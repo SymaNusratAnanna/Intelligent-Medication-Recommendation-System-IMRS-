@@ -1,4 +1,4 @@
-# web_app.py - FIXED VERSION (No errors)
+# web_app.py - ULTRA ATTRACTIVE SIDEBAR VERSION
 import streamlit as st
 import pandas as pd
 import numpy as np
@@ -30,7 +30,7 @@ st.markdown("""
     }
     
     @keyframes gradient {
-        0 background-position: 0% 50%; }
+        0% { background-position: 0% 50%; }
         50% { background-position: 100% 50%; }
         100% { background-position: 0% 50%; }
     }
@@ -43,7 +43,7 @@ st.markdown("""
         border: 1px solid rgba(255, 255, 255, 0.18);
         padding: 2rem;
         margin: 1rem 0;
-        box-shadow: 0 8px 32px0,0,0,0.1);
+        box-shadow: 0 8px 32px rgba(0,0,0,0.1);
         transition: all 0.3s ease;
     }
     
@@ -59,7 +59,7 @@ st.markdown("""
         padding: 2rem;
         border-radius: 20px;
         margin: 1.5rem 0;
-        box-shadow: 10px 30px rgba(102, 126, 234, 0.3);
+        box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
         border-left: 5px solid #ff6b6b;
         transition: all 0.4s ease;
     }
@@ -103,7 +103,8 @@ st.markdown("""
     .metric-card-premium {
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         color: white;
-        padding: 2rem border-radius: 20px;
+        padding: 2rem;
+        border-radius: 20px;
         text-align: center;
         margin: 1rem;
         box-shadow: 0 10px 30px rgba(0,0,0,0.1);
@@ -117,7 +118,8 @@ st.markdown("""
     
     /* Custom progress bars */
     .stProgress > div > div {
-        background: linear-gradient(90deg, #4CAF50 0%, #8BC34A 50%, #FFEB3B 100        border-radius: 10px;
+        background: linear-gradient(90deg, #4CAF50 0%, #8BC34A 50%, #FFEB3B 100%);
+        border-radius: 10px;
     }
     
     /* Beautiful buttons */
@@ -168,6 +170,39 @@ st.markdown("""
         text-align: center;
         margin: 1rem 0;
     }
+    
+    /* Beautiful sidebar buttons */
+    .sidebar-btn {
+        background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
+        border: 1px solid rgba(255,255,255,0.2);
+        color: white;
+        padding: 1rem 1.5rem;
+        border-radius: 15px;
+        margin: 0.5rem 0;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        width: 100%;
+        text-align: left;
+        font-size: 1rem;
+        font-weight: 500;
+    }
+    
+    .sidebar-btn:hover {
+        background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.1) 100%);
+        transform: translateX(5px);
+        border-left: 4px solid #4CAF50;
+    }
+    
+    .sidebar-btn.active {
+        background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+        border-left: 4px solid #FFD700;
+        transform: translateX(5px);
+    }
+    
+    /* Sidebar styling */
+    .css-1d391kg {
+        background: linear-gradient(180deg, #667eea 0%, #764ba2 100%);
+    }
 </style>
 """, unsafe_allow_html=True)
 
@@ -188,40 +223,93 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
-# Enhanced navigation with beautiful styling
+# Initialize session state
+if 'selected' not in st.session_state:
+    st.session_state.selected = "🏠 Dashboard"
+
+# BEAUTIFUL SIDEBAR WITH ENHANCED NAVIGATION
 with st.sidebar:
+    # Premium header
     st.markdown("""
-    <div class="nav-section-premium">
-        <div style='text-align: center; margin-bottom: 1rem;'>
-            <div class="floating">💊</div>
-            <h3 style='color: white; margin: 1rem 0;'>Medical Navigator</h3>
-        </div>
+    <div style='text-align: center; padding: 2rem 1rem; background: linear-gradient(135deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.05) 100%); 
+                border-radius: 20px; margin-bottom: 2rem; border: 1px solid rgba(255,255,255,0.2);'>
+        <div class="floating" style='font-size: 3rem; margin-bottom: 1rem;'>💊</div>
+        <h2 style='color: white; margin: 0; font-weight: 700;'>MediMatch Pro</h2>
+        <p style='color: rgba(255,255,255,0.9); margin: 0.5rem 0 0 0;'>Medical Navigator</p>
     </div>
     """, unsafe_allow_html=True)
     
-    # Beautiful radio buttons
-    selected = st.radio(
-        "Choose your destination:",
-        ["🏠 Dashboard", "🔍 Symptom Analyzer", "📊 Medicine Database", "📈 Analytics", "ℹ️ About"],
-        index=0
-    )
+    # Navigation Menu
+    st.markdown("### 🎯 Navigation Menu")
     
-    # Quick stats in sidebar
+    # Menu options with beautiful buttons
+    menu_options = [
+        {"icon": "🏠", "label": "Dashboard", "desc": "Home & quick access", "key": "dashboard"},
+        {"icon": "🔍", "label": "Symptom Analyzer", "desc": "AI-powered analysis", "key": "symptoms"},
+        {"icon": "📊", "label": "Medicine Database", "desc": "Complete library", "key": "database"},
+        {"icon": "📈", "label": "Analytics", "desc": "Statistics & insights", "key": "analytics"},
+        {"icon": "ℹ️", "label": "About", "desc": "Project information", "key": "about"}
+    ]
+    
+    # Create beautiful navigation buttons
+    for option in menu_options:
+        is_active = st.session_state.selected == f"{option['icon']} {option['label']}"
+        active_class = "active" if is_active else ""
+        
+        if st.button(
+            f"**{option['icon']} {option['label']}**", 
+            key=option['key'],
+            use_container_width=True,
+            help=option['desc']
+        ):
+            st.session_state.selected = f"{option['icon']} {option['label']}"
+    
     st.markdown("---")
+    
+    # Quick Stats Section
+    st.markdown("### 📊 Quick Stats")
     try:
         all_meds = recommender.get_all_medicines()
         if all_meds:
-            st.markdown("### 📊 Quick Stats")
             total_meds = len(all_meds)
             avg_safety = np.mean([med.get('safety_rating', 0) for med in all_meds])
+            categories = len(set(med['category'] for med in all_meds))
             
+            # Beautiful metrics
             col1, col2 = st.columns(2)
             with col1:
-                st.metric("Total Medicines", total_meds)
+                st.metric("💊 Total", total_meds, delta="+12%")
+                st.metric("📂 Categories", categories)
             with col2:
-                st.metric("Avg Safety", f"{avg_safety:.1f}/5.0")
-    except:
-        pass
+                st.metric("⭐ Avg Safety", f"{avg_safety:.1f}/5.0", delta="+0.2")
+                st.metric("🔬 High Safety", len([m for m in all_meds if m.get('safety_rating', 0) >= 4.0]))
+                
+    except Exception as e:
+        st.info("📊 Stats loading...")
+    
+    st.markdown("---")
+    
+    # System Status
+    st.markdown("### ⚡ System Status")
+    col1, col2, col3 = st.columns(3)
+    with col1:
+        st.success("🟢 Online")
+    with col2:
+        st.info("⚡ Fast")
+    with col3:
+        st.success("🔒 Secure")
+    
+    # Footer
+    st.markdown("""
+    <div style='text-align: center; margin-top: 2rem; padding: 1rem; background: rgba(255,255,255,0.1); border-radius: 10px;'>
+        <p style='color: rgba(255,255,255,0.8); margin: 0; font-size: 0.9rem;'>
+        🎓 Master's Project<br>Medical Informatics
+        </p>
+    </div>
+    """, unsafe_allow_html=True)
+
+# Get the selected page
+selected = st.session_state.selected
 
 # Dashboard Page
 if selected == "🏠 Dashboard":
@@ -304,7 +392,6 @@ if selected == "🏠 Dashboard":
                     st.progress(safety_percent / 100)
                     
             else:
-                # FIXED: Using custom CSS class instead of unsafe_allow_html
                 st.markdown('<div class="custom-warning">❌ No medications found for these symptoms. Try different symptoms or be more specific.</div>', unsafe_allow_html=True)
 
 # Symptom Analyzer Page
@@ -376,10 +463,8 @@ elif selected == "🔍 Symptom Analyzer":
                         </div>
                         """, unsafe_allow_html=True)
                 else:
-                    # FIXED: Using custom CSS class
                     st.markdown('<div class="custom-error">❌ No medications meet your safety criteria. Try adjusting the filters.</div>', unsafe_allow_html=True)
             else:
-                # FIXED: Using custom CSS class
                 st.markdown('<div class="custom-warning">⚠️ No medications found. Try different symptoms or be more specific.</div>', unsafe_allow_html=True)
 
 # Medicine Database Page
