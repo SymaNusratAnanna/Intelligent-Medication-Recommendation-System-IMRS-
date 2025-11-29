@@ -611,27 +611,7 @@ elif selected == "ℹ️ About":
     with col1:
         st.markdown("""
         <div class="glass-card">
-            <h2 style='color: #667eea; margin-bottom: 1rem;'>🎓 Master's Project - Advanced Medical AI</h2>
-            <p style='font-size: 1.1rem; line-height: 1.6; color: #666;'>
-            <strong>MediMatch Pro</strong> represents the cutting edge of AI-powered medical technology, 
-            developed as part of advanced academic research in medical informatics and artificial intelligence.
-            </p>
             
-            <h3 style='color: #667eea; margin-top: 2rem;'>✨ Revolutionary Features:</h3>
-            <ul style='font-size: 1.1rem; color: #666;'>
-            <li>🤖 Advanced AI symptom analysis</li>
-            <li>⭐ Intelligent safety rating system</li>
-            <li>🔍 Real-time medical database search</li>
-            <li>📊 Comprehensive analytics dashboard</li>
-            <li>🎨 Professional medical-grade interface</li>
-            </ul>
-            
-            <div style='background: rgba(102, 126, 234, 0.1); padding: 1.5rem; border-radius: 15px; margin-top: 2rem;'>
-                <h4 style='color: #667eea; margin: 0;'>⚕️ Medical Disclaimer</h4>
-                <p style='margin: 0.5rem 0 0 0; color: #666;'>
-                This system is for educational and research purposes. Always consult healthcare professionals.
-                </p>
-            </div>
         </div>
         """, unsafe_allow_html=True)
 
