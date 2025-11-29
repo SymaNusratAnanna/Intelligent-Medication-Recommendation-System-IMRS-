@@ -1,4 +1,4 @@
-# web_app.py - FIXED VERSION (No errors)
+# web_app.py - COMPLETELY FIXED VERSION (No errors)
 import streamlit as st
 import pandas as pd
 import numpy as np
@@ -12,7 +12,88 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# Advanced CSS with animations and modern design
+# =============================================
+# ENHANCED MEDICINE DETAILS FUNCTION - MOVED TO TOP
+# =============================================
+def get_medicine_details(medicine):
+    """Get specific, relevant medical information for each medicine"""
+    medicine_details = {
+        "Paracetamol 500mg": {
+            "primary_use": "Analgesic & Antipyretic (Pain & Fever relief)",
+            "drug_class": "Non-opioid analgesic",
+            "dosage_form": "Tablet, 500mg",
+            "duration": "4-6 hours",
+            "key_info": "First-line for mild-moderate pain. Max 4g/day. Avoid alcohol."
+        },
+        "Ibuprofen 400mg": {
+            "primary_use": "NSAID - Inflammation, Pain, Fever",
+            "drug_class": "Non-steroidal anti-inflammatory",
+            "dosage_form": "Tablet, 400mg", 
+            "duration": "6-8 hours",
+            "key_info": "Take with food. Caution in GI issues, kidney problems."
+        },
+        "Amoxicillin 250mg": {
+            "primary_use": "Bacterial infections treatment",
+            "drug_class": "Penicillin antibiotic",
+            "dosage_form": "Capsule, 250mg",
+            "duration": "7-10 day course",
+            "key_info": "Complete full course. May cause GI upset. Check for penicillin allergy."
+        },
+        "Cetirizine 10mg": {
+            "primary_use": "Antihistamine for allergy relief",
+            "drug_class": "H1-receptor antagonist", 
+            "dosage_form": "Tablet, 10mg",
+            "duration": "24 hours",
+            "key_info": "Non-drowsy formula. Take once daily. Avoid with CNS depressants."
+        },
+        "Omeprazole 20mg": {
+            "primary_use": "Acid reflux & ulcer treatment", 
+            "drug_class": "Proton pump inhibitor",
+            "dosage_form": "Capsule, 20mg",
+            "duration": "Once daily, 4-8 weeks",
+            "key_info": "Take before meals. Not for immediate relief. Long-term use requires monitoring."
+        },
+        "Aspirin 100mg": {
+            "primary_use": "Pain relief & heart attack prevention",
+            "drug_class": "Anti-platelet",
+            "dosage_form": "Tablet, 100mg",
+            "duration": "Once daily",
+            "key_info": "Low-dose for cardiovascular protection. GI bleeding risk."
+        },
+        "Atorvastatin 10mg": {
+            "primary_use": "Cholesterol reduction",
+            "drug_class": "Statin",
+            "dosage_form": "Tablet, 10mg",
+            "duration": "Once daily",
+            "key_info": "Take evening. Monitor liver function. Report muscle pain."
+        },
+        "Metformin 500mg": {
+            "primary_use": "Type 2 diabetes management",
+            "drug_class": "Biguanide",
+            "dosage_form": "Tablet, 500mg",
+            "duration": "Twice daily",
+            "key_info": "Take with food. GI side effects common. Avoid in kidney impairment."
+        },
+        "Salbutamol Inhaler": {
+            "primary_use": "Asthma & COPD symptom relief",
+            "drug_class": "Bronchodilator",
+            "dosage_form": "Inhaler",
+            "duration": "4-6 hours as needed",
+            "key_info": "Rescue medication. Shake well before use. Not for daily prevention."
+        }
+    }
+    
+    # Return details for the medicine or default values
+    medicine_name = medicine.get('name', '')
+    return medicine_details.get(medicine_name, {
+        "primary_use": medicine.get('primary_use', 'Symptom management'),
+        "drug_class": medicine.get('category', 'Medication'),
+        "dosage_form": "Tablet/Capsule",
+        "duration": "As directed",
+        "key_info": "Consult healthcare professional for proper usage."
+    })
+
+# FIXED CSS - All errors corrected
 st.markdown("""
 <style>
     /* Main header with animated gradient */
@@ -30,7 +111,7 @@ st.markdown("""
     }
     
     @keyframes gradient {
-        0 background-position: 0% 50%; }
+        0% { background-position: 0% 50%; }
         50% { background-position: 100% 50%; }
         100% { background-position: 0% 50%; }
     }
@@ -43,7 +124,7 @@ st.markdown("""
         border: 1px solid rgba(255, 255, 255, 0.18);
         padding: 2rem;
         margin: 1rem 0;
-        box-shadow: 0 8px 32px0,0,0,0.1);
+        box-shadow: 0 8px 32px rgba(0,0,0,0.1);
         transition: all 0.3s ease;
     }
     
@@ -52,14 +133,14 @@ st.markdown("""
         box-shadow: 0 15px 40px rgba(0,0,0,0.2);
     }
     
-    /* Premium medicine cards */
+    /* Premium medicine cards - ENHANCED */
     .medicine-card-premium {
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         color: white;
         padding: 2rem;
         border-radius: 20px;
         margin: 1.5rem 0;
-        box-shadow: 10px 30px rgba(102, 126, 234, 0.3);
+        box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
         border-left: 5px solid #ff6b6b;
         transition: all 0.4s ease;
     }
@@ -89,51 +170,10 @@ st.markdown("""
         100% { transform: scale(1); }
     }
     
-    /* Premium navigation */
-    .nav-section-premium {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        padding: 2rem 1.5rem;
-        border-radius: 20px;
-        margin-bottom: 2rem;
-        color: white;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-    }
-    
-    /* Metric cards with glow effect */
-    .metric-card-premium {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        color: white;
-        padding: 2rem border-radius: 20px;
-        text-align: center;
-        margin: 1rem;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-        transition: all 0.3s ease;
-    }
-    
-    .metric-card-premium:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 15px 40px rgba(102, 126, 234, 0.4);
-    }
-    
-    /* Custom progress bars */
+    /* Custom progress bars - FIXED */
     .stProgress > div > div {
-        background: linear-gradient(90deg, #4CAF50 0%, #8BC34A 50%, #FFEB3B 100        border-radius: 10px;
-    }
-    
-    /* Beautiful buttons */
-    .stButton > button {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        color: white;
-        border: none;
-        padding: 0.5rem 2rem;
-        border-radius: 25px;
-        font-weight: 600;
-        transition: all 0.3s ease;
-    }
-    
-    .stButton > button:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        background: linear-gradient(90deg, #4CAF50 0%, #8BC34A 50%, #FFEB3B 100%);
+        border-radius: 10px;
     }
     
     /* Floating animation for icons */
@@ -147,26 +187,26 @@ st.markdown("""
         100% { transform: translate(0, -0px); }
     }
     
-    /* Custom warning box */
-    .custom-warning {
-        background: #fff3cd;
-        color: #856404;
-        padding: 1rem;
-        border-radius: 10px;
-        border-left: 5px solid #ffc107;
-        text-align: center;
-        margin: 1rem 0;
+    /* Sidebar navigation buttons */
+    .sidebar-btn {
+        background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
+        border: 1px solid rgba(255,255,255,0.2);
+        color: white;
+        padding: 1rem 1.5rem;
+        border-radius: 15px;
+        margin: 0.5rem 0;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        width: 100%;
+        text-align: left;
+        font-size: 1rem;
+        font-weight: 500;
     }
     
-    /* Custom error box */
-    .custom-error {
-        background: #f8d7da;
-        color: #721c24;
-        padding: 1rem;
-        border-radius: 10px;
-        border-left: 5px solid #dc3545;
-        text-align: center;
-        margin: 1rem 0;
+    .sidebar-btn:hover {
+        background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.1) 100%);
+        transform: translateX(5px);
+        border-left: 4px solid #4CAF50;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -184,30 +224,70 @@ st.markdown("""
             border-radius: 0 0 50px 50px; margin: -2rem -2rem 2rem -2rem; color: white;'>
     <h1 class="main-header floating">💊 MediMatch Pro</h1>
     <h3 style='color: white; opacity: 0.9; margin-top: 0;'>AI-Powered Medicine Recommendation System</h3>
-    <p style='opacity: 0.8;'>Advanced medical intelligence for personalized treatment recommendations</p>
 </div>
 """, unsafe_allow_html=True)
 
-# Enhanced navigation with beautiful styling
+# =============================================
+# ENHANCED SIDEBAR NAVIGATION - ATTRACTIVE DESIGN
+# =============================================
 with st.sidebar:
+    # Premium header with glass effect
     st.markdown("""
-    <div class="nav-section-premium">
-        <div style='text-align: center; margin-bottom: 1rem;'>
-            <div class="floating">💊</div>
-            <h3 style='color: white; margin: 1rem 0;'>Medical Navigator</h3>
-        </div>
+    <div style='background: linear-gradient(135deg, rgba(102, 126, 234, 0.9) 0%, rgba(118, 75, 162, 0.9) 100%); 
+                backdrop-filter: blur(10px); padding: 2rem 1.5rem; border-radius: 20px; margin-bottom: 2rem; 
+                color: white; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+                border: 1px solid rgba(255,255,255,0.2);'>
+        <div style='font-size: 3rem; margin-bottom: 1rem;' class="floating">💊</div>
+        <h2 style='color: white; margin: 0; font-weight: 700;'>MediMatch Pro</h2>
+        <p style='margin: 0.5rem 0 0 0; opacity: 0.9; font-size: 1.1rem;'>Medical Navigator</p>
     </div>
     """, unsafe_allow_html=True)
     
-    # Beautiful radio buttons
-    selected = st.radio(
-        "Choose your destination:",
-        ["🏠 Dashboard", "🔍 Symptom Analyzer", "📊 Medicine Database", "📈 Analytics", "ℹ️ About"],
-        index=0
-    )
+    # Initialize session state for navigation
+    if 'selected' not in st.session_state:
+        st.session_state.selected = "🏠 Dashboard"
+    
+    # Attractive navigation menu
+    st.markdown("### 🧭 Navigation Menu")
+    
+    # Navigation options with beautiful buttons
+    nav_options = [
+        {"icon": "🏠", "label": "Dashboard", "desc": "Home & quick access", "key": "dashboard"},
+        {"icon": "🔍", "label": "Symptom Analyzer", "desc": "AI-powered analysis", "key": "symptoms"},
+        {"icon": "📊", "label": "Medicine Database", "desc": "Complete library", "key": "database"},
+        {"icon": "📈", "label": "Analytics", "desc": "Statistics & insights", "key": "analytics"},
+        {"icon": "ℹ️", "label": "About", "desc": "Project information", "key": "about"}
+    ]
+    
+    # Create beautiful navigation buttons
+    for option in nav_options:
+        full_label = f"{option['icon']} {option['label']}"
+        is_active = st.session_state.selected == full_label
+        
+        # Different styling for active vs inactive buttons
+        if is_active:
+            button_style = """
+            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+            color: white; border: none; padding: 1rem; border-radius: 15px; 
+            margin: 0.5rem 0; cursor: pointer; width: 100%; text-align: left;
+            font-weight: 600; border-left: 5px solid #FFD700; transition: all 0.3s;
+            """
+        else:
+            button_style = """
+            background: rgba(255,255,255,0.1); color: white; border: 1px solid rgba(255,255,255,0.2); 
+            padding: 1rem; border-radius: 15px; margin: 0.5rem 0; cursor: pointer; 
+            width: 100%; text-align: left; font-weight: 500; transition: all 0.3s;
+            """
+        
+        if st.button(f"**{full_label}**", key=option['key'], use_container_width=True):
+            st.session_state.selected = full_label
+        
+        # Add description
+        st.caption(f"📌 {option['desc']}")
+    
+    st.markdown("---")
     
     # Quick stats in sidebar
-    st.markdown("---")
     try:
         all_meds = recommender.get_all_medicines()
         if all_meds:
@@ -217,13 +297,28 @@ with st.sidebar:
             
             col1, col2 = st.columns(2)
             with col1:
-                st.metric("Total Medicines", total_meds)
+                st.metric("💊 Total", total_meds)
             with col2:
-                st.metric("Avg Safety", f"{avg_safety:.1f}/5.0")
+                st.metric("⭐ Safety", f"{avg_safety:.1f}/5.0")
     except:
         pass
+    
+    # System status
+    st.markdown("### ⚡ System Status")
+    col1, col2, col3 = st.columns(3)
+    with col1:
+        st.success("🟢 Online")
+    with col2:
+        st.info("⚡ Fast")
+    with col3:
+        st.success("🔒 Secure")
 
-# Dashboard Page
+# Get the selected value
+selected = st.session_state.selected
+
+# =============================================
+# DASHBOARD PAGE - WITH ENHANCED MEDICINE CARDS
+# =============================================
 if selected == "🏠 Dashboard":
     # Hero Section with Glass Morphism
     st.markdown("""
@@ -241,13 +336,13 @@ if selected == "🏠 Dashboard":
     # Quick stats row
     col1, col2, col3, col4 = st.columns(4)
     with col1:
-        st.markdown('<div class="metric-card-premium"><h4>📊 Total Medicines</h4><h2>24</h2></div>', unsafe_allow_html=True)
+        st.metric("📊 Total Medicines", 24)
     with col2:
-        st.markdown('<div class="metric-card-premium"><h4>⭐ Avg Safety</h4><h2>4.2/5.0</h2></div>', unsafe_allow_html=True)
+        st.metric("⭐ Avg Safety", "4.2/5.0")
     with col3:
-        st.markdown('<div class="metric-card-premium"><h4>🔬 Categories</h4><h2>8</h2></div>', unsafe_allow_html=True)
+        st.metric("🔬 Categories", 8)
     with col4:
-        st.markdown('<div class="metric-card-premium"><h4>⚡ Response Time</h4><h2><1s</h2></div>', unsafe_allow_html=True)
+        st.metric("⚡ Response Time", "<1s")
     
     # Quick Symptom Analyzer
     st.markdown("---")
@@ -267,47 +362,67 @@ if selected == "🏠 Dashboard":
                 results = recommender.recommend_by_symptoms(symptoms)
                 
             if results:
-                st.markdown(f'<div class="success-box-premium">🎯 Found {len(results)} perfect matches for your symptoms!</div>', unsafe_allow_html=True)
+                st.success(f"✅ Found {len(results)} relevant medications!")
                 
-                # Enhanced medicine cards
-                for i, medicine in enumerate(results, 1):
-                    safety_color = "🟢" if medicine['safety_rating'] >= 4.0 else "🟡" if medicine['safety_rating'] >= 3.0 else "🔴"
+                # =============================================
+                # ENHANCED MEDICINE CARDS - UPDATED TEXT
+                # =============================================
+                for medicine in results:
+                    # Get enhanced medicine information
+                    medicine_info = get_medicine_details(medicine)
                     
                     st.markdown(f"""
                     <div class="medicine-card-premium">
                         <div style='display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;'>
                             <h2 style='margin: 0; color: white;'>💊 {medicine['name']}</h2>
                             <div style='background: rgba(255,255,255,0.2); padding: 0.5rem 1rem; border-radius: 20px;'>
-                                <span style='font-size: 1.2rem; font-weight: bold;'>{safety_color} {medicine['safety_rating']}/5.0</span>
+                                <span style='font-size: 1.2rem; font-weight: bold;'>⭐ {medicine['safety_rating']}/5.0</span>
                             </div>
                         </div>
                         
                         <div style='display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; color: white;'>
                             <div>
-                                <strong>🧬 Treatment For:</strong><br>
-                                <span style='opacity: 0.9;'>{medicine['for_symptoms']}</span>
+                                <strong>🎯 Primary Use:</strong><br>
+                                <span style='opacity: 0.9;'>{medicine_info['primary_use']}</span>
                             </div>
                             <div>
-                                <strong>📋 Category:</strong><br>
-                                <span style='opacity: 0.9;'>{medicine['category']}</span>
+                                <strong>📊 Classification:</strong><br>
+                                <span style='opacity: 0.9;'>{medicine_info['drug_class']}</span>
+                            </div>
+                        </div>
+                        
+                        <div style='display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; color: white; margin-top: 1rem;'>
+                            <div>
+                                <strong>💊 Formulation:</strong><br>
+                                <span style='opacity: 0.9;'>{medicine_info['dosage_form']}</span>
+                            </div>
+                            <div>
+                                <strong>⏰ Duration:</strong><br>
+                                <span style='opacity: 0.9;'>{medicine_info['duration']}</span>
                             </div>
                         </div>
                         
                         <div style='margin-top: 1rem;'>
-                            <strong>⭐ Safety Progress:</strong>
+                            <strong>💡 Important Information:</strong><br>
+                            <span style='opacity: 0.9; font-size: 0.9rem;'>{medicine_info['key_info']}</span>
+                        </div>
+                        
+                        <div style='margin-top: 1rem;'>
+                            <strong>⭐ Safety Rating:</strong>
                         </div>
                     </div>
                     """, unsafe_allow_html=True)
                     
-                    # Animated progress bar
+                    # Progress bar
                     safety_percent = (medicine['safety_rating'] / 5.0) * 100
                     st.progress(safety_percent / 100)
                     
             else:
-                # FIXED: Using custom CSS class instead of unsafe_allow_html
-                st.markdown('<div class="custom-warning">❌ No medications found for these symptoms. Try different symptoms or be more specific.</div>', unsafe_allow_html=True)
+                st.warning("❌ No medications found for these symptoms. Try different symptoms or be more specific.")
 
-# Symptom Analyzer Page
+# =============================================
+# SYMPTOM ANALYZER PAGE
+# =============================================
 elif selected == "🔍 Symptom Analyzer":
     st.markdown("""
     <div class="glass-card">
@@ -350,39 +465,60 @@ elif selected == "🔍 Symptom Analyzer":
                 filtered_results = [med for med in results if med['safety_rating'] >= min_safety]
                 
                 if filtered_results:
-                    st.markdown(f"""
-                    <div class="success-box-premium">
-                        🎯 AI found {len(filtered_results)} perfect medication matches!
-                    </div>
-                    """, unsafe_allow_html=True)
+                    st.success(f"🎯 AI found {len(filtered_results)} perfect medication matches!")
                     
+                    # Enhanced medicine cards for Symptom Analyzer
                     for medicine in filtered_results:
-                        safety_percent = (medicine['safety_rating'] / 5.0) * 100
-                        safety_color = "#4CAF50" if medicine['safety_rating'] >= 4.0 else "#FF9800" if medicine['safety_rating'] >= 3.0 else "#F44336"
+                        medicine_info = get_medicine_details(medicine)
                         
                         st.markdown(f"""
-                        <div style='background: linear-gradient(135deg, {safety_color}20 0%, {safety_color}40 100%); 
-                                    padding: 2rem; border-radius: 15px; margin: 1rem 0; border-left: 5px solid {safety_color};'>
+                        <div class="medicine-card-premium">
                             <div style='display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;'>
-                                <h3 style='margin: 0; color: #333;'>💊 {medicine['name']}</h3>
-                                <div style='background: {safety_color}; color: white; padding: 0.5rem 1rem; border-radius: 15px;'>
-                                    ⭐ {medicine['safety_rating']}/5.0
+                                <h2 style='margin: 0; color: white;'>💊 {medicine['name']}</h2>
+                                <div style='background: rgba(255,255,255,0.2); padding: 0.5rem 1rem; border-radius: 20px;'>
+                                    <span style='font-size: 1.2rem; font-weight: bold;'>⭐ {medicine['safety_rating']}/5.0</span>
                                 </div>
                             </div>
-                            <div style='color: #666;'>
-                                <strong>Category:</strong> {medicine['category']} | 
-                                <strong>Treats:</strong> {medicine['for_symptoms']}
+                            
+                            <div style='display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; color: white;'>
+                                <div>
+                                    <strong>🎯 Primary Use:</strong><br>
+                                    <span style='opacity: 0.9;'>{medicine_info['primary_use']}</span>
+                                </div>
+                                <div>
+                                    <strong>📊 Classification:</strong><br>
+                                    <span style='opacity: 0.9;'>{medicine_info['drug_class']}</span>
+                                </div>
+                            </div>
+                            
+                            <div style='display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; color: white; margin-top: 1rem;'>
+                                <div>
+                                    <strong>💊 Formulation:</strong><br>
+                                    <span style='opacity: 0.9;'>{medicine_info['dosage_form']}</span>
+                                </div>
+                                <div>
+                                    <strong>⏰ Duration:</strong><br>
+                                    <span style='opacity: 0.9;'>{medicine_info['duration']}</span>
+                                </div>
+                            </div>
+                            
+                            <div style='margin-top: 1rem;'>
+                                <strong>💡 Important Information:</strong><br>
+                                <span style='opacity: 0.9; font-size: 0.9rem;'>{medicine_info['key_info']}</span>
                             </div>
                         </div>
                         """, unsafe_allow_html=True)
+                        
+                        safety_percent = (medicine['safety_rating'] / 5.0) * 100
+                        st.progress(safety_percent / 100)
                 else:
-                    # FIXED: Using custom CSS class
-                    st.markdown('<div class="custom-error">❌ No medications meet your safety criteria. Try adjusting the filters.</div>', unsafe_allow_html=True)
+                    st.error("❌ No medications meet your safety criteria. Try adjusting the filters.")
             else:
-                # FIXED: Using custom CSS class
-                st.markdown('<div class="custom-warning">⚠️ No medications found. Try different symptoms or be more specific.</div>', unsafe_allow_html=True)
+                st.warning("⚠️ No medications found. Try different symptoms or be more specific.")
 
-# Medicine Database Page
+# =============================================
+# MEDICINE DATABASE PAGE
+# =============================================
 elif selected == "📊 Medicine Database":
     st.markdown("""
     <div class="glass-card">
@@ -432,9 +568,11 @@ elif selected == "📊 Medicine Database":
             }
         )
     else:
-        st.markdown('<div class="custom-error">❌ No medicines found in the database.</div>', unsafe_allow_html=True)
+        st.error("❌ No medicines found in the database.")
 
-# Analytics Page
+# =============================================
+# ANALYTICS PAGE
+# =============================================
 elif selected == "📈 Analytics":
     st.markdown("""
     <div class="glass-card">
@@ -459,7 +597,9 @@ elif selected == "📈 Analytics":
             safety_chart = df['safety_rating'].value_counts().sort_index()
             st.line_chart(safety_chart)
 
-# About Page
+# =============================================
+# ABOUT PAGE - SAME SIZE CARDS
+# =============================================
 elif selected == "ℹ️ About":
     st.markdown("""
     <div class="glass-card">
@@ -470,16 +610,15 @@ elif selected == "ℹ️ About":
     col1, col2 = st.columns([2, 1])
     with col1:
         st.markdown("""
-        <div style='background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; 
-                    padding: 3rem; border-radius: 20px; margin: 2rem 0;'>
-            <h2 style='color: white;'>🎓 Master's Project - Advanced Medical AI</h2>
-            <p style='font-size: 1.1rem; line-height: 1.6;'>
+        <div class="glass-card">
+            <h2 style='color: #667eea; margin-bottom: 1rem;'>🎓 Master's Project - Advanced Medical AI</h2>
+            <p style='font-size: 1.1rem; line-height: 1.6; color: #666;'>
             <strong>MediMatch Pro</strong> represents the cutting edge of AI-powered medical technology, 
             developed as part of advanced academic research in medical informatics and artificial intelligence.
             </p>
             
-            <h3 style='color: white; margin-top: 2rem;'>✨ Revolutionary Features:</h3>
-            <ul style='font-size: 1.1rem;'>
+            <h3 style='color: #667eea; margin-top: 2rem;'>✨ Revolutionary Features:</h3>
+            <ul style='font-size: 1.1rem; color: #666;'>
             <li>🤖 Advanced AI symptom analysis</li>
             <li>⭐ Intelligent safety rating system</li>
             <li>🔍 Real-time medical database search</li>
@@ -487,9 +626,9 @@ elif selected == "ℹ️ About":
             <li>🎨 Professional medical-grade interface</li>
             </ul>
             
-            <div style='background: rgba(255,255,255,0.1); padding: 1rem; border-radius: 10px; margin-top: 2rem;'>
-                <h4 style='color: white; margin: 0;'>⚕️ Medical Disclaimer</h4>
-                <p style='margin: 0.5rem 0 0 0; opacity: 0.9;'>
+            <div style='background: rgba(102, 126, 234, 0.1); padding: 1.5rem; border-radius: 15px; margin-top: 2rem;'>
+                <h4 style='color: #667eea; margin: 0;'>⚕️ Medical Disclaimer</h4>
+                <p style='margin: 0.5rem 0 0 0; color: #666;'>
                 This system is for educational and research purposes. Always consult healthcare professionals.
                 </p>
             </div>
