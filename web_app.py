@@ -199,12 +199,40 @@ with st.sidebar:
     </div>
     """, unsafe_allow_html=True)
     
-    # Beautiful radio buttons
-    selected = st.radio(
-        "Choose your destination:",
-        ["🏠 Dashboard", "🔍 Symptom Analyzer", "📊 Medicine Database", "📈 Analytics", "ℹ️ About"],
-        index=0
-    )
+   # Add this CSS for better tabs
+st.markdown("""
+<style>
+    .stTabs [data-baseweb="tab-list"] {
+        gap: 2px;
+    }
+    .stTabs [data-baseweb="tab"] {
+        background-color: #f0f2f6;
+        border-radius: 4px 4px 0px 0px;
+        padding: 10px 16px;
+    }
+    .stTabs [aria-selected="true"] {
+        background-color: #4CAF50;
+        color: white;
+    }
+</style>
+""", unsafe_allow_html=True)
+
+# Use tabs instead of radio
+tab1, tab2, tab3, tab4, tab5 = st.tabs([
+    "🏠 Dashboard", "🔍 Symptoms", "📊 Database", "📈 Analytics", "ℹ️ About"
+])
+
+# Determine which tab is active
+if tab1:
+    selected = "🏠 Dashboard"
+elif tab2:
+    selected = "🔍 Symptom Analyzer"
+elif tab3:
+    selected = "📊 Medicine Database"
+elif tab4:
+    selected = "📈 Analytics"
+else:
+    selected = "ℹ️ About"
     
     # Quick stats in sidebar
     st.markdown("---")
