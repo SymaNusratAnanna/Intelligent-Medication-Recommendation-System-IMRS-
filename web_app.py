@@ -610,11 +610,45 @@ elif selected == "ℹ️ About":
     col1, col2 = st.columns([2, 1])
     with col1:
         st.markdown("""
-        <div class="glass-card">
-            
+      <div class="glass-card">
+    <h2 style='color: #667eea; text-align: center; margin-bottom: 2rem;'>🎓 Master's Research Project - Advanced Medical AI</h2>
+    
+    <p style='font-size: 1.2rem; line-height: 1.6; color: #666; text-align: center; margin-bottom: 2rem;'>
+    <strong>MediMatch Pro</strong> represents cutting-edge research at the intersection of artificial intelligence 
+    and healthcare, developed as a comprehensive Master's project exploring AI applications in clinical decision support.
+    </p>
+    
+    <div style='display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;'>
+        <div>
+            <h3 style='color: #667eea; margin-bottom: 1rem;'>🔬 Research Innovation</h3>
+            <ul style='color: #666; line-height: 1.6;'>
+                <li><strong>Advanced NLP</strong> for medical symptom analysis</li>
+                <li><strong>Machine Learning</strong> for intelligent matching</li>
+                <li><strong>Real-time Safety Analytics</strong> and profiling</li>
+                <li><strong>Professional Healthcare Interface</strong> design</li>
+            </ul>
         </div>
-        """, unsafe_allow_html=True)
-
+        
+        <div>
+            <h3 style='color: #667eea; margin-bottom: 1rem;'>🎯 Project Significance</h3>
+            <ul style='color: #666; line-height: 1.6;'>
+                <li>Bridges AI technology with clinical applications</li>
+                <li>Enhances medication safety through intelligent algorithms</li>
+                <li>Supports healthcare education and training</li>
+                <li>Advances ethical AI implementation in medicine</li>
+            </ul>
+        </div>
+    </div>
+    
+    <div style='background: rgba(102, 126, 234, 0.1); padding: 1.5rem; border-radius: 15px; margin-top: 2rem;'>
+        <h4 style='color: #667eea; margin: 0;'>⚕️ Important Disclaimer</h4>
+        <p style='margin: 0.5rem 0 0 0; color: #666;'>
+        <strong>For Educational and Research Purposes Only:</strong> This system demonstrates AI applications 
+        in healthcare. Always consult qualified medical professionals for actual treatment decisions.
+        </p>
+    </div>
+</div>
+""", unsafe_allow_html=True)
 # Professional Footer
 st.markdown("""
 <div style='text-align: center; padding: 3rem; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
