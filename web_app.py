@@ -427,7 +427,7 @@ elif selected == "🔍 Symptom Analyzer":
     st.markdown("""
     <div class="glass-card">
         <h1 style='color: #667eea; text-align: center; margin-bottom: 2rem;'>🔍 Advanced Symptom Analyzer</h1>
-        <p style='text-align: center; color:F5F527; font-size: 1.2rem;'>
+        <p style='text-align: center; color:F5F527git; font-size: 1.2rem;'>
         Detailed symptom analysis with advanced filtering and AI-powered recommendations
         </p>
     </div>
@@ -475,7 +475,7 @@ elif selected == "🔍 Symptom Analyzer":
                         <div class="medicine-card-premium">
                             <div style='display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;'>
                                 <h2 style='margin: 0; color: white;'>💊 {medicine['name']}</h2>
-                                <div style='background: rgba(255,255,255,0.2); padding: 0.5rem 1rem; border-radius: 20px;'>
+                                <div style='background: rgba(255,255,255,0.2); padding: 0.5rem 1rem; border-radius: 50px;'>
                                     <span style='font-size: 1.2rem; font-weight: bold;'>⭐ {medicine['safety_rating']}/5.0</span>
                                 </div>
                             </div>
