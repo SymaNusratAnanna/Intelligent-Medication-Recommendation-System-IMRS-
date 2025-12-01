@@ -611,6 +611,9 @@ elif selected == "ℹ️ About":
             <h2 style='color: #667eea; font-size: 2rem; margin-top: 0;'>Advanced Medical AI</h2>
         </div>
         
+                 <h2 style='color: #667eea; font-size: 1rem; margin-top: 0;'> **MediMatch Pro** represents cutting-edge research at the intersection of artificial intelligence 
+    and healthcare, developed as a comprehensive Master's project exploring AI applications in clinical decision support.
+    "</h2>
         <div style='text-align: center; margin-bottom: 3rem;'>
             <p style='font-size: 1.2rem; line-height: 1.6; color: #cccccc;'>
             <strong style='color: #fff;'>MediMatch Pro</strong> represents cutting-edge research at the 
