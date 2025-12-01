@@ -427,7 +427,7 @@ elif selected == "🔍 Symptom Analyzer":
     st.markdown("""
     <div class="glass-card">
         <h1 style='color: #667eea; text-align: center; margin-bottom: 2rem;'>🔍 Advanced Symptom Analyzer</h1>
-        <p style='text-align: center; color: #666; font-size: 1.2rem;'>
+        <p style='text-align: center; color:F5F527; font-size: 1.2rem;'>
         Detailed symptom analysis with advanced filtering and AI-powered recommendations
         </p>
     </div>
