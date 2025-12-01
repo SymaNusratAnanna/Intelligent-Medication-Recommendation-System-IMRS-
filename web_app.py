@@ -612,18 +612,14 @@ elif selected == "ℹ️ About":
         </div>
         
           
-div style='text-align: center; margin-bottom: 3rem;'>
+<div>
             <p style='font-size: 1.2rem; line-height: 1.6; color: #cccccc;'>
-            <strong style='color: #fff;'>MediMatch Pro</strong> represents cutting-edge research at the 
-            intersection of artificial intelligence and healthcare, developed as a comprehensive 
-            Master's project exploring AI applications in clinical decision support.
-            </p>
-        </div>
-        
-         <p style='font-size: 1.2rem; line-height: 1.6; color: #cccccc;'>
             <strong style='color: #fff;'>MediMatch Pro</strong> MediMatch Pro is a pioneering application born from advanced research at the intersection of artificial intelligence and healthcare. Developed as part of a comprehensive Master’s project, it showcases how AI can enhance clinical decision support by analyzing complex medical data and offering intelligent insights to assist healthcare professionals. The app embodies innovation, academic rigor, and a vision for the future of medicine—where technology empowers clinicians to make faster, more accurate, and patient‑centered decisions.
 
             </p>
+        </div>
+        
+        
     """, unsafe_allow_html=True)  # ⬅️ 关键修复：添加这个参数
 # Professional Footer
 st.markdown("""
