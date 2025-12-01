@@ -325,7 +325,7 @@ if selected == "🏠 Dashboard":
     <div class="glass-card">
         <div style='text-align: center; padding: 2rem;'>
             <h1 style='color: #667eea; margin-bottom: 1rem;'>Welcome to MediMatch Pro! 🩺</h1>
-            <p style='font-size: 1.3rem; color: #666; line-height: 1.6;'>
+            <p style='font-size: 1.3rem; color: F5F527; line-height: 1.6;'>
             Your intelligent AI-powered medicine recommendation system. Get personalized medication 
             suggestions based on your symptoms with advanced safety ratings and detailed medical information.
             </p>
@@ -427,7 +427,7 @@ elif selected == "🔍 Symptom Analyzer":
     st.markdown("""
     <div class="glass-card">
         <h1 style='color: #667eea; text-align: center; margin-bottom: 2rem;'>🔍 Advanced Symptom Analyzer</h1>
-        <p style='text-align: center; color:#F5F527; font-size: 1.2rem;'>
+        <p style='text-align: center; color:F5F527; font-size: 1.2rem;'>
         Detailed symptom analysis with advanced filtering and AI-powered recommendations
         </p>
     </div>
