@@ -611,10 +611,8 @@ elif selected == "ℹ️ About":
             <h2 style='color: #667eea; font-size: 2rem; margin-top: 0;'>Advanced Medical AI</h2>
         </div>
         
-                 <h2 style='color: #667eea; font-size: 1rem; margin-top: 0;'> **MediMatch Pro** represents cutting-edge research at the intersection of artificial intelligence 
-    and healthcare, developed as a comprehensive Master's project exploring AI applications in clinical decision support.
-    "</h2>
-        <div style='text-align: center; margin-bottom: 3rem;'>
+          
+div style='text-align: center; margin-bottom: 3rem;'>
             <p style='font-size: 1.2rem; line-height: 1.6; color: #cccccc;'>
             <strong style='color: #fff;'>MediMatch Pro</strong> represents cutting-edge research at the 
             intersection of artificial intelligence and healthcare, developed as a comprehensive 
@@ -622,35 +620,8 @@ elif selected == "ℹ️ About":
             </p>
         </div>
         
-        <div style='display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;'>
-            <div>
-                <h3 style='color: #667eea; margin-bottom: 1rem; font-size: 1.3rem;'>🔬 Research Innovation</h3>
-                <ul style='color: #cccccc; line-height: 1.6; font-size: 1rem;'>
-                    <li><strong style='color: #fff;'>Advanced NLP</strong> for medical symptom analysis</li>
-                    <li><strong style='color: #fff;'>Machine Learning</strong> for intelligent matching</li>
-                    <li><strong style='color: #fff;'>Real-time Safety Analytics</strong> and profiling</li>
-                    <li><strong style='color: #fff;'>Professional Healthcare Interface</strong> design</li>
-                </ul>
-            </div>
-            
-            <div>
-                <h3 style='color: #667eea; margin-bottom: 1rem; font-size: 1.3rem;'>🎯 Project Significance</h3>
-                <ul style='color: #cccccc; line-height: 1.6; font-size: 1rem;'>
-                    <li>Bridges AI technology with clinical applications</li>
-                    <li>Enhances medication safety through intelligent algorithms</li>
-                    <li>Supports healthcare education and training</li>
-                    <li>Advances ethical AI implementation in medicine</li>
-                </ul>
-            </div>
-        </div>
-        
-        <div style='background: rgba(102, 126, 234, 0.1); padding: 1.5rem; border-radius: 15px; margin-top: 2rem; border-left: 4px solid #667eea;'>
-            <h4 style='color: #667eea; margin: 0 0 0.5rem 0;'>⚕️ Important Disclaimer</h4>
-            <p style='margin: 0; color: #cccccc; font-size: 0.9rem;'>
-            <strong>For Educational and Research Purposes Only:</strong> This system demonstrates AI applications 
-            in healthcare. Always consult qualified medical professionals for actual treatment decisions.
-            </p>
-        </div>
+         "</h2>
+        <
     </div>
     """, unsafe_allow_html=True)  # ⬅️ 关键修复：添加这个参数
 # Professional Footer
