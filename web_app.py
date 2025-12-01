@@ -577,7 +577,7 @@ elif selected == "📈 Analytics":
     st.markdown("""
     <div class="glass-card">
         <h1 style='color: #667eea; text-align: center;'>📈 Advanced Analytics</h1>
-        <p style='text-align: center; color: #666;'>Comprehensive analytics and insights from our medicine database</p>
+        <p style='text-align: center; color: F5F527;'>Comprehensive analytics and insights from our medicine database</p>
     </div>
     """, unsafe_allow_html=True)
     
