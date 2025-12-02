@@ -3,6 +3,32 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 from medicine_recommender import MedicineRecommender
+# web_app.py - ENSURE THESE IMPORTS
+from medicine_recommender import MedicineRecommender
+
+@st.cache_resource
+def load_recommender():
+    return MedicineRecommender()
+
+recommender = load_recommender()
+
+# Your existing Streamlit code continues...
+# Test the integration
+try:
+    # Test statistics
+    stats = recommender.get_statistics()
+    st.success(f"✅ Dataset loaded! {stats['total_medicines']} medicines available")
+    
+    # Test symptom search
+    test_results = recommender.recommend_by_symptoms("fever headache")
+    st.info(f"🔍 Test found {len(test_results)} medicines for 'fever headache'")
+    
+    # Show first 3 results
+    for i, med in enumerate(test_results[:3]):
+        st.write(f"{i+1}. {med['name']} ⭐{med['safety_rating']} - {med['category']}")
+        
+except Exception as e:
+    st.error(f"❌ Integration error: {e}")
 
 # Page configuration
 st.set_page_config(
