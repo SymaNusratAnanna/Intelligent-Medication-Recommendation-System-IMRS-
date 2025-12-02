@@ -424,31 +424,30 @@ if selected == "🏠 Dashboard":
 # SYMPTOM ANALYZER PAGE
 # =============================================
 elif selected == "🔍 Symptom Analyzer":
+    # Page header - matches your image design
     st.markdown("""
-    <div class="glass-card">
-        <h1 style='color: #667eea; text-align: center; margin-bottom: 2rem;'>🔍 Advanced Symptom Analyzer</h1>
-        <p style='text-align: center; color:F5F527git; font-size: 1.2rem;'>
-        Detailed symptom analysis with advanced filtering and AI-powered recommendations
-        </p>
+    <div style='background: #1a1a1a; padding: 2rem; border-radius: 15px; margin: 1rem 0;'>
+        <h1 style='color: #667eea; text-align: center;'>🔍 AI Recommendations</h1>
     </div>
-    """, unsafe_allow_html=True)
+    """, unsafe_allow_html=True)  # ✅ ADD THIS PARAMETER
     
     col1, col2 = st.columns([1, 1])
     
     with col1:
+        # Symptoms input - matches your image
         st.markdown("### 📝 Describe Your Symptoms")
         user_symptoms = st.text_area(
             " ",
-            placeholder="Be specific about your symptoms...\nExample: High fever above 38°C, severe headache, body aches, fatigue",
+            placeholder="Describe your symptoms...",
             height=150,
-            help="The more detailed your description, the better our AI can help you"
+            help="Be specific for better recommendations"
         )
         
-        # Advanced filters
+        # Advanced filters - matches your image exactly
         st.markdown("### ⚙️ Advanced Filters")
         col1, col2, col3 = st.columns(3)
         with col1:
-            min_safety = st.slider("**Safety**", 1.0, 5.0, 3.5, 0.1)
+            min_safety = st.slider("**Safety**", 1.0, 5.0, 3.5, 0.1)  # ✅ Matches your 3.50 setting
         with col2:
             max_price = st.selectbox("**Price**", ["Any", "💰 Economy", "💵 Standard", "💎 Premium"])
         with col3:
@@ -458,64 +457,57 @@ elif selected == "🔍 Symptom Analyzer":
         if user_symptoms:
             st.markdown("### 💊 AI Recommendations")
             
-            with st.spinner("🤖 AI is analyzing your symptoms with advanced algorithms..."):
+            with st.spinner("🤖 AI is analyzing your symptoms..."):
                 results = recommender.recommend_by_symptoms(user_symptoms)
             
             if results:
                 filtered_results = [med for med in results if med['safety_rating'] >= min_safety]
                 
                 if filtered_results:
-                    st.success(f"🎯 AI found {len(filtered_results)} perfect medication matches!")
+                    # ✅ Success message - matches your dark green box
+                    st.markdown(f"""
+                    <div style='
+                        background: #00b09b; 
+                        color: white; 
+                        padding: 1.5rem; 
+                        border-radius: 10px; 
+                        margin: 1rem 0;
+                        text-align: center;
+                        font-weight: bold;
+                        font-size: 1.1rem;
+                    '>
+                        🎯 AI found {len(filtered_results)} perfect medication matches!
+                    </div>
+                    """, unsafe_allow_html=True)  # ✅ ADD THIS
                     
-                    # Enhanced medicine cards for Symptom Analyzer
+                    # ✅ Medicine cards - matches your blue card design
                     for medicine in filtered_results:
-                        medicine_info = get_medicine_details(medicine)
-                        
                         st.markdown(f"""
-                        <div class="medicine-card-premium">
-                            <div style='display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;'>
-                                <h2 style='margin: 0; color: white;'>💊 {medicine['name']}</h2>
-                                <div style='background: rgba(255,255,255,0.2); padding: 0.5rem 1rem; border-radius: 50px;'>
-                                    <span style='font-size: 1.2rem; font-weight: bold;'>⭐ {medicine['safety_rating']}/5.0</span>
+                        <div style='
+                            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                            color: white; 
+                            padding: 2rem; 
+                            border-radius: 15px; 
+                            margin: 1.5rem 0;
+                            border-left: 5px solid #ff6b6b;
+                        '>
+                            <div style='display: flex; justify-content: space-between; align-items: center;'>
+                                <h2 style='margin: 0;'>💊 {medicine['name']}</h2>
+                                <div style='
+                                    background: rgba(255,255,255,0.2); 
+                                    padding: 0.5rem 1rem; 
+                                    border-radius: 20px;
+                                '>
+                                    ⭐ {medicine['safety_rating']}/5.0
                                 </div>
-                            </div>
-                            
-                            <div style='display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; color: white;'>
-                                <div>
-                                    <strong>🎯 Primary Use:</strong><br>
-                                    <span style='opacity: 0.9;'>{medicine_info['primary_use']}</span>
-                                </div>
-                                <div>
-                                    <strong>📊 Classification:</strong><br>
-                                    <span style='opacity: 0.9;'>{medicine_info['drug_class']}</span>
-                                </div>
-                            </div>
-                            
-                            <div style='display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; color: white; margin-top: 1rem;'>
-                                <div>
-                                    <strong>💊 Formulation:</strong><br>
-                                    <span style='opacity: 0.9;'>{medicine_info['dosage_form']}</span>
-                                </div>
-                                <div>
-                                    <strong>⏰ Duration:</strong><br>
-                                    <span style='opacity: 0.9;'>{medicine_info['duration']}</span>
-                                </div>
-                            </div>
-                            
-                            <div style='margin-top: 1rem;'>
-                                <strong>💡 Important Information:</strong><br>
-                                <span style='opacity: 0.9; font-size: 0.9rem;'>{medicine_info['key_info']}</span>
                             </div>
                         </div>
-                        """, unsafe_allow_html=True)
+                        """, unsafe_allow_html=True)  # ✅ ADD THIS
                         
-                        safety_percent = (medicine['safety_rating'] / 5.0) * 100
-                        st.progress(safety_percent / 100)
                 else:
-                    st.error("❌ No medications meet your safety criteria. Try adjusting the filters.")
+                    st.error("❌ No medications meet your safety criteria.")
             else:
-                st.warning("⚠️ No medications found. Try different symptoms or be more specific.")
-
+                st.warning("⚠️ No medications found. Try different symptoms.")
 # =============================================
 # MEDICINE DATABASE PAGE
 # =============================================
