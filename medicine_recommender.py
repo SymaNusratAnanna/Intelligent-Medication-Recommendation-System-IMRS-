@@ -1,6 +1,5 @@
-# medicine_recommender.py - EXPANDED VERSION
+# medicine_recommender.py - COMPLETE FIXED VERSION
 import pandas as pd
-
 
 class MedicineRecommender:
     def __init__(self):
@@ -8,7 +7,7 @@ class MedicineRecommender:
         print("💊 Enhanced medicine database loaded successfully!")
     
     def create_medicine_data(self):
-        """Create comprehensive medicine database"""
+        """Create comprehensive medicine database with enhanced information"""
         data = {
             'name': [
                 # ANALGESICS & PAIN RELIEVERS
@@ -69,7 +68,7 @@ class MedicineRecommender:
                 'heartburn acid reflux ulcer', 'heartburn acid indigestion', 'acid reflux GERD ulcer',
                 'nausea vomiting indigestion', 'diarrhea', 'nausea vomiting gastroparesis',
                 
-                # RESPIRATOSTRY
+                # RESPIRATORY
                 'asthma bronchitis breathing difficulty', 'asthma COPD inflammation',
                 'asthma allergic rhinitis', 'cough chest congestion', 'cough bronchitis',
                 
@@ -136,6 +135,78 @@ class MedicineRecommender:
                 3.9, 3.8, 3.2, 3.1,             # Mental Health
                 4.4, 4.3, 4.2, 4.1,             # Skin
                 4.8, 4.7, 4.6, 4.5, 4.4         # Vitamins
+            ],
+            'price_category': [  # ADDED: Price categories for filtering
+                '💰 Economy', '💵 Standard', '💰 Economy', '💵 Standard', '💵 Standard', '💎 Premium',  # Analgesics
+                '💰 Economy', '💵 Standard', '💵 Standard', '💰 Economy', '💰 Economy', '💵 Standard',  # Antibiotics
+                '💰 Economy', '💰 Economy', '💵 Standard', '💰 Economy', '💰 Economy',                 # Antihistamines
+                '💎 Premium', '💰 Economy', '💎 Premium', '💵 Standard', '💰 Economy', '💵 Standard',  # Gastrointestinal
+                '💰 Economy', '💎 Premium', '💵 Standard', '💰 Economy', '💵 Standard',                # Respiratory
+                '💎 Premium', '💵 Standard', '💰 Economy', '💵 Standard', '💰 Economy',                # Cardiac
+                '💰 Economy', '💰 Economy', '💎 Premium',                                              # Diabetes
+                '💵 Standard', '💰 Economy', '💵 Standard', '💵 Standard',                            # Mental Health
+                '💰 Economy', '💰 Economy', '💵 Standard', '💰 Economy',                              # Skin
+                '💰 Economy', '💰 Economy', '💰 Economy', '💰 Economy', '💰 Economy'                  # Vitamins
+            ],
+            'key_info': [  # ADDED: Detailed medical information
+                'First-line for mild-moderate pain. Max 4g/day. Avoid alcohol.',
+                'Take with food. GI and kidney precautions. Anti-inflammatory.',
+                'Low-dose for heart protection. GI bleeding risk. Not for children.',
+                'Powerful NSAID. Monitor liver and kidney function. Take with food.',
+                'Longer acting NSAID. Good for chronic pain. Take with food.',
+                'Opioid analgesic. Risk of dependence. Schedule IV controlled substance.',
+                
+                'Penicillin antibiotic. Complete full course. Check for allergies.',
+                'Macrolide antibiotic. Once daily dosing. Fewer GI side effects.',
+                'Fluoroquinolone. Tendon rupture risk. Avoid in children and adolescents.',
+                'Tetracycline. Photosensitivity risk. Take with plenty of water.',
+                'Macrolide. Multiple drug interactions. GI side effects common.',
+                'First-generation cephalosporin. Good for skin infections.',
+                
+                'Non-drowsy formula. Once daily. Few side effects.',
+                'Non-sedating. Once daily. Minimal drug interactions.',
+                'Third-generation. Non-drowsy. Safe for long-term use.',
+                'First-generation. Causes drowsiness. Also used for sleep aid.',
+                'Classic antihistamine. Affordable. Mild drowsiness possible.',
+                
+                'Proton pump inhibitor. Take before meals. Long-term use monitoring needed.',
+                'H2 blocker. Being phased out due to safety concerns.',
+                'PPI with fewer interactions. Good for GERD.',
+                'Prokinetic agent. QT prolongation risk. Lactation use.',
+                'Antidiarrheal. Not for infectious diarrhea. Opioid derivative.',
+                'Antiemetic. Extrapyramidal side effects risk. Short-term use.',
+                
+                'Bronchodilator. Rescue medication. Short-acting.',
+                'Inhaled corticosteroid. Maintenance therapy. Rinse mouth after use.',
+                'Leukotriene inhibitor. Once daily. Good for allergy-induced asthma.',
+                'Expectorant. Thins mucus. Stay hydrated.',
+                'Mucolytic. Breaks down thick mucus. Good for productive cough.',
+                
+                'Statin. Cholesterol lowering. Take in evening.',
+                'Calcium channel blocker. For hypertension and angina.',
+                'Beta blocker. Slows heart rate. Avoid in asthma.',
+                'ARB. Blood pressure control. Kidney protective.',
+                'Diuretic. Removes excess fluid. Monitor electrolytes.',
+                
+                'First-line for type 2 diabetes. GI side effects common.',
+                'Stimulates insulin secretion. Hypoglycemia risk.',
+                'Long-acting basal insulin. Once daily injection.',
+                
+                'SSRI antidepressant. Takes 4-6 weeks for full effect.',
+                'SSRI with long half-life. Good for compliance.',
+                'Benzodiazepine. Fast-acting. High addiction potential.',
+                'Long-acting benzodiazepine. Muscle relaxant properties.',
+                
+                'Topical steroid. Mild potency. Avoid face and broken skin.',
+                'Antifungal cream. Apply to clean dry area.',
+                'Topical antibiotic. For skin infections. Not for deep wounds.',
+                'Antiacne treatment. May bleach fabrics. Start with lower concentration.',
+                
+                'Antioxidant. Immune support. Water soluble.',
+                'Bone health. Calcium absorption. Sunlight vitamin.',
+                'Immune function. Wound healing. Mineral supplement.',
+                'Bone health. Take with vitamin D for better absorption.',
+                'For iron deficiency anemia. May cause constipation.'
             ]
         }
         return pd.DataFrame(data)
@@ -163,6 +234,8 @@ class MedicineRecommender:
                     'for_symptoms': medicine['for_symptoms'],
                     'category': medicine['category'],
                     'safety_rating': medicine['safety_rating'],
+                    'price_category': medicine['price_category'],
+                    'key_info': medicine['key_info'],
                     'match_strength': self.calculate_match_strength(symptom_words, medicine_symptoms)
                 })
         
@@ -195,3 +268,54 @@ class MedicineRecommender:
             self.medicines_df['category'].str.contains(category, case=False, na=False)
         ]
         return results.to_dict('records')
+    
+    # ✅ ADD THIS MISSING METHOD
+    def get_statistics(self):
+        """Get comprehensive statistics for dashboard"""
+        all_meds = self.get_all_medicines()
+        
+        if not all_meds:
+            return {
+                'total_medicines': 0,
+                'categories': 0,
+                'avg_safety': 0,
+                'price_distribution': {},
+                'category_distribution': {}
+            }
+        
+        # Calculate statistics
+        safety_ratings = [med.get('safety_rating', 0) for med in all_meds]
+        categories = list(set(med.get('category', 'Unknown') for med in all_meds))
+        
+        # Price distribution
+        price_counts = {}
+        for med in all_meds:
+            price_cat = med.get('price_category', 'Unknown')
+            price_counts[price_cat] = price_counts.get(price_cat, 0) + 1
+        
+        # Category distribution
+        category_counts = {}
+        for med in all_meds:
+            category = med.get('category', 'Unknown')
+            category_counts[category] = category_counts.get(category, 0) + 1
+        
+        return {
+            'total_medicines': len(all_meds),
+            'categories': len(categories),
+            'avg_safety': round(sum(safety_ratings) / len(safety_ratings), 2) if safety_ratings else 0,
+            'price_distribution': price_counts,
+            'category_distribution': category_counts,
+            'high_safety_meds': len([med for med in all_meds if med.get('safety_rating', 0) >= 4.0])
+        }
+    
+    def get_medicines_by_price(self, price_category):
+        """Get medicines by price category"""
+        results = self.medicines_df[
+            self.medicines_df['price_category'].str.contains(price_category, case=False, na=False)
+        ]
+        return results.to_dict('records')
+    
+    def get_top_safe_medicines(self, limit=5):
+        """Get top safest medicines"""
+        sorted_meds = self.medicines_df.sort_values('safety_rating', ascending=False)
+        return sorted_meds.head(limit).to_dict('records')
