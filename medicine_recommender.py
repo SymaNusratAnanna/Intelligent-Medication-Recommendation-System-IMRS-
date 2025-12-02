@@ -1,6 +1,7 @@
 # medicine_recommender.py - EXPANDED VERSION
 import pandas as pd
 
+
 class MedicineRecommender:
     def __init__(self):
         self.medicines_df = self.create_medicine_data()
@@ -194,4 +195,3 @@ class MedicineRecommender:
             self.medicines_df['category'].str.contains(category, case=False, na=False)
         ]
         return results.to_dict('records')
-
