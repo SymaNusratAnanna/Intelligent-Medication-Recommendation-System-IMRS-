@@ -1,11 +1,11 @@
-# medicine_recommender.py - COMPLETE ENHANCED VERSION
+# medicine_recommender.py - COMPLETE FIXED VERSION
 import pandas as pd
 
 class MedicineRecommender:
     
     def __init__(self):
         self.medicines_df = self.create_medicine_data()
-        print("💊 Enhanced medicine database with detailed information loaded successfully!")
+        print("💊 Enhanced medicine database loaded successfully!")
     
     def create_medicine_data(self):
         """Create comprehensive medicine database with enhanced information"""
@@ -137,7 +137,7 @@ class MedicineRecommender:
                 4.4, 4.3, 4.2, 4.1,             # Skin
                 4.8, 4.7, 4.6, 4.5, 4.4         # Vitamins
             ],
-            'price_category': [  # Price categories for filtering
+            'price_category': [  # ADDED: Price categories for filtering
                 '💰 Economy', '💵 Standard', '💰 Economy', '💵 Standard', '💵 Standard', '💎 Premium',  # Analgesics
                 '💰 Economy', '💵 Standard', '💵 Standard', '💰 Economy', '💰 Economy', '💵 Standard',  # Antibiotics
                 '💰 Economy', '💰 Economy', '💵 Standard', '💰 Economy', '💰 Economy',                 # Antihistamines
@@ -149,7 +149,7 @@ class MedicineRecommender:
                 '💰 Economy', '💰 Economy', '💵 Standard', '💰 Economy',                              # Skin
                 '💰 Economy', '💰 Economy', '💰 Economy', '💰 Economy', '💰 Economy'                  # Vitamins
             ],
-            'key_info': [  # Detailed medical information
+            'key_info': [  # ADDED: Detailed medical information
                 'First-line for mild-moderate pain. Max 4g/day. Avoid alcohol.',
                 'Take with food. GI and kidney precautions. Anti-inflammatory.',
                 'Low-dose for heart protection. GI bleeding risk. Not for children.',
@@ -208,222 +208,6 @@ class MedicineRecommender:
                 'Immune function. Wound healing. Mineral supplement.',
                 'Bone health. Take with vitamin D for better absorption.',
                 'For iron deficiency anemia. May cause constipation.'
-            ],
-            # ✅ NEW: ADDED DETAILED MEDICAL INFORMATION
-            'primary_use': [
-                # ANALGESICS
-                'Analgesic & Antipyretic (Pain & Fever relief)',
-                'NSAID - Inflammation, Pain, Fever reduction',
-                'Pain relief & cardiovascular protection',
-                'NSAID - Arthritis, Pain, Inflammation',
-                'NSAID - Chronic pain, Inflammation',
-                'Opioid - Moderate to severe pain relief',
-                
-                # ANTIBIOTICS
-                'Bacterial infections treatment',
-                'Broad-spectrum antibiotic for respiratory infections',
-                'Urinary tract and bacterial infections',
-                'Bacterial infections, Acne, Malaria prevention',
-                'Respiratory and skin infections',
-                'Bacterial skin and respiratory infections',
-                
-                # ANTIHISTAMINES
-                'Antihistamine for allergy relief',
-                'Non-sedating allergy relief',
-                'Chronic allergy and hives treatment',
-                'Allergy relief and sleep aid',
-                'Classic antihistamine for allergies',
-                
-                # GASTROINTESTINAL
-                'Acid reflux & ulcer treatment',
-                'Heartburn and acid indigestion',
-                'GERD and acid-related conditions',
-                'Nausea and vomiting relief',
-                'Diarrhea treatment',
-                'Nausea and gastroparesis',
-                
-                # RESPIRATORY
-                'Asthma and COPD symptom relief',
-                'Asthma inflammation control',
-                'Asthma and allergy prevention',
-                'Cough and chest congestion relief',
-                'Productive cough treatment',
-                
-                # CARDIAC
-                'Cholesterol reduction',
-                'High blood pressure treatment',
-                'Blood pressure and heart rate control',
-                'Blood pressure management',
-                'Fluid retention and blood pressure',
-                
-                # DIABETES
-                'Type 2 diabetes management',
-                'Diabetes blood sugar control',
-                'Insulin-dependent diabetes',
-                
-                # MENTAL HEALTH
-                'Depression and anxiety treatment',
-                'Depression and panic disorder',
-                'Anxiety and panic disorder',
-                'Anxiety and muscle relaxation',
-                
-                # SKIN
-                'Skin inflammation and itching',
-                'Fungal skin infections',
-                'Bacterial skin infections',
-                'Acne treatment',
-                
-                # VITAMINS
-                'Immune system support',
-                'Bone health and calcium absorption',
-                'Immune function and wound healing',
-                'Bone health maintenance',
-                'Iron deficiency anemia treatment'
-            ],
-            'drug_class': [
-                # ANALGESICS
-                'Non-opioid analgesic',
-                'Non-steroidal anti-inflammatory',
-                'Salicylate, Antiplatelet agent',
-                'NSAID',
-                'NSAID',
-                'Opioid analgesic',
-                
-                # ANTIBIOTICS
-                'Penicillin antibiotic',
-                'Macrolide antibiotic',
-                'Fluoroquinolone antibiotic',
-                'Tetracycline antibiotic',
-                'Macrolide antibiotic',
-                'Cephalosporin antibiotic',
-                
-                # ANTIHISTAMINES
-                'H1-receptor antagonist',
-                'Second-generation antihistamine',
-                'Third-generation antihistamine',
-                'First-generation antihistamine',
-                'Classic antihistamine',
-                
-                # GASTROINTESTINAL
-                'Proton pump inhibitor',
-                'H2 receptor antagonist',
-                'Proton pump inhibitor',
-                'Dopamine antagonist',
-                'Opioid receptor agonist',
-                'Dopamine antagonist',
-                
-                # RESPIRATORY
-                'Short-acting beta-agonist',
-                'Inhaled corticosteroid',
-                'Leukotriene receptor antagonist',
-                'Expectorant',
-                'Mucolytic agent',
-                
-                # CARDIAC
-                'HMG-CoA reductase inhibitor',
-                'Calcium channel blocker',
-                'Beta-1 selective blocker',
-                'Angiotensin receptor blocker',
-                'Thiazide diuretic',
-                
-                # DIABETES
-                'Biguanide antihyperglycemic',
-                'Sulfonylurea',
-                'Long-acting basal insulin',
-                
-                # MENTAL HEALTH
-                'Selective serotonin reuptake inhibitor',
-                'SSRI antidepressant',
-                'Benzodiazepine',
-                'Benzodiazepine',
-                
-                # SKIN
-                'Topical corticosteroid',
-                'Topical antifungal',
-                'Topical antibiotic',
-                'Antiacne preparation',
-                
-                # VITAMINS
-                'Water-soluble vitamin',
-                'Fat-soluble vitamin',
-                'Essential mineral',
-                'Mineral supplement',
-                'Mineral supplement'
-            ],
-            'dosage_form': [
-                # ANALGESICS
-                'Tablet, 500mg', 'Tablet, 400mg', 'Enteric-coated tablet, 100mg',
-                'Tablet, 50mg', 'Tablet, 250mg', 'Tablet, 50mg',
-                
-                # ANTIBIOTICS
-                'Capsule, 250mg', 'Tablet, 250mg', 'Tablet, 250mg',
-                'Capsule, 100mg', 'Tablet, 250mg', 'Capsule, 250mg',
-                
-                # ANTIHISTAMINES
-                'Tablet, 10mg', 'Tablet, 10mg', 'Tablet, 120mg',
-                'Tablet, 25mg', 'Tablet, 4mg',
-                
-                # GASTROINTESTINAL
-                'Capsule, 20mg', 'Tablet, 150mg', 'Capsule, 40mg',
-                'Tablet, 10mg', 'Capsule, 2mg', 'Tablet, 10mg',
-                
-                # RESPIRATORY
-                'Metered dose inhaler', 'Inhaler', 'Chewable tablet, 10mg',
-                'Tablet, 400mg', 'Tablet, 30mg',
-                
-                # CARDIAC
-                'Tablet, 10mg', 'Tablet, 5mg', 'Tablet, 25mg',
-                'Tablet, 50mg', 'Tablet, 25mg',
-                
-                # DIABETES
-                'Tablet, 500mg', 'Tablet, 5mg', 'Injection pen',
-                
-                # MENTAL HEALTH
-                'Tablet, 50mg', 'Capsule, 20mg', 'Tablet, 0.25mg',
-                'Tablet, 5mg',
-                
-                # SKIN
-                'Cream, 1%', 'Cream, 1%', 'Ointment, 2%', 'Gel, 5%',
-                
-                # VITAMINS
-                'Tablet, 500mg', 'Softgel, 1000IU', 'Tablet, 50mg',
-                'Tablet, 600mg', 'Tablet, 65mg'
-            ],
-            'duration': [
-                # ANALGESICS
-                '4-6 hours', '6-8 hours', '4-6 hours (analgesic), 24 hours (antiplatelet)',
-                '8-12 hours', '12 hours', '4-6 hours',
-                
-                # ANTIBIOTICS
-                '7-10 day course', '3-5 day course', '7-14 day course',
-                '7-10 day course', '7-10 day course', '7-10 day course',
-                
-                # ANTIHISTAMINES
-                '24 hours', '24 hours', '24 hours', '4-6 hours', '4-6 hours',
-                
-                # GASTROINTESTINAL
-                'Once daily, 4-8 weeks', 'Twice daily', 'Once daily',
-                'As needed', 'As needed', 'Before meals',
-                
-                # RESPIRATORY
-                '4-6 hours as needed', 'Twice daily maintenance', 'Once daily',
-                'Every 4 hours', 'Three times daily',
-                
-                # CARDIAC
-                'Once daily, long-term', 'Once daily', 'Once or twice daily',
-                'Once daily', 'Once daily in morning',
-                
-                # DIABETES
-                'Twice daily with meals', 'Once daily with breakfast', 'Once daily injection',
-                
-                # MENTAL HEALTH
-                'Once daily, long-term', 'Once daily', 'As needed', '2-4 times daily as needed',
-                
-                # SKIN
-                'Apply 2-3 times daily', 'Apply twice daily', 'Apply 3 times daily', 'Apply once daily',
-                
-                # VITAMINS
-                'Once daily', 'Once daily', 'Once daily', 'Once daily with food', 'Once daily'
             ]
         }
         return pd.DataFrame(data)
@@ -453,10 +237,6 @@ class MedicineRecommender:
                     'safety_rating': medicine['safety_rating'],
                     'price_category': medicine['price_category'],
                     'key_info': medicine['key_info'],
-                    'primary_use': medicine['primary_use'],
-                    'drug_class': medicine['drug_class'],
-                    'dosage_form': medicine['dosage_form'],
-                    'duration': medicine['duration'],
                     'match_strength': self.calculate_match_strength(symptom_words, medicine_symptoms)
                 })
         
@@ -490,6 +270,7 @@ class MedicineRecommender:
         ]
         return results.to_dict('records')
     
+    # ✅ ADD THIS MISSING METHOD
     def get_statistics(self):
         """Get comprehensive statistics for dashboard"""
         all_meds = self.get_all_medicines()
