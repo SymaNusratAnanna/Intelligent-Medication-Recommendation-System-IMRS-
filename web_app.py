@@ -4,9 +4,7 @@ import pandas as pd
 import numpy as np
 from medicine_recommender import MedicineRecommender
 
-# In your web_app.py
-stats = medicine_recommende.get_statistics()  # ✅ NO MORE ERROR!
-st.success(f"✅ Found {stats['total_medicines']} medicines with avg safety {stats['avg_safety']}/5.0")
+
 
 # Page configuration
 st.set_page_config(
