@@ -1,7 +1,39 @@
 # medicine_recommender.py - COMPLETE FIXED VERSION
 import pandas as pd
 
+
 class MedicineRecommender:
+    # ... your existing methods ...
+    
+    # ✅ ADD THIS EXACT METHOD
+    def get_statistics(self):
+        """Get statistics for dashboard - ADD THIS TO FIX THE ERROR"""
+        all_meds = self.get_all_medicines()
+        
+        if not all_meds:
+            return {
+                'total_medicines': 0,
+                'categories': 0,
+                'avg_safety': 0,
+                'price_distribution': {}
+            }
+        
+        # Calculate statistics
+        safety_ratings = [med.get('safety_rating', 0) for med in all_meds]
+        categories = list(set(med.get('category', 'Unknown') for med in all_meds))
+        
+        # Price distribution
+        price_counts = {}
+        for med in all_meds:
+            price_cat = med.get('price_category', 'Unknown')
+            price_counts[price_cat] = price_counts.get(price_cat, 0) + 1
+        
+        return {
+            'total_medicines': len(all_meds),
+            'categories': len(categories),
+            'avg_safety': sum(safety_ratings) / len(safety_ratings) if safety_ratings else 0,
+            'price_distribution': price_counts
+        }
     def __init__(self):
         self.medicines_df = self.create_medicine_data()
         print("💊 Enhanced medicine database loaded successfully!")
