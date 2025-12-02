@@ -194,3 +194,4 @@ class MedicineRecommender:
             self.medicines_df['category'].str.contains(category, case=False, na=False)
         ]
         return results.to_dict('records')
+
