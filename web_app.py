@@ -399,12 +399,7 @@ if selected == "🏠 Dashboard":
                                 <strong>⏰ Duration:</strong><br>
                                 <span style='opacity: 0.9;'>{medicine_info['duration']}</span>
                             </div>
-    </div>
-
-                        
-   
-                        
-                        <div style='margin-top: 1rem;'>
+                            <div style='margin-top: 1rem;'>
                             <strong>💡 Important Information:</strong><br>
                             <span style='opacity: 0.9; font-size: 0.9rem;'>{medicine_info['key_info']}</span>
                         </div>
@@ -412,6 +407,12 @@ if selected == "🏠 Dashboard":
                         <div style='margin-top: 1rem;'>
                             <strong>⭐ Safety Rating:</strong>
                         </div>
+    </div>
+
+                        
+   
+                        
+                        
                     </div>
              
 
