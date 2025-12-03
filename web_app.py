@@ -374,6 +374,7 @@ if selected == "🏠 Dashboard":
                     medicine_info = get_medicine_details(medicine)
                     
                     st.markdown(f"""
+                                <div>
                     <div class="medicine-card-premium">
                         <div style='display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;'>
                             <h2 style='margin: 0; color: white;'>💊 {medicine['name']}</h2>
@@ -381,7 +382,7 @@ if selected == "🏠 Dashboard":
                                 <span style='font-size: 1.2rem; font-weight: bold;'>⭐ {medicine['safety_rating']}/5.0</span>
                             </div>
                      
-                        
+                              </div>
                         <div style='display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; color: white;'>
                             <div>
                                 <strong>🎯 Primary Use:</strong><br>
@@ -413,7 +414,8 @@ if selected == "🏠 Dashboard":
                             <strong>⭐ Safety Rating:</strong>
                         </div>
                     </div>
-                       </div>
+                   </div>
+                 
                     """, unsafe_allow_html=True)
                     
                     # Progress bar
