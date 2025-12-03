@@ -380,7 +380,7 @@ if selected == "🏠 Dashboard":
                             <div style='background: rgba(255,255,255,0.2); padding: 0.5rem 1rem; border-radius: 20px;'>
                                 <span style='font-size: 1.2rem; font-weight: bold;'>⭐ {medicine['safety_rating']}/5.0</span>
                             </div>
-                        </div>
+                     
                         
                         <div style='display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; color: white;'>
                             <div>
@@ -413,6 +413,7 @@ if selected == "🏠 Dashboard":
                             <strong>⭐ Safety Rating:</strong>
                         </div>
                     </div>
+                       </div>
                     """, unsafe_allow_html=True)
                     
                     # Progress bar
