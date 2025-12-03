@@ -485,34 +485,19 @@ elif selected == "🔍 Symptom Analyzer":
                     # ✅ Medicine cards - matches your blue card design
                     for medicine in filtered_results:
                         st.markdown(f"""
-                       <div style='
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-    padding: 2rem;
-    border-radius: 15px;
-    margin: 1.5rem 0;
-    border-left: 5px solid #ff6b6b;
-    width: 100%;  /* ✅ CRITICAL FIX: Use full width */
-    min-width: 300px;  /* ✅ Ensure minimum readable width */
-    box-sizing: border-box;  /* ✅ Include padding in width calculation */
-'>
-    <div style='display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap;'>
-        <h2 style='margin: 0; color: white; font-size: 1.5rem; word-wrap: break-word;'>💊 {medicine['name']}</h2>
-        <div style='
-            background: rgba(255,255,255,0.2);
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            white-space: nowrap;  /* ✅ Prevent rating from breaking */
-        '>
-            <span style='font-size: 1.2rem; font-weight: bold;'>⭐ {medicine['safety_rating']}/5.0</span>
-        </div>
-    </div>
-    
-    <div style='color: white; line-height: 1.6;'>
-        <div><strong>🎯 Primary Use:</strong> {medicine.get('for_symptoms', 'Symptom management')}</div>
-        <div><strong>📊 Classification:</strong> {medicine.get('category', 'Medication')}</div>
-    </div>
-</div>
+                        <div class="medicine-card-premium">
+                        <div style='display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;'>
+                            <h2 style='margin: 0; color: white;'>💊 {medicine['name']}</h2>
+                            <div style='background: rgba(255,255,255,0.2); padding: 0.5rem 1rem; border-radius: 20px;'>
+                                <span style='font-size: 1.2rem; font-weight: bold;'>⭐ {medicine['safety_rating']}/5.0</span>
+                            </div>
+                    </div>
+      
+                        
+                        
+   
+                        
+                        
                         """, unsafe_allow_html=True)  # ✅ ADD THIS
                         
                 else:
@@ -526,7 +511,7 @@ elif selected == "📊 Medicine Database":
     st.markdown("""
     <div class="glass-card">
         <h1 style='color: #667eea; text-align: center;'>📊 Complete Medicine Database</h1>
-        <p style='text-align: center; color: #666;'>Advanced search and filtering for our comprehensive medicine library</p>
+        <p style='text-align: center; color:  F5F527;'>Advanced search and filtering for our comprehensive medicine library</p>
     </div>
     """, unsafe_allow_html=True)
     
