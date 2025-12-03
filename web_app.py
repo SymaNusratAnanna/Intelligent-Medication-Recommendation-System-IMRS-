@@ -381,10 +381,8 @@ if selected == "🏠 Dashboard":
                             <div style='background: rgba(255,255,255,0.2); padding: 0.5rem 1rem; border-radius: 20px;'>
                                 <span style='font-size: 1.2rem; font-weight: bold;'>⭐ {medicine['safety_rating']}/5.0</span>
                             </div>
-                     
-                             <!-- Add this opening container div with background -->
- </div>
-                      <div style='display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;'>
+                    </div>
+        <div style='display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;'>
         <div>
             <strong>🎯 Primary Use:</strong><br>
             <span style='opacity: 0.9;'>{medicine_info['primary_use']}</span>
@@ -393,11 +391,7 @@ if selected == "🏠 Dashboard":
             <strong>📊 Classification:</strong><br>
             <span style='opacity: 0.9;'>{medicine_info['drug_class']}</span>
         </div>
-    </div>
-
-                        
-                        <div style='display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; color: white; margin-top: 1rem;'>
-                            <div>
+        <div>
                                 <strong>💊 Formulation:</strong><br>
                                 <span style='opacity: 0.9;'>{medicine_info['dosage_form']}</span>
                             </div>
@@ -405,7 +399,10 @@ if selected == "🏠 Dashboard":
                                 <strong>⏰ Duration:</strong><br>
                                 <span style='opacity: 0.9;'>{medicine_info['duration']}</span>
                             </div>
-                        </div>
+    </div>
+
+                        
+   
                         
                         <div style='margin-top: 1rem;'>
                             <strong>💡 Important Information:</strong><br>
