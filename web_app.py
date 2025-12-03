@@ -404,12 +404,7 @@ if selected == "🏠 Dashboard":
                             <span style='opacity: 0.9; font-size: 0.9rem;'>{medicine_info['key_info']}</span>
                         </div>
                         
-                        # <div style='margin-top: 1rem;'>
-                        #     <strong>⭐ Safety Rating:</strong>
-                        #      <span style='opacity: 0.9; font-size: 0.9rem;'>{medicine_info['safety_rating']}</span>
-                        # </div>
-    
-
+                        
                         
    
                         
