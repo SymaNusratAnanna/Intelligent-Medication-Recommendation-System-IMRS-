@@ -6,7 +6,7 @@ class MedicineRecommender:
     def __init__(self):
         self.medicines_df = self.create_medicine_data()
         self.user_added_medicines = []  # Make sure this line exists
-        # self.total_medicines_count = []
+        self.total_medicines_count = []
         print("💊 Enhanced medicine database loaded successfully!")
     
     def create_medicine_data(self):
@@ -286,10 +286,13 @@ class MedicineRecommender:
         all_medicines = self.get_all_medicines_with_user_added()
         results = [med for med in all_medicines if medicine_name.lower() in med['name'].lower()]
         return results
+    def get_total_medicines_count(self):
+        """Get count of user-added medicines"""
+        return len(self.user_added_medicines)
     
     def get_user_added_medicines_count(self):
         """Get count of user-added medicines"""
-        return len(self.user_added_medicines)
+        return len(self.total_medicines)
         
         # Sort by safety rating and match strength
         recommendations.sort(key=lambda x: (x['safety_rating'], x.get('match_strength', 0)), reverse=True)
@@ -437,6 +440,21 @@ def search_medicine(self, medicine_name):
 #             print(f"Error counting medicines: {e}")
 #             return 0
 
+
+def get_total_medicines_count(self):
+        """Returns total count of all medicines (base + user-added)"""
+        try:
+            base_count = len(self.medicines_df)
+            user_count = len(self.user_added_medicines)
+            print(f"Debug: Base={base_count}, User={user_count}")  # Debug line
+            return base_count + user_count
+        except Exception as e:
+            print(f"❌ Error in get_total_medicines_count: {str(e)}")
+            return 0
+  
+
+
+
 def get_user_added_medicines_count(self):
     """Get count of user-added medicines"""
     try:
@@ -444,7 +462,6 @@ def get_user_added_medicines_count(self):
     except Exception as e:
         print(f"Error counting user-added medicines: {e}")
         return 0
-    
-  
+
 
 
