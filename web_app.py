@@ -455,7 +455,7 @@ elif selected == "🔍 Symptom Analyzer":
         with col3:
             category_filter = st.selectbox("**Category**", ["All", "Analgesic", "Antibiotic", "NSAID"])
 
-    
+    with  col1, col2, col3 :
         if user_symptoms:
             st.markdown("### 💊 AI Recommendations")
             
