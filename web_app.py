@@ -468,35 +468,31 @@ elif selected == "🔍 Symptom Analyzer":
                 if filtered_results:
                     # ✅ Success message - matches your dark green box
                     st.markdown(f"""
-                    <div class="medicine-card-premium">
+                    <div style='
+                        background: #00b09b; 
+                        color: white; 
+                        padding: 1.5rem; 
+                        border-radius: 10px; 
+                        margin: 1rem 0;
+                        text-align: center;
+                        font-weight: bold;
+                        font-size: 1.1rem;
+                    '>
+                        🎯 AI found {len(filtered_results)} perfect medication matches!
+                    </div>
+                    """, unsafe_allow_html=True)  # ✅ ADD THIS
+                    
+                    # ✅ Medicine cards - matches your blue card design
+                    for medicine in filtered_results:
+                        st.markdown(f"""
+                        <div class="medicine-card-premium">
                         <div style='display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;'>
                             <h2 style='margin: 0; color: white;'>💊 {medicine['name']}</h2>
                             <div style='background: rgba(255,255,255,0.2); padding: 0.5rem 1rem; border-radius: 20px;'>
                                 <span style='font-size: 1.2rem; font-weight: bold;'>⭐ {medicine['safety_rating']}/5.0</span>
                             </div>
                     </div>
-        <div style='display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;'>
-        <div>
-            <strong>🎯 Primary Use:</strong><br>
-            <span style='opacity: 0.9;'>{medicine_info['primary_use']}</span>
-        </div>
-        <div>
-            <strong>📊 Classification:</strong><br>
-            <span style='opacity: 0.9;'>{medicine_info['drug_class']}</span>
-        </div>
-        <div>
-                                <strong>💊 Formulation:</strong><br>
-                                <span style='opacity: 0.9;'>{medicine_info['dosage_form']}</span>
-                            </div>
-                            <div>
-                                <strong>⏰ Duration:</strong><br>
-                                <span style='opacity: 0.9;'>{medicine_info['duration']}</span>
-                            </div>
-                            <div style='margin-top: 1rem;'>
-                            <strong>💡 Important Information:</strong><br>
-                            <span style='opacity: 0.9; font-size: 0.9rem;'>{medicine_info['key_info']}</span>
-                        </div>
-                        
+      
                         
                         
    
