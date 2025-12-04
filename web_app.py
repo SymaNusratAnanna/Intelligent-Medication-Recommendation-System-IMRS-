@@ -808,11 +808,11 @@ st.markdown("""
 
 
 
-# Debug medicine counts
-print("=== DEBUG ===")
-print(f"Type of medicines_df: {type(recommender.medicines_df)}")
-print(f"Type of user_added_medicines: {type(recommender.user_added_medicines)}")
-print(f"Base medicines count: {len(recommender.medicines_df)}")
-print(f"User added count: {len(recommender.user_added_medicines)}")
-print(f"Total medicines (method): {recommender.get_total_medicines_count()}")
-print(f"User added (method): {recommender.get_user_added_medicines_count()}")
+# # Debug medicine counts
+# print("=== DEBUG ===")
+# print(f"Type of medicines_df: {type(recommender.medicines_df)}")
+# print(f"Type of user_added_medicines: {type(recommender.user_added_medicines)}")
+# print(f"Base medicines count: {len(recommender.medicines_df)}")
+# print(f"User added count: {len(recommender.user_added_medicines)}")
+# print(f"Total medicines (method): {recommender.get_total_medicines_count()}")
+# print(f"User added (method): {recommender.get_user_added_medicines_count()}")
