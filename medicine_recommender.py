@@ -442,26 +442,22 @@ def search_medicine(self, medicine_name):
 
 
 def get_total_medicines_count(self):
-        """Returns total count of all medicines (base + user-added)"""
+        """Returns combined count of base and user-added medicines"""
         try:
+            # Get count from DataFrame
             base_count = len(self.medicines_df)
+            # Get count from user-added list
             user_count = len(self.user_added_medicines)
-            print(f"Debug: Base={base_count}, User={user_count}")  # Debug line
             return base_count + user_count
         except Exception as e:
-            print(f"❌ Error in get_total_medicines_count: {str(e)}")
-            return 0
-  
-
-
+            print(f"🔴 Count error: {str(e)}")
+            return 0  # Safe default
 
 def get_user_added_medicines_count(self):
-    """Get count of user-added medicines"""
-    try:
-        return len(self.user_added_medicines)
-    except Exception as e:
-        print(f"Error counting user-added medicines: {e}")
-        return 0
-
-
+        """Returns count of only user-added medicines"""
+        try:
+            return len(self.user_added_medicines)
+        except Exception as e:
+            print(f"🔴 User count error: {str(e)}")
+            return 0
 
