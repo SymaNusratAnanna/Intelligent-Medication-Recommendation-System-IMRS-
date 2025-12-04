@@ -428,6 +428,14 @@ def search_medicine(self, medicine_name):
     results = [med for med in all_medicines if medicine_name.lower() in med['name'].lower()]
     return results
 
+def get_total_medicines_count(self):
+        """Returns total count of all medicines (base + user-added)"""
+        try:
+            return len(self.medicines_df) + len(self.user_added_medicines)
+        except Exception as e:
+            print(f"Error counting medicines: {e}")
+            return 0
+
 def get_user_added_medicines_count(self):
     """Get count of user-added medicines"""
     try:
@@ -435,5 +443,7 @@ def get_user_added_medicines_count(self):
     except Exception as e:
         print(f"Error counting user-added medicines: {e}")
         return 0
+    
+  
 
 
