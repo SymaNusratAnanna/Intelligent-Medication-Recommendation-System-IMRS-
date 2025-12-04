@@ -390,9 +390,9 @@ if selected == "➕ Add Medicine":
                     st.success(message)
                     st.balloons()
                     
-                    # Show updated count
-                    total_medicines = recommender.get_total_medicines_count()
-                    st.info(f"📊📊 Total medicines in database: {total_medicines}")
+                    # # Show updated count
+                    # total_medicines = recommender.get_total_medicines_count()
+                    # st.info(f"📊📊 Total medicines in database: {total_medicines}")
                     
                     # Clear form
                     st.rerun()
@@ -418,7 +418,7 @@ if selected == "🏠 Dashboard":
     
     # Quick stats row - UPDATED WITH TOTAL MEDICINES COUNT
     try:
-        total_medicines = recommender.get_total_medicines_count()
+        # total_medicines = recommender.get_total_medicines_count()
         all_meds = recommender.get_all_medicines_with_user_added()
         avg_safety = np.mean([med.get('safety_rating', 0) for med in all_meds]) if all_meds else 0
         user_added_count = recommender.get_user_added_medicines_count()
@@ -471,13 +471,13 @@ elif selected == "📊📊 Medicine Database":
         df = pd.DataFrame(all_medicines)
         
         # Enhanced metrics - shows total count including user-added
-        total_count = recommender.get_total_medicines_count()
+        # total_count = recommender.get_total_medicines_count()
         user_added_count = recommender.get_user_added_medicines_count()
         
         st.markdown("### 📈📈 Database Analytics")
         col1, col2, col3, col4 = st.columns(4)
         with col1:
-            st.metric("Total Medicines", total_count)
+            st.metric("Total Medicines")
         with col2:
             st.metric("Avg Safety", f"{df['safety_rating'].mean():.1f}/5.0")
         with col3:
@@ -808,11 +808,11 @@ st.markdown("""
 
 
 
-# Debug medicine counts
-print("=== DEBUG ===")
-print(f"Type of medicines_df: {type(recommender.medicines_df)}")
-print(f"Type of user_added_medicines: {type(recommender.user_added_medicines)}")
-print(f"Base medicines count: {len(recommender.medicines_df)}")
-print(f"User added count: {len(recommender.user_added_medicines)}")
-print(f"Total medicines (method): {recommender.get_total_medicines_count()}")
-print(f"User added (method): {recommender.get_user_added_medicines_count()}")
+# # Debug medicine counts
+# print("=== DEBUG ===")
+# print(f"Type of medicines_df: {type(recommender.medicines_df)}")
+# print(f"Type of user_added_medicines: {type(recommender.user_added_medicines)}")
+# print(f"Base medicines count: {len(recommender.medicines_df)}")
+# print(f"User added count: {len(recommender.user_added_medicines)}")
+# print(f"Total medicines (method): {recommender.get_total_medicines_count()}")
+# print(f"User added (method): {recommender.get_user_added_medicines_count()}")
