@@ -246,11 +246,6 @@ class MedicineRecommender:
 
                 # Add these methods to your MedicineRecommender class in medicine_recommender.py
 
-    def __init__(self):
-        self.medicines_df = self.create_medicine_data()
-        self.user_added_medicines = []  # Store user-added medicines
-        print("💊 Medicine database loaded successfully!")
-    
     def add_medicine(self, medicine_data):
         """Add a new medicine to the database"""
         try:
