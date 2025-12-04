@@ -2,12 +2,13 @@ import pandas as pd
 
 class MedicineRecommender:
     def __init__(self):
+        """Initialize medicine database with base data"""
         self.medicines_df = self.create_medicine_data()
         self.user_added_medicines = []
         print("💊 Medicine database initialized successfully!")
     
     def create_medicine_data(self):
-        """Create comprehensive medicine database"""
+        """Create base medicine dataset"""
         data = {
             'name': [
                 'Paracetamol 500mg', 'Ibuprofen 400mg', 'Aspirin 100mg',
@@ -38,24 +39,8 @@ class MedicineRecommender:
         }
         return pd.DataFrame(data)
     
-    def get_total_medicines_count(self):
-        """Returns accurate total count of all medicines (base + user-added)"""
-        try:
-            return len(self.medicines_df) + len(self.user_added_medicines)
-        except Exception as e:
-            print(f"❌ Error counting total medicines: {str(e)}")
-            return 0
-    
-    def get_user_added_medicines_count(self):
-        """Returns count of only user-added medicines"""
-        try:
-            return len(self.user_added_medicines)
-        except Exception as e:
-            print(f"❌ Error counting user-added medicines: {str(e)}")
-            return 0
-    
     def add_medicine(self, medicine_data):
-        """Add new medicine to database"""
+        """Add a new medicine to the database"""
         try:
             # Validate required fields
             required_fields = ['name', 'for_symptoms', 'category', 'safety_rating']
@@ -63,7 +48,7 @@ class MedicineRecommender:
                 if field not in medicine_data or not medicine_data[field]:
                     return False, f"❌ Missing required field: {field}"
             
-            # Create complete record
+            # Create complete medicine record
             new_medicine = {
                 'name': medicine_data['name'],
                 'for_symptoms': medicine_data['for_symptoms'],
@@ -86,31 +71,38 @@ class MedicineRecommender:
         except Exception as e:
             return False, f"❌ Error adding medicine: {str(e)}"
     
-    def get_all_medicines(self):
-        """Get all medicines as dictionary records"""
+    def get_total_medicines_count(self):
+        """Get total count of all medicines (base + user-added)"""
+        try:
+            return len(self.medicines_df) + len(self.user_added_medicines)
+        except Exception as e:
+            print(f"Error counting total medicines: {e}")
+            return 0
+    
+    def get_user_added_medicines_count(self):
+        """Get count of user-added medicines only"""
+        try:
+            return len(self.user_added_medicines)
+        except Exception as e:
+            print(f"Error counting user-added medicines: {e}")
+            return 0
+    
+    def get_all_medicines_with_user_added(self):
+        """Get all medicines including user-added ones"""
         try:
             base_medicines = self.medicines_df.to_dict('records')
             return base_medicines + self.user_added_medicines
         except Exception as e:
-            print(f"❌ Error getting medicines: {str(e)}")
-            return []
-    
-    def search_medicine(self, medicine_name):
-        """Search medicines by name"""
-        try:
-            all_meds = self.get_all_medicines()
-            return [med for med in all_meds if medicine_name.lower() in med['name'].lower()]
-        except Exception as e:
-            print(f"❌ Error searching medicines: {str(e)}")
+            print(f"Error getting all medicines: {e}")
             return []
     
     def recommend_by_symptoms(self, symptoms):
-        """Recommend medicines based on symptom matching"""
+        """Recommend medicines based on symptoms"""
         try:
             recommendations = []
             symptoms_lower = symptoms.lower()
             
-            for medicine in self.get_all_medicines():
+            for medicine in self.get_all_medicines_with_user_added():
                 medicine_symptoms = medicine['for_symptoms'].lower()
                 
                 # Check if any symptom word matches
@@ -124,7 +116,7 @@ class MedicineRecommender:
                         'category': medicine['category'],
                         'safety_rating': medicine['safety_rating'],
                         'price_category': medicine['price_category'],
-                        'key_info': medicine['key_info'],
+                        'key_info': medicine.get('key_info', ''),
                         'match_strength': self.calculate_match_strength(symptom_words, medicine_symptoms)
                     })
             
@@ -132,7 +124,7 @@ class MedicineRecommender:
             recommendations.sort(key=lambda x: (x['safety_rating'], x.get('match_strength', 0)), reverse=True)
             return recommendations
         except Exception as e:
-            print(f"❌ Error recommending by symptoms: {str(e)}")
+            print(f"Error recommending by symptoms: {e}")
             return []
     
     def calculate_match_strength(self, user_symptoms, medicine_symptoms):
@@ -143,10 +135,37 @@ class MedicineRecommender:
                 matches += 1
         return matches / len(user_symptoms) if user_symptoms else 0
     
+    def search_medicine(self, medicine_name):
+        """Search medicines by name"""
+        try:
+            all_meds = self.get_all_medicines_with_user_added()
+            return [med for med in all_meds if medicine_name.lower() in med['name'].lower()]
+        except Exception as e:
+            print(f"Error searching medicines: {e}")
+            return []
+    
+    def get_medicines_by_category(self, category):
+        """Get medicines by category"""
+        try:
+            all_meds = self.get_all_medicines_with_user_added()
+            return [med for med in all_meds if category.lower() in med.get('category', '').lower()]
+        except Exception as e:
+            print(f"Error filtering by category: {e}")
+            return []
+    
+    def get_medicines_by_price(self, price_category):
+        """Get medicines by price category"""
+        try:
+            all_meds = self.get_all_medicines_with_user_added()
+            return [med for med in all_meds if price_category.lower() in med.get('price_category', '').lower()]
+        except Exception as e:
+            print(f"Error filtering by price: {e}")
+            return []
+    
     def get_statistics(self):
         """Get comprehensive database statistics"""
         try:
-            all_meds = self.get_all_medicines()
+            all_meds = self.get_all_medicines_with_user_added()
             
             if not all_meds:
                 return {
@@ -182,5 +201,5 @@ class MedicineRecommender:
                 'high_safety_meds': len([med for med in all_meds if med.get('safety_rating', 0) >= 4.0])
             }
         except Exception as e:
-            print(f"❌ Error calculating statistics: {str(e)}")
+            print(f"Error calculating statistics: {e}")
             return {}
