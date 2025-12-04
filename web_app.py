@@ -774,3 +774,45 @@ st.markdown("""
     <p style='opacity: 0.7; margin: 0;'>🎓 Master's Research Project | 🔬 Medical Informatics | ⚕️ Always Consult Professionals</p>
 </div>
 """, unsafe_allow_html=True)
+
+
+
+
+# # Add this right before you call get_total_medicines_count()
+# print("=== DEBUGGING ===")
+# print(f"Recommender object: {repr(recommender)}")
+# print(f"Methods available: {dir(recommender)}")
+# print(f"medicines_df type: {type(recommender.medicines_df)}")
+# print(f"user_added_medicines type: {type(getattr(recommender, 'user_added_medicines', None))}")
+
+# # Then call the method
+# total = recommender.get_total_medicines_count()
+# print(f"Total medicines returned: {total}")
+
+
+# # Test the counting methods
+# print("=== COUNT VERIFICATION ===")
+# print(f"Total medicines (method): {recommender.get_total_medicines_count()}")
+# print(f"User added (method): {recommender.get_user_added_medicines_count()}")
+# print(f"Manual count: {len(recommender.medicines_df) + len(recommender.user_added_medicines)}")
+
+# # Debug medicine counts
+# print("=== DEBUG ===")
+# print(f"Type of medicines_df: {type(recommender.medicines_df)}")
+# print(f"Type of user_added_medicines: {type(recommender.user_added_medicines)}")
+# print(f"Base medicines count: {len(recommender.medicines_df)}")
+# print(f"User added count: {len(recommender.user_added_medicines)}")
+# print(f"Total medicines (method): {recommender.get_total_medicines_count()}")
+# print(f"User added (method): {recommender.get_user_added_medicines_count()}")
+
+
+
+
+# # Debug medicine counts
+# print("=== DEBUG ===")
+# print(f"Type of medicines_df: {type(recommender.medicines_df)}")
+# print(f"Type of user_added_medicines: {type(recommender.user_added_medicines)}")
+# print(f"Base medicines count: {len(recommender.medicines_df)}")
+# print(f"User added count: {len(recommender.user_added_medicines)}")
+# print(f"Total medicines (method): {recommender.get_total_medicines_count()}")
+# print(f"User added (method): {recommender.get_user_added_medicines_count()}")

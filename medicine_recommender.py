@@ -290,9 +290,9 @@ class MedicineRecommender:
         """Get count of user-added medicines"""
         return len(self.user_added_medicines)
     
-    def get_user_added_medicines_count(self):
+    def get_user_added_medicines_count(self):    
         """Get count of user-added medicines"""
-        return len(self.total_medicines)
+        return len(self.total_medicines_count)
         
         # Sort by safety rating and match strength
         recommendations.sort(key=lambda x: (x['safety_rating'], x.get('match_strength', 0)), reverse=True)
@@ -409,7 +409,7 @@ def add_medicine(self, medicine_data):
     except Exception as e:
         return False, f"❌ Error adding medicine: {str(e)}"
 
-def get_all_medicines_with_user_added(self):
+def get_total_medicines_count(self):
     """Get all medicines including user-added ones"""
     base_medicines = self.medicines_df.to_dict('records')
     user_medicines = getattr(self, 'user_added_medicines', [])
@@ -441,23 +441,27 @@ def search_medicine(self, medicine_name):
 #             return 0
 
 
-def get_total_medicines_count(self):
-        """Returns combined count of base and user-added medicines"""
-        try:
-            # Get count from DataFrame
-            base_count = len(self.medicines_df)
-            # Get count from user-added list
-            user_count = len(self.user_added_medicines)
-            return base_count + user_count
-        except Exception as e:
-            print(f"🔴 Count error: {str(e)}")
-            return 0  # Safe default
+# def get_total_medicines_count(self):
+#         """Returns accurate count of all medicines"""
+#         try:
+#             return len(self.medicines_df) + len(self.user_added_medicines)
+#         except Exception as e:
+#             print(f"❌ Error counting total medicines: {e}")
+#             return 0
+    
+# # def get_user_added_medicines_count(self):
+# #         """Returns count of only user-added medicines"""
+# #         try:
+# #             return len(self.user_added_medicines)  # Fixed: using correct attribute
+# #         except Exception as e:
+# #             print(f"❌ Error counting user-added medicines: {e}")
+#             return 0
 
 def get_user_added_medicines_count(self):
         """Returns count of only user-added medicines"""
         try:
-            return len(self.user_added_medicines)
+            return len(self.user_added_medicines)  # Corrected: using user_added_medicines
         except Exception as e:
-            print(f"🔴 User count error: {str(e)}")
+            print(f"❌ Error counting user-added medicines: {str(e)}")
             return 0
 
