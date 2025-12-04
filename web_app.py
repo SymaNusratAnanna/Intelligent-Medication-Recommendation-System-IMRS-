@@ -418,7 +418,7 @@ if selected == "🏠 Dashboard":
     
     # Quick stats row - UPDATED WITH TOTAL MEDICINES COUNT
     try:
-        total_medicines = recommender.get_total_medicines_count()
+        # total_medicines = recommender.get_total_medicines_count()
         all_meds = recommender.get_all_medicines_with_user_added()
         avg_safety = np.mean([med.get('safety_rating', 0) for med in all_meds]) if all_meds else 0
         user_added_count = recommender.get_user_added_medicines_count()
@@ -471,7 +471,7 @@ elif selected == "📊📊 Medicine Database":
         df = pd.DataFrame(all_medicines)
         
         # Enhanced metrics - shows total count including user-added
-        total_count = recommender.get_total_medicines_count()
+        # total_count = recommender.get_total_medicines_count()
         user_added_count = recommender.get_user_added_medicines_count()
         
         st.markdown("### 📈📈 Database Analytics")
