@@ -316,88 +316,7 @@ except Exception as e:
 selected = st.session_state.selected
 
 
-# =============================================
-# ADD MEDICINE PAGE - NEW FEATURE
-# =============================================
-if selected == "➕ Add Medicine":
-    st.markdown("""
-    <div class="glass-card">
-        <h1 style='color: #667eea; text-align: center;'>➕➕ Add New Medicine</h1>
-        <p style='text-align: center; color: #666;'>Add a new medicine to the database with all required information</p>
-    </div>
-    """, unsafe_allow_html=True)
-    
-    # Medicine form
-    with st.form("add_medicine_form"):
-        st.markdown("### 📝📝 Medicine Information")
-        
-        col1, col2 = st.columns(2)
-        with col1:
-            medicine_name = st.text_input("💊💊 Medicine Name*", placeholder="e.g., Paracetamol 500mg")
-            category = st.selectbox("📋📋 Category*", [
-                "Analgesic", "NSAID", "Antibiotic", "Antihistamine", "PPI", "H2 Blocker", 
-                "Bronchodilator", "Statin", "Vitamin", "Mineral", "Other"
-            ])
-            safety_rating = st.slider("⭐ Safety Rating*", 1.0, 5.0, 4.0, 0.1)
-        
-        with col2:
-            price_category = st.selectbox("💰💰 Price Category*", 
-                ["💰 Economy", "💵💵 Standard", "💎💎 Premium"])
-            dosage_form = st.text_input("💊💊 Dosage Form", placeholder="e.g., Tablet 500mg, Inhaler")
-            duration = st.text_input("⏰⏰ Duration", placeholder="e.g., 4-6 hours, Once daily")
-        
-        # Symptoms and usage
-        for_symptoms = st.text_area("🤒🤒 Symptoms Treated*", 
-            placeholder="e.g., fever headache mild pain", 
-            help="Describe what symptoms this medicine treats")
-        
-        primary_use = st.text_input("🎯🎯 Primary Use", 
-            placeholder="e.g., Analgesic & Antipyretic")
-        
-        key_info = st.text_area("💡💡 Key Information", 
-            placeholder="Important medical information, precautions, etc.",
-            height=100)
-        
-        drug_class = st.text_input("🔬🔬 Drug Class", 
-            placeholder="e.g., Non-opioid analgesic, SSRI")
-        
-        # Submit button
-        submitted = st.form_submit_button("💾💾 Add Medicine to Database", type="primary")
-        
-        if submitted:
-            # Validate required fields
-            if not medicine_name or not for_symptoms or not category:
-                st.error("❌❌ Please fill in all required fields (*)")
-            else:
-                # Prepare medicine data
-                medicine_data = {
-                    'name': medicine_name,
-                    'for_symptoms': for_symptoms,
-                    'category': category,
-                    'safety_rating': safety_rating,
-                    'price_category': price_category,
-                    'key_info': key_info,
-                    'primary_use': primary_use,
-                    'drug_class': drug_class,
-                    'dosage_form': dosage_form,
-                    'duration': duration
-                }
-                
-                # Add medicine to database
-                success, message = recommender.add_medicine()
-                
-                if success:
-                    st.success(message)
-                    st.balloons()
-                    
-                    # # Show updated count
-                    # total_medicines = recommender.get_total_medicines_count()
-                    # st.info(f"📊📊 Total medicines in database: {total_medicines}")
-                    
-                    # Clear form
-                    st.rerun()
-                else:
-                    st.error(message)
+
 
 # =============================================
 # DASHBOARD PAGE - WITH ENHANCED MEDICINE CARDS
@@ -416,24 +335,17 @@ if selected == "🏠 Dashboard":
     </div>
     """, unsafe_allow_html=True)
     
-    # Quick stats row - UPDATED WITH TOTAL MEDICINES COUNT
-    try:
-        # total_medicines = recommender.get_total_medicines_count()
-        all_meds = recommender.get_all_medicines_with_user_added()
-        avg_safety = np.mean([med.get('safety_rating', 0) for med in all_meds]) if all_meds else 0
-        user_added_count = recommender.get_user_added_medicines_count()
-        
-        col1, col2, col3, col4 = st.columns(4)
-        with col1:
-            st.metric("📊📊 Total Medicines", total_medicines)
-        with col2:
-            st.metric("⭐ Avg Safety", f"{avg_safety:.1f}/5.0")
-        with col3:
-            st.metric("🔬🔬 Categories", len(set(med.get('category', '') for med in all_meds)))
-        with col4:
-            st.metric("👤 User Added", user_added_count)
-    except Exception as e:
-        st.error(f"Error loading dashboard stats: {e}")
+    # Quick stats row
+    col1, col2, col3, col4 = st.columns(4)
+    with col1:
+        st.metric("📊 Total Medicines", 24)
+    with col2:
+        st.metric("⭐ Avg Safety", "4.2/5.0")
+    with col3:
+        st.metric("🔬 Categories", 8)
+    with col4:
+        st.metric("⚡ Response Time", "<1s")
+    
     # Quick Symptom Analyzer
     st.markdown("---")
     st.markdown("## 🔍 Quick Symptom Analysis")
@@ -446,71 +358,6 @@ if selected == "🏠 Dashboard":
                 placeholder="fever, headache, pain, inflammation...",
                 help="Be specific for better recommendations"
             )
-
-            
-            # =============================================
-# MEDICINE DATABASE PAGE - UPDATED TO SHOW USER-ADDED MEDICINES
-# =============================================
-elif selected == "📊📊 Medicine Database":
-    st.markdown("""
-    <div class="glass-card">
-        <h1 style='color: #667eea; text-align: center;'>📊📊 Complete Medicine Database</h1>
-        <p style='text-align: center; color: #666;'>Advanced search and filtering for our comprehensive medicine library</p>
-    </div>
-    """, unsafe_allow_html=True)
-    
-    # Search and analytics
-    col1, col2, col3 = st.columns([2, 1, 1])
-    with col1:
-        search_term = st.text_input("🔍🔍 Search medicines:", placeholder="Search by name, category, or symptoms...")
-    
-    # Get all medicines including user-added
-    all_medicines = recommender.get_all_medicines_with_user_added()
-    
-    if all_medicines:
-        df = pd.DataFrame(all_medicines)
-        
-        # Enhanced metrics - shows total count including user-added
-        # total_count = recommender.get_total_medicines_count()
-        user_added_count = recommender.get_user_added_medicines_count()
-        
-        st.markdown("### 📈📈 Database Analytics")
-        col1, col2, col3, col4 = st.columns(4)
-        with col1:
-            st.metric("Total Medicines")
-        with col2:
-            st.metric("Avg Safety", f"{df['safety_rating'].mean():.1f}/5.0")
-        with col3:
-            st.metric("Categories", df['category'].nunique())
-        with col4:
-            st.metric("User Added", user_added_count)
-        
-        # Enhanced dataframe
-        st.dataframe(
-            df,
-            use_container_width=True,
-            hide_index=True,
-            column_config={
-                "name": "Medicine Name",
-                "category": "Category", 
-                "for_symptoms": "Treats Symptoms",
-                "safety_rating": st.column_config.ProgressColumn(
-                    "Safety Rating",
-                    help="Safety rating out of 5",
-                    format="%.1f",
-                    min_value=0,
-                    max_value=5,
-                ),
-            }
-        )
-    else:
-        st.error("❌❌ No medicines found in the database.")
-
-        # ------------
-
-
-
-
         
         if symptoms:
             with st.spinner("🔍 AI is analyzing your symptoms..."):
@@ -574,6 +421,8 @@ elif selected == "📊📊 Medicine Database":
                     
             else:
                 st.warning("❌ No medications found for these symptoms. Try different symptoms or be more specific.")
+
+
 
 # =============================================
 # SYMPTOM ANALYZER PAGE
@@ -668,7 +517,7 @@ elif selected == "📊 Medicine Database":
     st.markdown("""
     <div class="glass-card">
         <h1 style='color: #667eea; text-align: center;'>📊 Complete Medicine Database</h1>
-        <p style='text-align: center; color:  F5F527;'>Advanced search and filtering for our comprehensive medicine library</p>
+        <p style='text-align: center; color:  F5F527;'>Advanced search and   for  doing filtering for our comprehensive medicine library</p>
     </div>
     """, unsafe_allow_html=True)
     
