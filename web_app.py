@@ -512,50 +512,50 @@ elif selected == "📊📊 Medicine Database":
 
 
         
-        # if symptoms:
-        #     with st.spinner("🔍 AI is analyzing your symptoms..."):
-        #         results = recommender.recommend_by_symptoms(symptoms)
+        if symptoms:
+            with st.spinner("🔍 AI is analyzing your symptoms..."):
+                results = recommender.recommend_by_symptoms(symptoms)
                 
-        #     if results:
-        #         st.success(f"✅ Found {len(results)} relevant medications!")
+            if results:
+                st.success(f"✅ Found {len(results)} relevant medications!")
                 
-        #         # =============================================
-        #         # ENHANCED MEDICINE CARDS - UPDATED TEXT
-        #         # =============================================
-        #         for medicine in results:
-        #             # Get enhanced medicine information
-        #             medicine_info = get_medicine_details(medicine)
+                # =============================================
+                # ENHANCED MEDICINE CARDS - UPDATED TEXT
+                # =============================================
+                for medicine in results:
+                    # Get enhanced medicine information
+                    medicine_info = get_medicine_details(medicine)
                     
-        #             st.markdown(f"""
+                    st.markdown(f"""
                    
-        #             <div class="medicine-card-premium">
-        #                 <div style='display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;'>
-        #                     <h2 style='margin: 0; color: white;'>💊 {medicine['name']}</h2>
-        #                     <div style='background: rgba(255,255,255,0.2); padding: 0.5rem 1rem; border-radius: 20px;'>
-        #                         <span style='font-size: 1.2rem; font-weight: bold;'>⭐ {medicine['safety_rating']}/5.0</span>
-        #                     </div>
-        #             </div>
-        # <div style='display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;'>
-        # <div>
-        #     <strong>🎯 Primary Use:</strong><br>
-        #     <span style='opacity: 0.9;'>{medicine_info['primary_use']}</span>
-        # </div>
-        # <div>
-        #     <strong>📊 Classification:</strong><br>
-        #     <span style='opacity: 0.9;'>{medicine_info['drug_class']}</span>
-        # </div>
-        # <div>
-        #                         <strong>💊 Formulation:</strong><br>
-        #                         <span style='opacity: 0.9;'>{medicine_info['dosage_form']}</span>
-        #                     </div>
-        #                     <div>
-        #                         <strong>⏰ Duration:</strong><br>
-        #                         <span style='opacity: 0.9;'>{medicine_info['duration']}</span>
-        #                     </div>
-        #                     <div style='margin-top: 1rem;'>
-        #                     <strong>💡 Important Information:</strong><br>
-        #                     <span style='opacity: 0.9; font-size: 0.9rem;'>{medicine_info['key_info']}</span>
-        #                 </div>
+                    <div class="medicine-card-premium">
+                        <div style='display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;'>
+                            <h2 style='margin: 0; color: white;'>💊 {medicine['name']}</h2>
+                            <div style='background: rgba(255,255,255,0.2); padding: 0.5rem 1rem; border-radius: 20px;'>
+                                <span style='font-size: 1.2rem; font-weight: bold;'>⭐ {medicine['safety_rating']}/5.0</span>
+                            </div>
+                    </div>
+        <div style='display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;'>
+        <div>
+            <strong>🎯 Primary Use:</strong><br>
+            <span style='opacity: 0.9;'>{medicine_info['primary_use']}</span>
+        </div>
+        <div>
+            <strong>📊 Classification:</strong><br>
+            <span style='opacity: 0.9;'>{medicine_info['drug_class']}</span>
+        </div>
+        <div>
+                                <strong>💊 Formulation:</strong><br>
+                                <span style='opacity: 0.9;'>{medicine_info['dosage_form']}</span>
+                            </div>
+                            <div>
+                                <strong>⏰ Duration:</strong><br>
+                                <span style='opacity: 0.9;'>{medicine_info['duration']}</span>
+                            </div>
+                            <div style='margin-top: 1rem;'>
+                            <strong>💡 Important Information:</strong><br>
+                            <span style='opacity: 0.9; font-size: 0.9rem;'>{medicine_info['key_info']}</span>
+                        </div>
                         
                         
                         
@@ -566,14 +566,14 @@ elif selected == "📊📊 Medicine Database":
              
 
                  
-        #             """, unsafe_allow_html=True)
+                    """, unsafe_allow_html=True)
                     
-        #             # Progress bar
-        #             safety_percent = (medicine['safety_rating'] / 5.0) * 100
-        #             st.progress(safety_percent / 100)
+                    # Progress bar
+                    safety_percent = (medicine['safety_rating'] / 5.0) * 100
+                    st.progress(safety_percent / 100)
                     
-        #     else:
-        #         st.warning("❌ No medications found for these symptoms. Try different symptoms or be more specific.")
+            else:
+                st.warning("❌ No medications found for these symptoms. Try different symptoms or be more specific.")
 
 # =============================================
 # SYMPTOM ANALYZER PAGE
