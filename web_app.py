@@ -390,9 +390,9 @@ if selected == "➕ Add Medicine":
                     st.success(message)
                     st.balloons()
                     
-                    # Show updated count
-                    total_medicines = recommender.get_total_medicines_count()
-                    st.info(f"📊📊 Total medicines in database: {total_medicines}")
+                    # # Show updated count
+                    # total_medicines = recommender.get_total_medicines_count()
+                    # st.info(f"📊📊 Total medicines in database: {total_medicines}")
                     
                     # Clear form
                     st.rerun()
