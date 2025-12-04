@@ -6,6 +6,7 @@ class MedicineRecommender:
     def __init__(self):
         self.medicines_df = self.create_medicine_data()
         self.user_added_medicines = []  # Make sure this line exists
+        self.total_medicines_count = []
         print("💊 Enhanced medicine database loaded successfully!")
     
     def create_medicine_data(self):
