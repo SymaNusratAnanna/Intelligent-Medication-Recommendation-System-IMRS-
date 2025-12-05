@@ -707,4 +707,22 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
+# Test adding this medicine programmatically
+# test_medicine = {
+#     "name": "Loratadine 10mg",
+#     "for_symptoms": "allergy hay fever itching runny nose",
+#     "category": "Antihistamine",
+#     "safety_rating": 4.3,
+#     "price_category": "💰 Economy",
+#     "key_info": "Non-drowsy formula. Once daily. Few drug interactions. Safe for long-term use.",
+#     "primary_use": "Allergy relief",
+#     "drug_class": "H1-receptor antagonist",
+#     "dosage_form": "Tablet, 10mg",
+#     "duration": "Once daily"
+# }
+
+# success, message = recommender.add_medicine(test_medicine)
+# print(f"Add result: {success}, {message}")
+# print(f"Total medicines now: {recommender.get_total_medicines_count()}")
+
 

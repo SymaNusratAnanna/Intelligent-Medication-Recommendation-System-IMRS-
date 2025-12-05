@@ -271,7 +271,7 @@ class MedicineRecommender:
             
             # 也添加到主数据框（可选）
             new_row = pd.DataFrame([new_medicine])
-            self.medicines_df = pd.concat([self.medicines_df, new_row], ignore_index=True)
+            # self.medicines_df = pd.concat([self.medicines_df, new_row], ignore_index=True)
             
             return True, "✅ Medicine added successfully!"
             
@@ -288,6 +288,12 @@ class MedicineRecommender:
         all_medicines = self.get_all_medicines_with_user_added()
         results = [med for med in all_medicines if medicine_name.lower() in med['name'].lower()]
         return results
+    # get total 
+    def get_total_medicines_count(self):
+        """Get total count of all medicines including user-added"""
+        base_count = len(self.medicines_df)
+        user_count = len(self.user_added_medicines)
+        return base_count + user_count
     
     def get_user_added_medicines_count(self):
         """Get count of user-added medicines"""
@@ -429,3 +435,44 @@ def search_medicine(self, medicine_name):
 def get_user_added_medicines_count(self):
     """Get count of user-added medicines"""
     return len(getattr(self, 'user_added_medicines', []))
+
+
+
+# testttt
+
+# Test the counting functionality
+recommender = MedicineRecommender()
+print(f"Initial total medicines: {recommender.get_total_medicines_count()}")  # Should be 6
+print(f"Initial user-added medicines: {recommender.get_user_added_medicines_count()}")  # Should be 0
+
+# Test adding a medicine
+success, message = recommender.add_medicine({
+    'name': 'Test Medicine',
+    'for_symptoms': 'test symptoms',
+    'category': 'Test',
+    'safety_rating': 4.0
+})
+print(f"Add result: {success}, {message}")
+
+# Verify updated counts
+print(f"Updated total medicines: {recommender.get_total_medicines_count()}")  # Should be 7
+print(f"Updated user-added medicines: {recommender.get_user_added_medicines_count()}")  # Should be 1
+
+
+# Test adding this medicine programmatically
+test_medicine = {
+    "name": "Loratadine 10mg",
+    "for_symptoms": "allergy hay fever itching runny nose",
+    "category": "Antihistamine",
+    "safety_rating": 4.3,
+    "price_category": "💰 Economy",
+    "key_info": "Non-drowsy formula. Once daily. Few drug interactions. Safe for long-term use.",
+    "primary_use": "Allergy relief",
+    "drug_class": "H1-receptor antagonist",
+    "dosage_form": "Tablet, 10mg",
+    "duration": "Once daily"
+}
+
+success, message = recommender.add_medicine(test_medicine)
+print(f"Add result: {success}, {message}")
+print(f"Total medicines now: {recommender.get_total_medicines_count()}")
