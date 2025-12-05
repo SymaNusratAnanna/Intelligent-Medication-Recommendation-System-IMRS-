@@ -628,19 +628,19 @@ if selected == "➕ Add Medicine":
                     'duration': duration
                 }
                 
-                # Add medicine to database
-                success, message = recommender.add_medicine()
-                
+             # Add medicine to database
+                success, message = recommender.add_medicine(medicine_data)
                 if success:
                     st.success(message)
                     st.balloons()
                     
-                    # # Show updated count
-                    # total_medicines = recommender.get_total_medicines_count()
-                    # st.info(f"📊📊 Total medicines in database: {total_medicines}")
+                   # Show updated count
+                    total_medicines = recommender.get_total_medicines_count()
+                    st.info(f"📊📊 Total medicines in database: {total_medicines}")
                     
-                    # Clear form
-                    st.rerun()
+                    # Show user-added count
+                    user_added_count = recommender.get_user_added_medicines_count()
+                    st.info(f"➕➕ User-added medicines: {user_added_count}")
                 else:
                     st.error(message)
 
