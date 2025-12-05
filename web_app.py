@@ -255,7 +255,7 @@ with st.sidebar:
     nav_options = [
         {"icon": "🏠", "label": "Dashboard", "desc": "Home & quick access", "key": "dashboard"},
         {"icon": "🔍", "label": "Symptom Analyzer", "desc": "AI-powered analysis", "key": "symptoms"},
-        # {"icon": "➕", "label": "Add Medicine", "key": "add_medicine"},
+       {"icon": "➕", "label": "Add Medicine", "desc": "Add new medicine to database", "key": "add_medicine"}, 
         {"icon": "📊", "label": "Medicine Database", "desc": "Complete library", "key": "database"},
         {"icon": "📈", "label": "Analytics", "desc": "Statistics & insights", "key": "analytics"},
         {"icon": "ℹ️", "label": "About", "desc": "Project information", "key": "about"}
@@ -560,6 +560,93 @@ elif selected == "📊 Medicine Database":
         )
     else:
         st.error("❌ No medicines found in the database.")
+
+# =============================================
+# ADD MEDICINE PAGE - NEW FEATURE
+# =============================================
+if selected == "➕ Add Medicine":
+    st.markdown("""
+    <div class="glass-card">
+        <h1 style='color: #667eea; text-align: center;'>➕➕ Add New Medicine</h1>
+        <p style='text-align: center; color: #666;'>Add a new medicine to the database with all required information</p>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    # Medicine form
+    with st.form("add_medicine_form"):
+        st.markdown("### 📝📝 Medicine Information")
+        
+        col1, col2 = st.columns(2)
+        with col1:
+            medicine_name = st.text_input("💊💊 Medicine Name*", placeholder="e.g., Paracetamol 500mg")
+            category = st.selectbox("📋📋 Category*", [
+                "Analgesic", "NSAID", "Antibiotic", "Antihistamine", "PPI", "H2 Blocker", 
+                "Bronchodilator", "Statin", "Vitamin", "Mineral", "Other"
+            ])
+            safety_rating = st.slider("⭐ Safety Rating*", 1.0, 5.0, 4.0, 0.1)
+        
+        with col2:
+            price_category = st.selectbox("💰💰 Price Category*", 
+                ["💰 Economy", "💵💵 Standard", "💎💎 Premium"])
+            dosage_form = st.text_input("💊💊 Dosage Form", placeholder="e.g., Tablet 500mg, Inhaler")
+            duration = st.text_input("⏰⏰ Duration", placeholder="e.g., 4-6 hours, Once daily")
+        
+        # Symptoms and usage
+        for_symptoms = st.text_area("🤒🤒 Symptoms Treated*", 
+            placeholder="e.g., fever headache mild pain", 
+            help="Describe what symptoms this medicine treats")
+        
+        primary_use = st.text_input("🎯🎯 Primary Use", 
+            placeholder="e.g., Analgesic & Antipyretic")
+        
+        key_info = st.text_area("💡💡 Key Information", 
+            placeholder="Important medical information, precautions, etc.",
+            height=100)
+        
+        drug_class = st.text_input("🔬🔬 Drug Class", 
+            placeholder="e.g., Non-opioid analgesic, SSRI")
+        
+        # Submit button
+        submitted = st.form_submit_button("💾💾 Add Medicine to Database", type="primary")
+        
+        if submitted:
+            # Validate required fields
+            if not medicine_name or not for_symptoms or not category:
+                st.error("❌❌ Please fill in all required fields (*)")
+            else:
+                # Prepare medicine data
+                medicine_data = {
+                    'name': medicine_name,
+                    'for_symptoms': for_symptoms,
+                    'category': category,
+                    'safety_rating': safety_rating,
+                    'price_category': price_category,
+                    'key_info': key_info,
+                    'primary_use': primary_use,
+                    'drug_class': drug_class,
+                    'dosage_form': dosage_form,
+                    'duration': duration
+                }
+                
+                # Add medicine to database
+                success, message = recommender.add_medicine()
+                
+                if success:
+                    st.success(message)
+                    st.balloons()
+                    
+                    # # Show updated count
+                    # total_medicines = recommender.get_total_medicines_count()
+                    # st.info(f"📊📊 Total medicines in database: {total_medicines}")
+                    
+                    # Clear form
+                    st.rerun()
+                else:
+                    st.error(message)
+
+
+
+
 
 # =============================================
 # ANALYTICS PAGE
