@@ -733,7 +733,7 @@ if selected == "🏠 Dashboard":
                             <strong>🤒 Symptoms Treated:</strong><br>
                             <span style='opacity: 0.9;'>{medicine['for_symptoms']}</span>
                         </div>
-                      
+                      <div>
                         <div>
                             <strong>📊 Safety Rating:</strong><br>
                             <span style='opacity: 0.9;'>Excellent ({medicine['safety_rating']}/5.0)</span>
