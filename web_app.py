@@ -550,9 +550,11 @@ if selected == "🏠 Dashboard":
                 # =============================================
                 # ENHANCED MEDICINE CARDS - UPDATED TEXT
                 # =============================================
-                for i, medicine in enumerate(results):
-                # Create enhanced medicine card
-                 st.markdown(f"""
+                for medicine in results:
+                    # Get enhanced medicine information
+                    medicine_info = get_medicine_details(medicine)
+
+                st.markdown(f"""
                    
                     <div class="medicine-card-premium">
                         <div style='display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;'>
