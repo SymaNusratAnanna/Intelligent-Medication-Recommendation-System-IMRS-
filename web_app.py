@@ -522,21 +522,35 @@ if selected == "🏠 Dashboard":
     st.markdown("## 🔍 Quick Symptom Analysis")
     
     with st.container():
-        col1, col2 = st.columns([3, 1])
-        with col1:
-            symptoms = st.text_input(
-                "**Describe your symptoms:**",
-                placeholder="fever, headache, pain, inflammation...",
-                help="Be specific for better recommendations"
-            )
-        
+      col1, col2 = st.columns([3, 1])
+    with col1:
+        symptoms = st.text_input(
+            "**Describe your symptoms:**",
+            placeholder="fever, headache, pain, allergy, inflammation...",
+            help="Be specific for better recommendations",
+            key="dashboard_input"
+        )
+    with col2:
+        st.write("")  # Spacer
+        search_btn = st.button("🔍 Search", type="primary", key="dashboard_search")
+    
         if symptoms:
             with st.spinner("🔍 AI is analyzing your symptoms..."):
                 results = recommender.recommend_by_symptoms(symptoms)
                 
             if results:
                 st.success(f"✅ Found {len(results)} relevant medications!")
-          # Quick symptoms buttons
+    #       # Quick symptoms buttons
+    # st.markdown("### ⚡ Quick Symptoms")
+    # quick_symptoms = ["fever", "headache", "pain", "allergy", "cough", "nausea", "inflammation", "infection"]
+    # quick_cols = st.columns(4)
+    # for i, symptom in enumerate(quick_symptoms):
+    #     with quick_cols[i % 4]:
+    #         if st.button(f"🤒 {symptom.title()}", key=f"quick_{symptom}"):
+    #             symptoms = symptom
+    #             search_btn = True      
+
+     # Quick symptoms buttons
     st.markdown("### ⚡ Quick Symptoms")
     quick_symptoms = ["fever", "headache", "pain", "allergy", "cough", "nausea", "inflammation", "infection"]
     quick_cols = st.columns(4)
@@ -544,15 +558,27 @@ if selected == "🏠 Dashboard":
         with quick_cols[i % 4]:
             if st.button(f"🤒 {symptom.title()}", key=f"quick_{symptom}"):
                 symptoms = symptom
-                search_btn = True      
+                search_btn = True
 
+      
+    # Search and display results
+    if search_btn and symptoms:
+        st.markdown("---")
+        st.subheader("💊 AI Recommendations")
+        
+        with st.spinner("🔍 AI is analyzing your symptoms..."):
+            results = recommender.recommend_by_symptoms(symptoms)
+        
+        if results:
+            st.success(f"✅ Found {len(results)} medications for: **'{symptoms}'**")
+            
                 
                 # =============================================
                 # ENHANCED MEDICINE CARDS - UPDATED TEXT
                 # =============================================
-                for i, medicine in enumerate(results): 
-                    # Get enhanced medicine information
-                    medicine_info = get_medicine_details(medicine)
+            for i, medicine in enumerate(results):
+                # Create enhanced medicine card
+
 
                 st.markdown(f"""
                    
