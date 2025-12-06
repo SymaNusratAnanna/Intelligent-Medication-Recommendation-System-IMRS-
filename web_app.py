@@ -550,7 +550,7 @@ if selected == "🏠 Dashboard":
                 # =============================================
                 # ENHANCED MEDICINE CARDS - UPDATED TEXT
                 # =============================================
-                for i, medicine in (results):
+                for i, medicine in enumerate(results): 
                     # Get enhanced medicine information
                     medicine_info = get_medicine_details(medicine)
 
