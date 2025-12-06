@@ -1,209 +1,366 @@
-# medicine_recommender.py - FINAL 100% WORKING VERSION
+# medicine_recommender.py - COMPLETE FIXED VERSION
 import pandas as pd
+import numpy as np
 
 class MedicineRecommender:
     
     def __init__(self):
         self.medicines_df = self.create_medicine_data()
-        self.user_added_medicines = []
-        print("Enhanced medicine database loaded successfully!")
-
+        self.user_added_medicines = []  # Store user-added medicines
+        print("💊 Enhanced medicine database loaded successfully!")
+    
     def create_medicine_data(self):
-        """Create comprehensive medicine database"""
+        """Create comprehensive medicine database with enhanced information"""
         data = {
             'name': [
-                'Paracetamol 500mg', 'Ibuprofen 400mg', 'Aspirin 100mg', 'Diclofenac 50mg', 'Naproxen 250mg', 'Tramadol 50mg',
-                'Amoxicillin 250mg', 'Azithromycin 250mg', 'Ciprofloxacin 250mg', 'Doxycycline 100mg', 'Erythromycin 250mg', 'Cephalexin 250mg',
-                'Cetirizine 10mg', 'Loratadine 10mg', 'Fexofenadine 120mg', 'Diphenhydramine 25mg', 'Chlorpheniramine 4mg',
-                'Omeprazole 20mg', 'Ranitidine 150mg', 'Pantoprazole 40mg', 'Domperidone 10mg', 'Loperamide 2mg', 'Metoclopramide 10mg',
-                'Salbutamol Inhaler', 'Budesonide Inhaler', 'Montelukast 10mg', 'Guaifenesin 400mg', 'Ambroxol 30mg',
-                'Atorvastatin 10mg', 'Amlodipine 5mg', 'Metoprolol 25mg', 'Losartan 50mg', 'Hydrochlorothiazide 25mg',
+                # ANALGESICS & PAIN RELIEVERS
+                'Paracetamol 500mg', 'Ibuprofen 400mg', 'Aspirin 100mg', 
+                'Diclofenac 50mg', 'Naproxen 250mg', 'Tramadol 50mg',
+                
+                # ANTIBIOTICS
+                'Amoxicillin 250mg', 'Azithromycin 250mg', 'Ciprofloxacin 250mg',
+                'Doxycycline 100mg', 'Erythromycin 250mg', 'Cephalexin 250mg',
+                
+                # ANTIHISTAMINES & ALLERGY
+                'Cetirizine 10mg', 'Loratadine 10mg', 'Fexofenadine 120mg',
+                'Diphenhydramine 25mg', 'Chlorpheniramine 4mg',
+                
+                # GASTROINTESTINAL
+                'Omeprazole 20mg', 'Ranitidine 150mg', 'Pantoprazole 40mg',
+                'Domperidone 10mg', 'Loperamide 2mg', 'Metoclopramide 10mg',
+                
+                # RESPIRATORY
+                'Salbutamol Inhaler', 'Budesonide Inhaler', 'Montelukast 10mg',
+                'Guaifenesin 400mg', 'Ambroxol 30mg',
+                
+                # CARDIAC & BLOOD PRESSURE
+                'Atorvastatin 10mg', 'Amlodipine 5mg', 'Metoprolol 25mg',
+                'Losartan 50mg', 'Hydrochlorothiazide 25mg',
+                
+                # DIABETES
                 'Metformin 500mg', 'Glibenclamide 5mg', 'Insulin Glargine',
-                'Sertraline 50mg', 'Fluoxetine 20mg', 'Alprazolam 0.25mg', 'Diazepam 5mg',
-                'Hydrocortisone Cream 1%', 'Clotrimazole Cream 1%', 'Mupirocin Ointment 2%', 'Benzoyl Peroxide Gel 5%',
-                'Vitamin C 500mg', 'Vitamin D3 1000IU', 'Zinc 50mg', 'Calcium 600mg', 'Iron 65mg'
+                
+                # MENTAL HEALTH
+                'Sertraline 50mg', 'Fluoxetine 20mg', 'Alprazolam 0.25mg',
+                'Diazepam 5mg',
+                
+                # SKIN & TOPICAL
+                'Hydrocortisone Cream 1%', 'Clotrimazole Cream 1%',
+                'Mupirocin Ointment 2%', 'Benzoyl Peroxide Gel 5%',
+                
+                # VITAMINS & SUPPLEMENTS
+                'Vitamin C 500mg', 'Vitamin D3 1000IU', 'Zinc 50mg',
+                'Calcium 600mg', 'Iron 65mg'
             ],
             'for_symptoms': [
-                'fever headache mild pain body ache', 'pain inflammation fever menstrual cramps joint pain', 'pain fever inflammation heart protection',
-                'pain inflammation arthritis back pain', 'pain inflammation menstrual cramps muscle pain', 'moderate severe pain chronic pain',
-                'bacterial infection throat infection ear infection pneumonia', 'bacterial infection respiratory infection sinusitis', 'urinary tract infection bacterial infection',
-                'bacterial infection acne malaria prevention', 'bacterial infection respiratory infection stomach infection', 'bacterial infection skin infection cellulitis',
-                'allergy sneezing itching runny nose hay fever', 'allergy hay fever itching hives', 'allergy chronic hives itching', 
-                'allergy insomnia motion sickness drowsiness', 'allergy common cold sneezing',
-                'heartburn acid reflux ulcer GERD', 'heartburn acid indigestion ulcer', 'acid reflux GERD ulcer stomach pain',
-                'nausea vomiting indigestion motion sickness', 'diarrhea loose motion', 'nausea vomiting gastroparesis',
-                'asthma wheezing breathing difficulty bronchitis', 'asthma COPD inflammation cough', 'asthma allergic rhinitis wheezing',
-                'cough chest congestion mucus phlegm', 'cough bronchitis thick mucus',
-                'high cholesterol heart disease prevention', 'high blood pressure chest pain angina', 'high blood pressure heart rate control',
-                'high blood pressure kidney protection', 'high blood pressure edema swelling fluid retention',
-                'diabetes type 2 high blood sugar', 'diabetes type 2 blood sugar control', 'diabetes type 1 insulin dependent',
-                'depression anxiety OCD stress', 'depression panic disorder OCD', 'anxiety panic disorder stress', 'anxiety muscle spasm insomnia',
-                'skin inflammation itching eczema rash', 'fungal infection ringworm athletes foot', 'bacterial skin infection impetigo boil',
-                'acne pimples blackheads skin inflammation',
-                'immune support cold prevention fatigue', 'bone health calcium absorption weakness', 'immune support wound healing taste loss',
-                'bone health osteoporosis prevention', 'anemia iron deficiency tiredness weakness'
+                # ANALGESICS
+                'fever headache mild pain', 'pain inflammation fever menstrual cramps',
+                'pain fever inflammation heart attack prevention', 'pain inflammation arthritis',
+                'pain inflammation menstrual cramps', 'moderate severe pain chronic pain',
+                
+                # ANTIBIOTICS
+                'bacterial infection throat infection ear infection', 'bacterial infection respiratory infection',
+                'urinary tract infection bacterial infection', 'bacterial infection acne malaria prevention',
+                'bacterial infection respiratory infection', 'bacterial infection skin infection',
+                
+                # ANTIHISTAMINES
+                'allergy sneezing itching runny nose', 'allergy hay fever itching',
+                'allergy chronic hives', 'allergy insomnia motion sickness', 'allergy common cold',
+                
+                # GASTROINTESTINAL
+                'heartburn acid reflux ulcer', 'heartburn acid indigestion', 'acid reflux GERD ulcer',
+                'nausea vomiting indigestion', 'diarrhea', 'nausea vomiting gastroparesis',
+                
+                # RESPIRATORY
+                'asthma bronchitis breathing difficulty', 'asthma COPD inflammation',
+                'asthma allergic rhinitis', 'cough chest congestion', 'cough bronchitis',
+                
+                # CARDIAC
+                'high cholesterol heart disease prevention', 'high blood pressure chest pain',
+                'high blood pressure heart rate angina', 'high blood pressure kidney protection',
+                'high blood pressure edema fluid retention',
+                
+                # DIABETES
+                'diabetes type 2 high blood sugar', 'diabetes type 2', 'diabetes type 1 insulin dependent',
+                
+                # MENTAL HEALTH
+                'depression anxiety OCD', 'depression panic disorder', 'anxiety panic disorder',
+                'anxiety muscle spasm alcohol withdrawal',
+                
+                # SKIN
+                'skin inflammation itching eczema', 'fungal infection ringworm athletes foot',
+                'bacterial skin infection impetigo', 'acne pimples skin inflammation',
+                
+                # VITAMINS
+                'immune support cold prevention', 'bone health calcium absorption', 'immune support wound healing',
+                'bone health osteoporosis prevention', 'anemia iron deficiency'
             ],
             'category': [
+                # ANALGESICS
                 'Analgesic', 'NSAID', 'NSAID', 'NSAID', 'NSAID', 'Opioid Analgesic',
+                
+                # ANTIBIOTICS
                 'Antibiotic', 'Antibiotic', 'Antibiotic', 'Antibiotic', 'Antibiotic', 'Antibiotic',
+                
+                # ANTIHISTAMINES
                 'Antihistamine', 'Antihistamine', 'Antihistamine', 'Antihistamine', 'Antihistamine',
+                
+                # GASTROINTESTINAL
                 'PPI', 'H2 Blocker', 'PPI', 'Prokinetic', 'Antidiarrheal', 'Antiemetic',
+                
+                # RESPIRATORY
                 'Bronchodilator', 'Corticosteroid', 'Leukotriene Inhibitor', 'Expectorant', 'Mucolytic',
+                
+                # CARDIAC
                 'Statin', 'Calcium Channel Blocker', 'Beta Blocker', 'ARB', 'Diuretic',
+                
+                # DIABETES
                 'Biguanide', 'Sulfonylurea', 'Insulin',
+                
+                # MENTAL HEALTH
                 'SSRI', 'SSRI', 'Benzodiazepine', 'Benzodiazepine',
+                
+                # SKIN
                 'Corticosteroid', 'Antifungal', 'Antibiotic', 'Antiacne',
+                
+                # VITAMINS
                 'Vitamin', 'Vitamin', 'Mineral', 'Mineral', 'Mineral'
             ],
             'safety_rating': [
-                4.5, 4.0, 4.1, 3.8, 3.9, 3.2, 4.2, 4.1, 3.9, 3.8, 3.7, 4.0,
-                4.3, 4.2, 4.3, 3.5, 4.1, 4.4, 4.2, 4.3, 3.9, 4.0, 3.8,
-                4.1, 4.0, 4.2, 4.3, 4.1, 4.2, 4.0, 3.9, 4.1, 3.8,
-                4.3, 3.7, 4.0, 3.9, 3.8, 3.2, 3.1, 4.4, 4.3, 4.2, 4.1,
-                4.8, 4.7, 4.6, 4.5, 4.4
+                # Safety ratings (1-5 scale)
+                4.5, 4.0, 4.1, 3.8, 3.9, 3.2,  # Analgesics
+                4.2, 4.1, 3.9, 3.8, 3.7, 4.0,   # Antibiotics
+                4.3, 4.2, 4.3, 3.5, 4.1,        # Antihistamines
+                4.4, 4.2, 4.3, 3.9, 4.0, 3.8,   # Gastrointestinal
+                4.1, 4.0, 4.2, 4.3, 4.1,        # Respiratory
+                4.2, 4.0, 3.9, 4.1, 3.8,         # Cardiac
+                4.3, 3.7, 4.0,                   # Diabetes
+                3.9, 3.8, 3.2, 3.1,             # Mental Health
+                4.4, 4.3, 4.2, 4.1,             # Skin
+                4.8, 4.7, 4.6, 4.5, 4.4         # Vitamins
             ],
-            'price_category': [
-                'Economy', 'Standard', 'Economy', 'Standard', 'Standard', 'Premium',
-                'Economy', 'Standard', 'Standard', 'Economy', 'Economy', 'Standard',
-                'Economy', 'Economy', 'Standard', 'Economy', 'Economy',
-                'Premium', 'Economy', 'Premium', 'Standard', 'Economy', 'Standard',
-                'Economy', 'Premium', 'Standard', 'Economy', 'Standard',
-                'Premium', 'Standard', 'Economy', 'Standard', 'Economy',
-                'Economy', 'Economy', 'Premium', 'Standard', 'Economy', 'Standard', 'Standard',
-                'Economy', 'Economy', 'Standard', 'Economy',
-                'Economy', 'Economy', 'Economy', 'Economy', 'Economy'
+            'price_category': [  # ADDED: Price categories for filtering
+                '💰 Economy', '💵 Standard', '💰 Economy', '💵 Standard', '💵 Standard', '💎 Premium',  # Analgesics
+                '💰 Economy', '💵 Standard', '💵 Standard', '💰 Economy', '💰 Economy', '💵 Standard',  # Antibiotics
+                '💰 Economy', '💰 Economy', '💵 Standard', '💰 Economy', '💰 Economy',                 # Antihistamines
+                '💎 Premium', '💰 Economy', '💎 Premium', '💵 Standard', '💰 Economy', '💵 Standard',  # Gastrointestinal
+                '💰 Economy', '💎 Premium', '💵 Standard', '💰 Economy', '💵 Standard',                # Respiratory
+                '💎 Premium', '💵 Standard', '💰 Economy', '💵 Standard', '💰 Economy',                # Cardiac
+                '💰 Economy', '💰 Economy', '💎 Premium',                                              # Diabetes
+                '💵 Standard', '💰 Economy', '💵 Standard', '💵 Standard',                            # Mental Health
+                '💰 Economy', '💰 Economy', '💵 Standard', '💰 Economy',                              # Skin
+                '💰 Economy', '💰 Economy', '💰 Economy', '💰 Economy', '💰 Economy'                  # Vitamins
             ],
-            'key_info': [
-                'First-line for mild-moderate pain. Max 4g/day. Safe in pregnancy.',
-                'Take with food. Avoid in stomach ulcer or asthma.',
-                'Low-dose for heart protection. Avoid in children (Reye syndrome).',
-                'Strong NSAID. Take with food. Risk of stomach bleeding.',
-                'Long-acting NSAID. Good for arthritis.',
-                'Controlled opioid. Risk of addiction.',
-                'Complete full course. Check penicillin allergy.',
-                'Once daily. Good for respiratory infections.',
-                'Avoid in pregnancy. Tendon rupture risk.',
-                'Take with water. Avoid sunlight.',
-                'Many drug interactions.',
-                'Good for skin infections.',
-                'Non-drowsy. Once daily.',
-                'Non-drowsy. Safe long-term.',
-                'Very safe. Long-term use OK.',
-                'Causes drowsiness. Used as sleep aid.',
-                'Classic antihistamine.',
-                'Take 30 min before food. Long-term use needs monitoring.',
-                'Being replaced by PPIs.',
-                'Better than Omeprazole in some cases.',
-                'Can cause tremors. Avoid alcohol.',
-                'Stops diarrhea quickly. Not for infection.',
-                'Can cause muscle spasms. Short-term use.',
-                'Rescue inhaler. Use when short of breath.',
-                'Maintenance inhaler. Rinse mouth after use.',
-                'Once daily tablet for asthma control.',
-                'Loosens mucus. Drink water.',
-                'Breaks down thick mucus.',
-                'Take at night. Muscle pain = stop immediately.',
-                'For blood pressure and angina.',
-                'Slows heart rate. Avoid in asthma.',
-                'Protects kidneys in diabetes.',
-                'Removes excess water.',
-                'First choice for type 2 diabetes.',
-                'Can cause low sugar.',
-                'Long-acting insulin. Inject once daily.',
-                'Takes 4-6 weeks to work.',
-                'Long half-life. Good for missing doses.',
-                'Fast acting. High addiction risk.',
-                'Long acting. Muscle relaxant.',
-                'Mild steroid cream. Avoid face.',
-                'For fungal infections. 2-4 weeks.',
-                'For bacterial skin infections.',
-                'For acne. May cause dryness.',
-                'Boosts immunity. Safe daily.',
-                'Essential for bones. Take with calcium.',
-                'Boosts immunity and healing.',
-                'Take with Vitamin D.',
-                'For anemia. Take with Vitamin C.'
+            'key_info': [  # ADDED: Detailed medical information
+                'First-line for mild-moderate pain. Max 4g/day. Avoid alcohol.',
+                'Take with food. GI and kidney precautions. Anti-inflammatory.',
+                'Low-dose for heart protection. GI bleeding risk. Not for children.',
+                'Powerful NSAID. Monitor liver and kidney function. Take with food.',
+                'Longer acting NSAID. Good for chronic pain. Take with food.',
+                'Opioid analgesic. Risk of dependence. Schedule IV controlled substance.',
+                
+                'Penicillin antibiotic. Complete full course. Check for allergies.',
+                'Macrolide antibiotic. Once daily dosing. Fewer GI side effects.',
+                'Fluoroquinolone. Tendon rupture risk. Avoid in children and adolescents.',
+                'Tetracycline. Photosensitivity risk. Take with plenty of water.',
+                'Macrolide. Multiple drug interactions. GI side effects common.',
+                'First-generation cephalosporin. Good for skin infections.',
+                
+                'Non-drowsy formula. Once daily. Few side effects.',
+                'Non-sedating. Once daily. Minimal drug interactions.',
+                'Third-generation. Non-drowsy. Safe for long-term use.',
+                'First-generation. Causes drowsiness. Also used for sleep aid.',
+                'Classic antihistamine. Affordable. Mild drowsiness possible.',
+                
+                'Proton pump inhibitor. Take before meals. Long-term use monitoring needed.',
+                'H2 blocker. Being phased out due to safety concerns.',
+                'PPI with fewer interactions. Good for GERD.',
+                'Prokinetic agent. QT prolongation risk. Lactation use.',
+                'Antidiarrheal. Not for infectious diarrhea. Opioid derivative.',
+                'Antiemetic. Extrapyramidal side effects risk. Short-term use.',
+                
+                'Bronchodilator. Rescue medication. Short-acting.',
+                'Inhaled corticosteroid. Maintenance therapy. Rinse mouth after use.',
+                'Leukotriene inhibitor. Once daily. Good for allergy-induced asthma.',
+                'Expectorant. Thins mucus. Stay hydrated.',
+                'Mucolytic. Breaks down thick mucus. Good for productive cough.',
+                
+                'Statin. Cholesterol lowering. Take in evening.',
+                'Calcium channel blocker. For hypertension and angina.',
+                'Beta blocker. Slows heart rate. Avoid in asthma.',
+                'ARB. Blood pressure control. Kidney protective.',
+                'Diuretic. Removes excess fluid. Monitor electrolytes.',
+                
+                'First-line for type 2 diabetes. GI side effects common.',
+                'Stimulates insulin secretion. Hypoglycemia risk.',
+                'Long-acting basal insulin. Once daily injection.',
+                
+                'SSRI antidepressant. Takes 4-6 weeks for full effect.',
+                'SSRI with long half-life. Good for compliance.',
+                'Benzodiazepine. Fast-acting. High addiction potential.',
+                'Long-acting benzodiazepine. Muscle relaxant properties.',
+                
+                'Topical steroid. Mild potency. Avoid face and broken skin.',
+                'Antifungal cream. Apply to clean dry area.',
+                'Topical antibiotic. For skin infections. Not for deep wounds.',
+                'Antiacne treatment. May bleach fabrics. Start with lower concentration.',
+                
+                'Antioxidant. Immune support. Water soluble.',
+                'Bone health. Calcium absorption. Sunlight vitamin.',
+                'Immune function. Wound healing. Mineral supplement.',
+                'Bone health. Take with vitamin D for better absorption.',
+                'For iron deficiency anemia. May cause constipation.'
             ]
         }
         return pd.DataFrame(data)
-
+    
     def recommend_by_symptoms(self, user_symptoms):
-        """FIXED: Now returns list, works with spaces/commas/sentences"""
-        if not user_symptoms or not user_symptoms.strip():
-            return []
-
-        user_input = user_symptoms.lower().strip()
-
-        # Handle both comma and space separation
-        if ',' in user_input:
-            words = [w.strip() for w in user_input.split(',') if w.strip()]
-        else:
-            words = [w.strip() for w in user_input.split() if w.strip()]
-
-        # Remove filler words
-        stop_words = {'i', 'have', 'am', 'feeling', 'with', 'and', 'the', 'a', 'an', 'my', 'me', 'in', 'on', 'for', 'very', 'too', 'having', 'feel', 'is', 'got', 'been'}
-        symptom_words = [w for w in words if w not in stop_words and len(w) > 2]
-
-        if not symptom_words:
-            return []
-
+        """Enhanced symptom matching with better logic"""
         recommendations = []
-        for _, med in self.medicines_df.iterrows():
-            med_symptoms = med['for_symptoms'].lower()
-            matches = sum(1 for word in symptom_words if word in med_symptoms)
-
-            if matches > 0:
-                strength = matches / len(symptom_words)
+        user_symptoms_lower = user_symptoms.lower()
+        
+        for _, medicine in self.medicines_df.iterrows():
+            medicine_symptoms = medicine['for_symptoms'].lower()
+            
+            # Improved matching: check if any symptom word matches
+            symptom_words = [word.strip() for word in user_symptoms_lower.split(',')]
+            match_found = False
+            
+            for symptom in symptom_words:
+                if symptom and symptom in medicine_symptoms:
+                    match_found = True
+                    break
+            
+            if match_found:
                 recommendations.append({
-                    'name': med['name'],
-                    'category': med['category'],
-                    'safety_rating': med['safety_rating'],
-                    'price_category': med['price_category'],
-                    'key_info': med['key_info'],
-                    'match_strength': strength
+                    'name': medicine['name'],
+                    'for_symptoms': medicine['for_symptoms'],
+                    'category': medicine['category'],
+                    'safety_rating': medicine['safety_rating'],
+                    'price_category': medicine['price_category'],
+                    'key_info': medicine['key_info'],
+                    'match_strength': self.calculate_match_strength(symptom_words, medicine_symptoms)
                 })
-
-        # Sort by safety + match strength
-        recommendations.sort(key=lambda x: (x['safety_rating'], x['match_strength']), reverse=True)
-        return recommendations  # FIXED: This was missing before!
-
+        # Sort by safety rating and match strength
+        recommendations.sort(key=lambda x: (x['safety_rating'], x.get('match_strength', 0)), reverse=True)
+        return recommendations
+    
+    def calculate_match_strength(self, user_symptoms, medicine_symptoms):
+        """Calculate how well the medicine matches symptoms"""
+        matches = 0
+        for symptom in user_symptoms:
+            if symptom and symptom in medicine_symptoms:
+                matches += 1
+        return matches / len(user_symptoms) if user_symptoms else 0
+    
+    def get_all_medicines(self):
+        """Return all medicines with additional info"""
+        return self.medicines_df.to_dict('records')
+    
+    def get_all_medicines_with_user_added(self):
+        """Get all medicines including user-added ones"""
+        base_medicines = self.medicines_df.to_dict('records')
+        return base_medicines + self.user_added_medicines
+    
+    def search_medicine(self, medicine_name):
+        """Search medicine by name"""
+        all_medicines = self.get_all_medicines_with_user_added()
+        results = [med for med in all_medicines if medicine_name.lower() in med['name'].lower()]
+        return results
+    
+    def get_medicines_by_category(self, category):
+        """Get medicines by category"""
+        results = self.medicines_df[
+            self.medicines_df['category'].str.contains(category, case=False, na=False)
+        ]
+        return results.to_dict('records')
+    
+    def get_medicines_by_price(self, price_category):
+        """Get medicines by price category"""
+        results = self.medicines_df[
+            self.medicines_df['price_category'].str.contains(price_category, case=False, na=False)
+        ]
+        return results.to_dict('records')
+    
+    def get_top_safe_medicines(self, limit=5):
+        """Get top safest medicines"""
+        sorted_meds = self.medicines_df.sort_values('safety_rating', ascending=False)
+        return sorted_meds.head(limit).to_dict('records')
+    
+    def get_statistics(self):
+        """Get comprehensive statistics for dashboard"""
+        all_meds = self.get_all_medicines_with_user_added()
+        
+        if not all_meds:
+            return {
+                'total_medicines': 0,
+                'categories': 0,
+                'avg_safety': 0,
+                'price_distribution': {},
+                'category_distribution': {},
+                'high_safety_meds': 0
+            }
+        
+        # Calculate statistics
+        safety_ratings = [med.get('safety_rating', 0) for med in all_meds]
+        categories = list(set(med.get('category', 'Unknown') for med in all_meds))
+        
+        # Price distribution
+        price_counts = {}
+        for med in all_meds:
+            price_cat = med.get('price_category', 'Unknown')
+            price_counts[price_cat] = price_counts.get(price_cat, 0) + 1
+        
+        # Category distribution
+        category_counts = {}
+        for med in all_meds:
+            category = med.get('category', 'Unknown')
+            category_counts[category] = category_counts.get(category, 0) + 1
+        
+        return {
+            'total_medicines': len(all_meds),
+            'categories': len(categories),
+            'avg_safety': round(sum(safety_ratings) / len(safety_ratings), 2) if safety_ratings else 0,
+            'price_distribution': price_counts,
+            'category_distribution': category_counts,
+            'high_safety_meds': len([med for med in all_meds if med.get('safety_rating', 0) >= 4.0])
+        }
+    
+    def get_total_medicines_count(self):
+        """Get total count of all medicines including user-added"""
+        base_count = len(self.medicines_df)
+        user_count = len(self.user_added_medicines)
+        return base_count + user_count
+    
+    def get_user_added_medicines_count(self):
+        """Get count of user-added medicines"""
+        return len(self.user_added_medicines)
+    
     def add_medicine(self, medicine_data):
-        """Add new medicine to database"""
+        """Add a new medicine to the database"""
         try:
-            new_med = {
+            # Create new medicine record
+            new_medicine = {
                 'name': medicine_data['name'],
-                'for_symptoms': medicine_data['for_symptoms'].lower(),
+                'for_symptoms': medicine_data['for_symptoms'],
                 'category': medicine_data['category'],
                 'safety_rating': medicine_data['safety_rating'],
-                'price_category': medicine_data.get('price_category', 'Standard'),
-                'key_info': medicine_data.get('key_info', 'Consult doctor before use.')
+                'price_category': medicine_data.get('price_category', '💵 Standard'),
+                'key_info': medicine_data.get('key_info', ''),
+                'primary_use': medicine_data.get('primary_use', ''),
+                'drug_class': medicine_data.get('drug_class', ''),
+                'dosage_form': medicine_data.get('dosage_form', ''),
+                'duration': medicine_data.get('duration', '')
             }
-            new_row = pd.DataFrame([new_med])
+            
+            # Add to user-added medicines list
+            self.user_added_medicines.append(new_medicine)
+            
+            # Also add to main dataframe
+            new_row = pd.DataFrame([new_medicine])
             self.medicines_df = pd.concat([self.medicines_df, new_row], ignore_index=True)
-            self.user_added_medicines.append(new_med)
-            return True, "Medicine added successfully!"
+            
+            return True, "✅ Medicine added successfully!"
+            
         except Exception as e:
-            return False, f"Error: {str(e)}"
-
-    def get_all_medicines(self):
-        return self.medicines_df.to_dict('records')
-
-    def get_total_medicines_count(self):
-        return len(self.medicines_df)
-
-    def get_user_added_medicines_count(self):
-        return len(self.user_added_medicines)
-
-    def search_medicine(self, name):
-        results = self.medicines_df[self.medicines_df['name'].str.contains(name, case=False, na=False)]
-        return results.to_dict('records')
-
-# Quick test
-if __name__ == "__main__":
-    r = MedicineRecommender()
-    print("Total medicines:", r.get_total_medicines_count())
-    results = r.recommend_by_symptoms("fever headache")
-    print("Found for 'fever headache':", len(results))
-    if results:
-        print("Top match:", results[0]['name'], "⭐", results[0]['safety_rating'])
-    print("WEB-APP READY!")
+            return False, f"❌ Error adding medicine: {str(e)}"
