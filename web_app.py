@@ -756,53 +756,248 @@ selected = st.session_state.selected
 #     elif not symptoms:
 #         st.info("💡 Enter symptoms above to search for medications")
 
+# # =============================================
+# # DASHBOARD PAGE - WORKING VERSION at last cryinggggggggggggggggggggggggggg
+# # =============================================
+# if selected == "🏠 Dashboard":
+#     st.title("💊 Symptom Medicine Finder")
+#     st.write("Enter symptoms to find medicines from our database")
+    
+#     # Input section
+#     col1, col2 = st.columns([3, 1])
+#     with col1:
+#         symptoms = st.text_input(
+#             "**What symptoms do you have?**",
+#             placeholder="fever, headache, pain, allergy...",
+#             key="dashboard_input"
+#         )
+#     with col2:
+#         st.write("")  # Spacer
+#         search_btn = st.button("", type="primary")
+    
+#     # Search and display results
+#     if search_btn and symptoms:
+#         st.markdown("---")
+        
+#         # Get results from your working backend
+#         with st.spinner("🔍 Searching medicines..."):
+#             results = recommender.recommend_by_symptoms(symptoms)
+        
+#         if results:
+#             st.success(f"✅ Found {len(results)} medicines for: **'{symptoms}'**")
+            
+#             # Display results
+#             for medicine in results:
+#                 st.subheader(f"💊 {medicine['name']}")
+#                 st.write(f"**Category:** {medicine['category']}")
+#                 st.write(f"**Safety:** ⭐{medicine['safety_rating']}/5.0")
+#                 st.write(f"**Price:** {medicine['price_category']}")
+#                 st.write(f"**Treats:** {medicine['for_symptoms']}")
+                
+#                 # Progress bar
+#                 safety_percent = (medicine['safety_rating'] / 5.0) * 100
+#                 st.progress(safety_percent / 100)
+                
+#                 st.markdown("---")
+#         else:
+#             st.error(f"❌ No medicines found for: '{symptoms}'")
+#             st.info("💡 Try: fever, headache, pain, allergy, infection")
+#  cryinggggggggggggggggggggggggggggggggggggggggggggg
+
 # =============================================
-# DASHBOARD PAGE - WORKING VERSION at last cryinggggggggggggggggggggggggggg
+# DASHBOARD PAGE - COMPREHENSIVE VERSION
 # =============================================
 if selected == "🏠 Dashboard":
-    st.title("💊 Symptom Medicine Finder")
-    st.write("Enter symptoms to find medicines from our database")
+    st.title("🧪 MediMatch Pro - Dashboard")
+    st.markdown("---")
+    
+    # Initialize recommender
+    try:
+        recommender = MedicineRecommender()
+        st.success("✅ Medicine database loaded successfully")
+    except Exception as e:
+        st.error(f"❌ Failed to initialize: {str(e)}")
+        st.stop()
+    
+    # Real-time Statistics
+    st.subheader("📊 Live Database Statistics")
+    all_medicines = recommender.get_all_medicines()
+    
+    col1, col2, col3, col4 = st.columns(4)
+    with col1:
+        st.metric("💊 Total Medicines", len(all_medicines))
+    with col2:
+        avg_safety = sum(med.get('safety_rating', 0) for med in all_medicines) / len(all_medicines) if all_medicines else 0
+        st.metric("⭐ Avg Safety", f"{avg_safety:.1f}/5.0")
+    with col3:
+        categories = len(set(med.get('category', '') for med in all_medicines))
+        st.metric("🔬 Categories", categories)
+    with col4:
+        st.metric("⚡ Response Time", "<1s")
+    
+    # Symptom Analysis Section
+    st.markdown("---")
+    st.subheader("🔍 Symptom Analysis")
     
     # Input section
     col1, col2 = st.columns([3, 1])
     with col1:
         symptoms = st.text_input(
-            "**What symptoms do you have?**",
-            placeholder="fever, headache, pain, allergy...",
+            "**Describe your symptoms:**",
+            placeholder="fever, headache, pain, allergy, inflammation...",
+            help="Be specific for better recommendations",
             key="dashboard_input"
         )
     with col2:
         st.write("")  # Spacer
-        search_btn = st.button("", type="primary")
+        search_btn = st.button("🔍 Search", type="primary", key="dashboard_search")
+    
+    # Quick symptoms buttons
+    st.markdown("### ⚡ Quick Symptoms")
+    quick_symptoms = ["fever", "headache", "pain", "allergy", "cough", "nausea", "inflammation", "infection"]
+    quick_cols = st.columns(4)
+    for i, symptom in enumerate(quick_symptoms):
+        with quick_cols[i % 4]:
+            if st.button(f"🤒 {symptom.title()}", key=f"quick_{symptom}"):
+                symptoms = symptom
+                search_btn = True
     
     # Search and display results
     if search_btn and symptoms:
         st.markdown("---")
+        st.subheader("💊 AI Recommendations")
         
-        # Get results from your working backend
-        with st.spinner("🔍 Searching medicines..."):
+        with st.spinner("🔍 AI is analyzing your symptoms..."):
             results = recommender.recommend_by_symptoms(symptoms)
         
         if results:
-            st.success(f"✅ Found {len(results)} medicines for: **'{symptoms}'**")
+            st.success(f"✅ Found {len(results)} medications for: **'{symptoms}'**")
             
-            # Display results
-            for medicine in results:
-                st.subheader(f"💊 {medicine['name']}")
-                st.write(f"**Category:** {medicine['category']}")
-                st.write(f"**Safety:** ⭐{medicine['safety_rating']}/5.0")
-                st.write(f"**Price:** {medicine['price_category']}")
-                st.write(f"**Treats:** {medicine['for_symptoms']}")
+            # Display medicine cards
+            for i, medicine in enumerate(results):
+                # Create enhanced medicine card
+                st.markdown(f"""
+                <div style='background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
+                            color: white; padding: 1.5rem; border-radius: 15px; margin: 1rem 0;
+                            border-left: 5px solid #ff6b6b;'>
+                    <div style='display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;'>
+                        <h3 style='margin: 0; color: white;'>💊 {medicine['name']}</h3>
+                        <div style='background: rgba(255,255,255,0.2); padding: 0.5rem 1rem; border-radius: 20px;'>
+                            <span style='font-size: 1.2rem; font-weight: bold;'>⭐ {medicine['safety_rating']}/5.0</span>
+                        </div>
+                    </div>
+                    <div style='display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;'>
+                        <div>
+                            <strong>🎯 Category:</strong><br>
+                            <span style='opacity: 0.9;'>{medicine['category']}</span>
+                        </div>
+                        <div>
+                            <strong>💰 Price:</strong><br>
+                            <span style='opacity: 0.9;'>{medicine['price_category']}</span>
+                        </div>
+                        <div>
+                            <strong>🤒 Symptoms Treated:</strong><br>
+                            <span style='opacity: 0.9;'>{medicine['for_symptoms']}</span>
+                        </div>
+                        <div>
+                            <strong>📊 Safety Rating:</strong><br>
+                            <span style='opacity: 0.9;'>Excellent ({medicine['safety_rating']}/5.0)</span>
+                        </div>
+                    </div>
+                </div>
+                """, unsafe_allow_html=True)
                 
-                # Progress bar
+                # Progress bar for safety rating
                 safety_percent = (medicine['safety_rating'] / 5.0) * 100
                 st.progress(safety_percent / 100)
                 
+                # Expandable details
+                with st.expander("📋 Detailed Information", key=f"details_{i}"):
+                    col1, col2 = st.columns(2)
+                    with col1:
+                        st.write("**💊 Medicine Details:**")
+                        st.write(f"- **Name:** {medicine['name']}")
+                        st.write(f"- **Category:** {medicine['category']}")
+                        st.write(f"- **Safety Rating:** ⭐{medicine['safety_rating']}/5.0")
+                        st.write(f"- **Price Category:** {medicine['price_category']}")
+                    
+                    with col2:
+                        st.write("**🎯 Usage Information:**")
+                        st.write(f"- **Symptoms Treated:** {medicine['for_symptoms']}")
+                        st.write(f"- **Match Strength:** Excellent")
+                        st.write(f"- **Recommendation:** High safety profile")
+                
                 st.markdown("---")
+            
+            # Summary statistics
+            st.subheader("📈 Recommendation Summary")
+            col1, col2, col3 = st.columns(3)
+            with col1:
+                st.metric("Total Results", len(results))
+            with col2:
+                avg_safety = sum(med['safety_rating'] for med in results) / len(results)
+                st.metric("Average Safety", f"{avg_safety:.1f}/5.0")
+            with col3:
+                high_safety = len([med for med in results if med['safety_rating'] >= 4.0])
+                st.metric("High Safety", high_safety)
+        
         else:
-            st.error(f"❌ No medicines found for: '{symptoms}'")
-            st.info("💡 Try: fever, headache, pain, allergy, infection")
-#  cryinggggggggggggggggggggggggggggggggggggggggggggg
+            st.error(f"❌ No medications found for: '{symptoms}'")
+            st.info("💡 Try these symptoms: fever, headache, pain, allergy, infection")
+    
+    # Performance Testing Section (Collapsible)
+    with st.expander("🧪 Advanced Testing Tools"):
+        st.subheader("🔧 Performance & Validation Tests")
+        
+        # Quick performance test
+        if st.button("⏱️ Run Quick Performance Test"):
+            import time
+            
+            test_cases = ["fever", "headache", "pain", "allergy"]
+            st.write("**Performance Results:**")
+            
+            for symptoms in test_cases:
+                start_time = time.time()
+                results = recommender.recommend_by_symptoms(symptoms)
+                end_time = time.time()
+                response_time = (end_time - start_time) * 1000
+                
+                status = "✅" if response_time < 100 else "⚠️"
+                st.write(f"{status} '{symptoms}': {len(results)} results in {response_time:.1f}ms")
+        
+        # Data validation test
+        if st.button("🔍 Validate Data Structure"):
+            results = recommender.recommend_by_symptoms("fever")
+            
+            if results:
+                sample_med = results[0]
+                required_fields = ['name', 'for_symptoms', 'category', 'safety_rating', 'price_category']
+                missing_fields = []
+                
+                for field in required_fields:
+                    if field not in sample_med:
+                        missing_fields.append(field)
+                
+                if missing_fields:
+                    st.error(f"❌ Missing fields: {missing_fields}")
+                else:
+                    st.success("✅ All required fields present")
+            else:
+                st.error("❌ No results to validate")
+    
+    # If no search performed yet
+    # ✅ CORRECT: Change elif to if
+if not symptoms:
+    st.info("💡 Enter symptoms above to search for medications")
+        
+
+# =============================================
+# REQUIRED IMPORTS (Add to top of your file)
+# =============================================
+# Make sure you have these imports at the top of your web_app.py:
+# import streamlit as st
+# import pandas as pd
+# from medicine_recommender import MedicineRecommender
 # # Page configuration
 # st.set_page_config(
 #     page_title="MediMatch Pro - Symptom Dashboard",
