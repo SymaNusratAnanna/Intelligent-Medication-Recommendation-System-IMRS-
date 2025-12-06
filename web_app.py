@@ -711,63 +711,43 @@ if selected == "🏠 Dashboard":
                     st.markdown(f"""
 
            
-                # <div style='background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
-                #             color: white; padding: 1.5rem; border-radius: 15px; margin: 1rem 0;
-                #             border-left: 5px solid #ff6b6b;'>
-                #     <div style='display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;'>
-                #         <h3 style='margin: 0; color: white;'>💊 {medicine['name']}</h3>
-                #         <div style='background: rgba(255,255,255,0.2); padding: 0.5rem 1rem; border-radius: 20px;'>
-                #             <span style='font-size: 1.2rem; font-weight: bold;'>⭐ {medicine['safety_rating']}/5.0</span>
-                #         </div>
-                #     </div>
-                #     <div style='display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;'>
-                #         <div>
-                #             <strong>🎯 Category:</strong><br>
-                #             <span style='opacity: 0.9;'>{medicine['category']}</span>
-                #         </div>
-                #         <div>
-                #             <strong>💰 Price:</strong><br>
-                #             <span style='opacity: 0.9;'>{medicine['price_category']}</span>
-                #         </div>
-                #         <div>
-                #             <strong>🤒 Symptoms Treated:</strong><br>
-                #             <span style='opacity: 0.9;'>{medicine['for_symptoms']}</span>
-                #         </div>
-                #         <div>
-                #             <strong>📊 Safety Rating:</strong><br>
-                #             <span style='opacity: 0.9;'>Excellent ({medicine['safety_rating']}/5.0)</span>
-                #         </div>
-                #     </div>
-                # </div>  
-
-                 <div class="medicine-card-premium">
-                        <div style='display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;'>
-                            <h2 style='margin: 0; color: white;'>💊 {medicine['name']}</h2>
-                            <div style='background: rgba(255,255,255,0.2); padding: 0.5rem 1rem; border-radius: 20px;'>
-                                <span style='font-size: 1.2rem; font-weight: bold;'>⭐ {medicine['safety_rating']}/5.0</span>
-                            </div>
-                    </div>
-        <div style='display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;'>
-      
-            <strong>📊 Classification:</strong><br>
-            <span style='opacity: 0.9;'>{medicine['drug_class']}</span>
-        </div>
-        <div>
-                                <strong>💊 Formulation:</strong><br>
-                                <span style='opacity: 0.9;'>{medicine['dosage_form']}</span>
-                            </div>
-                            <div>
-                                <strong>⏰ Duration:</strong><br>
-                                <span style='opacity: 0.9;'>{medicine['duration']}</span>
-                            </div>
-                            <div style='margin-top: 1rem;'>
-                            <strong>💡 Important Information:</strong><br>
-                            <span style='opacity: 0.9; font-size: 0.9rem;'>{medicine['key_info']}</span>
+                <div style='background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
+                            color: white; padding: 1.5rem; border-radius: 15px; margin: 1rem 0;
+                            border-left: 5px solid #ff6b6b;'>
+                    <div style='display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;'>
+                        <h3 style='margin: 0; color: white;'>💊 {medicine['name']}</h3>
+                        <div style='background: rgba(255,255,255,0.2); padding: 0.5rem 1rem; border-radius: 20px;'>
+                            <span style='font-size: 1.2rem; font-weight: bold;'>⭐ {medicine['safety_rating']}/5.0</span>
                         </div>
-
+                    </div>
+                    <div style='display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;'>
+                        <div>
+                            <strong>🎯 Category:</strong><br>
+                            <span style='opacity: 0.9;'>{medicine['category']}</span>
+                        </div>
+                        <div>
+                            <strong>💰 Price:</strong><br>
+                            <span style='opacity: 0.9;'>{medicine['price_category']}</span>
+                        </div>
+                        <div>
+                            <strong>🤒 Symptoms Treated:</strong><br>
+                            <span style='opacity: 0.9;'>{medicine['for_symptoms']}</span>
+                        </div>
+                        <div>
+                            <strong>🤒 Symptoms Treated:</strong><br>
+                            <span style='opacity: 0.9;'>{medicine['duration']}</span>
+                        </div>
+                         <div>
+                            <strong>🤒 Symptoms Treated:</strong><br>
+                            <span style='opacity: 0.9;'>{medicine['key_info']}</span>
+                        </div>
+                        <div>
+                            <strong>📊 Safety Rating:</strong><br>
+                            <span style='opacity: 0.9;'>Excellent ({medicine['safety_rating']}/5.0)</span>
+                        </div>
+                    </div>
+                </div>
                 """, unsafe_allow_html=True)
-                    
-                    
                 
         #         # Progress bar for safety rating
         # safety_percent = (medicine['safety_rating'] / 5.0) * 100
