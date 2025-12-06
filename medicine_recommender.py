@@ -1,3 +1,5 @@
+
+
 # medicine_recommender.py - COMPLETE FIXED VERSION
 import pandas as pd
 
@@ -429,4 +431,5 @@ def search_medicine(self, medicine_name):
 def get_user_added_medicines_count(self):
     """Get count of user-added medicines"""
     return len(getattr(self, 'user_added_medicines', []))
+
 
