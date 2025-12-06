@@ -1,12 +1,12 @@
-
-
 # medicine_recommender.py - COMPLETE FIXED VERSION
 import pandas as pd
+import numpy as np  # Added missing import
 
 class MedicineRecommender:
     
     def __init__(self):
         self.medicines_df = self.create_medicine_data()
+        self.user_added_medicines = []  # Store user-added medicines
         print("💊 Enhanced medicine database loaded successfully!")
     
     def create_medicine_data(self):
@@ -242,59 +242,6 @@ class MedicineRecommender:
                     'match_strength': self.calculate_match_strength(symptom_words, medicine_symptoms)
                 })
 
-
-
-                # Add these methods to your MedicineRecommender class in medicine_recommender.py
-
-    def __init__(self):
-        self.medicines_df = self.create_medicine_data()
-        self.user_added_medicines = []  # Store user-added medicines
-        print("💊 Medicine database loaded successfully!")
-    
-    def add_medicine(self, medicine_data):
-        """Add a new medicine to the database"""
-        try:
-            # Create新的药物记录
-            new_medicine = {
-                'name': medicine_data['name'],
-                'for_symptoms': medicine_data['for_symptoms'],
-                'category': medicine_data['category'],
-                'safety_rating': medicine_data['safety_rating'],
-                'price_category': medicine_data.get('price_category', '💵 Standard'),
-                'key_info': medicine_data.get('key_info', ''),
-                'primary_use': medicine_data.get('primary_use', ''),
-                'drug_class': medicine_data.get('drug_class', ''),
-                'dosage_form': medicine_data.get('dosage_form', ''),
-                'duration': medicine_data.get('duration', '')
-            }
-            
-            # 添加到用户添加的药物列表
-            self.user_added_medicines.append(new_medicine)
-            
-            # 也添加到主数据框（可选）
-            new_row = pd.DataFrame([new_medicine])
-            self.medicines_df = pd.concat([self.medicines_df, new_row], ignore_index=True)
-            
-            return True, "✅ Medicine added successfully!"
-            
-        except Exception as e:
-            return False, f"❌ Error adding medicine: {str(e)}"
-    
-    def get_all_medicines_with_user_added(self):
-        """Get all medicines including user-added ones"""
-        base_medicines = self.medicines_df.to_dict('records')
-        return base_medicines + self.user_added_medicines
-    
-    def search_medicine(self, medicine_name):
-        """Search in both base and user-added medicines"""
-        all_medicines = self.get_all_medicines_with_user_added()
-        results = [med for med in all_medicines if medicine_name.lower() in med['name'].lower()]
-        return results
-    
-    def get_user_added_medicines_count(self):
-        """Get count of user-added medicines"""
-        return len(self.user_added_medicines)
-        
         # Sort by safety rating and match strength
         recommendations.sort(key=lambda x: (x['safety_rating'], x.get('match_strength', 0)), reverse=True)
         return recommendations
@@ -313,10 +260,10 @@ class MedicineRecommender:
     
     def search_medicine(self, medicine_name):
         """Search medicine by name"""
-        results = self.medicines_df[
-            self.medicines_df['name'].str.contains(medicine_name, case=False, na=False)
-        ]
-        return results.to_dict('records')
+        # Search in both base and user-added medicines
+        all_medicines = self.get_all_medicines_with_user_added()
+        results = [med for med in all_medicines if medicine_name.lower() in med['name'].lower()]
+        return results
     
     def get_medicines_by_category(self, category):
         """Get medicines by category"""
@@ -325,10 +272,9 @@ class MedicineRecommender:
         ]
         return results.to_dict('records')
     
-    # ✅ ADD THIS MISSING METHOD
     def get_statistics(self):
         """Get comprehensive statistics for dashboard"""
-        all_meds = self.get_all_medicines()
+        all_meds = self.get_all_medicines_with_user_added()
         
         if not all_meds:
             return {
@@ -376,60 +322,44 @@ class MedicineRecommender:
         sorted_meds = self.medicines_df.sort_values('safety_rating', ascending=False)
         return sorted_meds.head(limit).to_dict('records')
     
-
-    # Add these methods to your MedicineRecommender class
-
-def add_medicine(self, medicine_data):
-    """Add a new medicine to the database"""
-    try:
-        # Create new medicine record
-        new_medicine = {
-          'name': medicine_data['name'],
-            'for_symptoms': medicine_data['for_symptoms'],
-            'category': medicine_data['category'],
-            'safety_rating': medicine_data['safety_rating'],
-            'price_category': medicine_data.get('price_category', '💵💵 Standard'),
-            'key_info': medicine_data.get('key_info', ''),
-            'primary_use': medicine_data.get('primary_use', ''),
-            'drug_class': medicine_data.get('drug_class', ''),
-            'dosage_form': medicine_data.get('dosage_form', ''),
-            'duration': medicine_data.get('duration', '')
-        }
-        
-        # Add to user-added medicines list
-        if not hasattr(self, 'user_added_medicines'):
-            self.user_added_medicines = []
-        self.user_added_medicines.append(new_medicine)
-        
-        # Also add to main dataframe
-        new_row = pd.DataFrame([new_medicine])
-        self.medicines_df = pd.concat([self.medicines_df, new_row], ignore_index=True)
-        
-        return True, "✅ Medicine added successfully!"
-        
-    except Exception as e:
-        return False, f"❌ Error adding medicine: {str(e)}"
-
-def get_all_medicines_with_user_added(self):
-    """Get all medicines including user-added ones"""
-    base_medicines = self.medicines_df.to_dict('records')
-    user_medicines = getattr(self, 'user_added_medicines', [])
-    return base_medicines + user_medicines
-
-def get_total_medicines_count(self):
-    """Get total count of all medicines including user-added"""
-    base_count = len(self.medicines_df)
-    user_count = len(getattr(self, 'user_added_medicines', []))
-    return base_count + user_count
-
-def search_medicine(self, medicine_name):
-    """Search in both base and user-added medicines"""
-    all_medicines = self.get_all_medicines_with_user_added()
-    results = [med for med in all_medicines if medicine_name.lower() in med['name'].lower()]
-    return results
-
-def get_user_added_medicines_count(self):
-    """Get count of user-added medicines"""
-    return len(getattr(self, 'user_added_medicines', []))
-
-
+    def add_medicine(self, medicine_data):
+        """Add a new medicine to the database"""
+        try:
+            # Create new medicine record
+            new_medicine = {
+                'name': medicine_data['name'],
+                'for_symptoms': medicine_data['for_symptoms'],
+                'category': medicine_data['category'],
+                'safety_rating': medicine_data['safety_rating'],
+                'price_category': medicine_data.get('price_category', '💵 Standard'),
+                'key_info': medicine_data.get('key_info', ''),
+                'primary_use': medicine_data.get('primary_use', ''),
+                'drug_class': medicine_data.get('drug_class', ''),
+                'dosage_form': medicine_data.get('dosage_form', ''),
+                'duration': medicine_data.get('duration', '')
+            }
+            
+            # Add to user-added medicines list
+            self.user_added_medicines.append(new_medicine)
+            
+            # Also add to main dataframe
+            new_row = pd.DataFrame([new_medicine])
+            self.medicines_df = pd.concat([self.medicines_df, new_row], ignore_index=True)
+            
+            return True, "✅ Medicine added successfully!"
+            
+        except Exception as e:
+            return False, f"❌ Error adding medicine: {str(e)}"
+    
+    def get_all_medicines_with_user_added(self):
+        """Get all medicines including user-added ones"""
+        base_medicines = self.medicines_df.to_dict('records')
+        return base_medicines + self.user_added_medicines
+    
+    def get_total_medicines_count(self):
+        """Get total count of all medicines including user-added"""
+        return len(self.medicines_df) + len(self.user_added_medicines)
+    
+    def get_user_added_medicines_count(self):
+        """Get count of user-added medicines"""
+        return len(self.user_added_medicines)
