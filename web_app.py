@@ -734,7 +734,7 @@ if selected == "🏠 Dashboard":
                             <span style='opacity: 0.9;'>{medicine['for_symptoms']}</span>
                         </div>
                         <div>
-                            <strong>🤒 Symptoms Treated:</strong><br>
+                            <strong>🤒 Precautions:</strong><br>
                             <span style='opacity: 0.9;'>{medicine['key_info']}</span>
                         </div>
                       <div>
