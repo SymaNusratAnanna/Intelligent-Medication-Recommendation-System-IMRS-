@@ -259,7 +259,8 @@ class MedicineRecommender:
                         'for_symptoms': medicine['for_symptoms'],
                         'category': medicine['category'],
                         'safety_rating': medicine['safety_rating'],
-                        'price_category': medicine['price_category']
+                        'price_category': medicine['price_category'],
+                        'key_info' : medicine['key_info']
                     })
             
             results.sort(key=lambda x: x['safety_rating'], reverse=True)
