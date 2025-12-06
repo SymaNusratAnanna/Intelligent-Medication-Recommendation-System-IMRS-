@@ -748,11 +748,7 @@ if selected == "🏠 Dashboard":
                             </div>
                     </div>
         <div style='display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;'>
-        # <div>
-        #     <strong>🎯 Primary Use:</strong><br>
-        #     <span style='opacity: 0.9;'>{medicine['primary_use']}</span>
-        # </div>
-        <div>
+      
             <strong>📊 Classification:</strong><br>
             <span style='opacity: 0.9;'>{medicine['drug_class']}</span>
         </div>
