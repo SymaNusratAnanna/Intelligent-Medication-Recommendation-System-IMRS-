@@ -1,6 +1,8 @@
 # medicine_recommender.py - COMPLETE FIXED VERSION
 import pandas as pd
 import numpy as np
+import re
+from collections import Counter
 
 class MedicineRecommender:
     
@@ -54,46 +56,46 @@ class MedicineRecommender:
             ],
             'for_symptoms': [
                 # ANALGESICS
-                'fever headache mild pain', 'pain inflammation fever menstrual cramps',
-                'pain fever inflammation heart attack prevention', 'pain inflammation arthritis',
-                'pain inflammation menstrual cramps', 'moderate severe pain chronic pain',
+                'fever, headache, mild pain', 'pain, inflammation, fever, menstrual cramps',
+                'pain, fever, inflammation, heart attack prevention', 'pain, inflammation, arthritis',
+                'pain, inflammation, menstrual cramps', 'moderate severe pain, chronic pain',
                 
                 # ANTIBIOTICS
-                'bacterial infection throat infection ear infection', 'bacterial infection respiratory infection',
-                'urinary tract infection bacterial infection', 'bacterial infection acne malaria prevention',
-                'bacterial infection respiratory infection', 'bacterial infection skin infection',
+                'bacterial infection, throat infection, ear infection', 'bacterial infection, respiratory infection',
+                'urinary tract infection, bacterial infection', 'bacterial infection, acne, malaria prevention',
+                'bacterial infection, respiratory infection', 'bacterial infection, skin infection',
                 
                 # ANTIHISTAMINES
-                'allergy sneezing itching runny nose', 'allergy hay fever itching',
-                'allergy chronic hives', 'allergy insomnia motion sickness', 'allergy common cold',
+                'allergy, sneezing, itching, runny nose', 'allergy, hay fever, itching',
+                'allergy, chronic hives', 'allergy, insomnia, motion sickness', 'allergy, common cold',
                 
                 # GASTROINTESTINAL
-                'heartburn acid reflux ulcer', 'heartburn acid indigestion', 'acid reflux GERD ulcer',
-                'nausea vomiting indigestion', 'diarrhea', 'nausea vomiting gastroparesis',
+                'heartburn, acid reflux, ulcer', 'heartburn, acid indigestion', 'acid reflux, GERD, ulcer',
+                'nausea, vomiting, indigestion', 'diarrhea', 'nausea, vomiting, gastroparesis',
                 
                 # RESPIRATORY
-                'asthma bronchitis breathing difficulty', 'asthma COPD inflammation',
-                'asthma allergic rhinitis', 'cough chest congestion', 'cough bronchitis',
+                'asthma, bronchitis, breathing difficulty', 'asthma, COPD, inflammation',
+                'asthma, allergic rhinitis', 'cough, chest congestion', 'cough, bronchitis',
                 
                 # CARDIAC
-                'high cholesterol heart disease prevention', 'high blood pressure chest pain',
-                'high blood pressure heart rate angina', 'high blood pressure kidney protection',
-                'high blood pressure edema fluid retention',
+                'high cholesterol, heart disease prevention', 'high blood pressure, chest pain',
+                'high blood pressure, heart rate, angina', 'high blood pressure, kidney protection',
+                'high blood pressure, edema, fluid retention',
                 
                 # DIABETES
-                'diabetes type 2 high blood sugar', 'diabetes type 2', 'diabetes type 1 insulin dependent',
+                'diabetes type 2, high blood sugar', 'diabetes type 2', 'diabetes type 1, insulin dependent',
                 
                 # MENTAL HEALTH
-                'depression anxiety OCD', 'depression panic disorder', 'anxiety panic disorder',
-                'anxiety muscle spasm alcohol withdrawal',
+                'depression, anxiety, OCD', 'depression, panic disorder', 'anxiety, panic disorder',
+                'anxiety, muscle spasm, alcohol withdrawal',
                 
                 # SKIN
-                'skin inflammation itching eczema', 'fungal infection ringworm athletes foot',
-                'bacterial skin infection impetigo', 'acne pimples skin inflammation',
+                'skin inflammation, itching, eczema', 'fungal infection, ringworm, athletes foot',
+                'bacterial skin infection, impetigo', 'acne, pimples, skin inflammation',
                 
                 # VITAMINS
-                'immune support cold prevention', 'bone health calcium absorption', 'immune support wound healing',
-                'bone health osteoporosis prevention', 'anemia iron deficiency'
+                'immune support, cold prevention', 'bone health, calcium absorption', 'immune support, wound healing',
+                'bone health, osteoporosis prevention', 'anemia, iron deficiency'
             ],
             'category': [
                 # ANALGESICS
@@ -139,7 +141,7 @@ class MedicineRecommender:
                 4.4, 4.3, 4.2, 4.1,             # Skin
                 4.8, 4.7, 4.6, 4.5, 4.4         # Vitamins
             ],
-            'price_category': [  # ADDED: Price categories for filtering
+            'price_category': [
                 '💰 Economy', '💵 Standard', '💰 Economy', '💵 Standard', '💵 Standard', '💎 Premium',  # Analgesics
                 '💰 Economy', '💵 Standard', '💵 Standard', '💰 Economy', '💰 Economy', '💵 Standard',  # Antibiotics
                 '💰 Economy', '💰 Economy', '💵 Standard', '💰 Economy', '💰 Economy',                 # Antihistamines
@@ -215,77 +217,74 @@ class MedicineRecommender:
         return pd.DataFrame(data)
     
     def recommend_by_symptoms(self, user_symptoms):
-        """Enhanced symptom matching with better logic"""
+        """Enhanced symptom matching with advanced logic"""
         recommendations = []
-        user_symptoms_lower = user_symptoms.lower()
+        
+        if not user_symptoms or not user_symptoms.strip():
+            return recommendations
+        
+        user_symptoms_lower = user_symptoms.lower().strip()
+        symptom_words = [word.strip() for word in user_symptoms_lower.split(',') if word.strip()]
         
         for _, medicine in self.medicines_df.iterrows():
-            medicine_symptoms = medicine['for_symptoms'].lower()
+            # Extract medicine symptoms
+            medicine_symptoms = medicine.get('for_symptoms', '').lower()
+            if not medicine_symptoms:
+                continue
             
-            # Improved matching: check if any symptom word matches
-            symptom_words = [word.strip() for word in user_symptoms_lower.split(',')]
-            match_found = False
+            # Calculate match score
+            match_score = 0
+            medicine_symptom_words = [word.strip() for word in medicine_symptoms.split(',')]
             
-            for symptom in symptom_words:
-                if symptom and symptom in medicine_symptoms:
-                    match_found = True
-                    break
+            for user_word in symptom_words:
+                for med_word in medicine_symptom_words:
+                    if user_word in med_word or med_word in user_word:
+                        match_score += 1
+                        break
+                # Also check if user word is in the concatenated symptoms
+                if user_word in medicine_symptoms:
+                    match_score += 0.5
             
-            if match_found:
+            if match_score > 0:
+                # Calculate match percentage
+                match_percentage = (match_score / len(symptom_words)) * 100
+                safety_rating = medicine.get('safety_rating', 3.0)
+                
                 recommendations.append({
                     'name': medicine['name'],
                     'for_symptoms': medicine['for_symptoms'],
                     'category': medicine['category'],
-                    'safety_rating': medicine['safety_rating'],
-                    'price_category': medicine['price_category'],
-                    'key_info': medicine['key_info'],
-                    'match_strength': self.calculate_match_strength(symptom_words, medicine_symptoms)
+                    'safety_rating': safety_rating,
+                    'price_category': medicine.get('price_category', '💵 Standard'),
+                    'key_info': medicine.get('key_info', 'No additional info'),
+                    'match_percentage': match_percentage,
+                    'match_score': match_score
                 })
-        # Sort by safety rating and match strength
-        recommendations.sort(key=lambda x: (x['safety_rating'], x.get('match_strength', 0)), reverse=True)
+        
+        # Sort by safety rating, match percentage, and match score
+        recommendations.sort(
+            key=lambda x: (
+                x['safety_rating'], 
+                x.get('match_percentage', 0), 
+                x.get('match_score', 0)
+            ), 
+            reverse=True
+        )
         return recommendations
     
-    def calculate_match_strength(self, user_symptoms, medicine_symptoms):
-        """Calculate how well the medicine matches symptoms"""
-        matches = 0
-        for symptom in user_symptoms:
-            if symptom and symptom in medicine_symptoms:
-                matches += 1
-        return matches / len(user_symptoms) if user_symptoms else 0
-    
-    def get_all_medicines(self):
-        """Return all medicines with additional info"""
-        return self.medicines_df.to_dict('records')
+    def search_medicine_by_name(self, medicine_name):
+        """Search medicine by name"""
+        all_medicines = self.get_all_medicines_with_user_added()
+        results = [
+            med for med in all_medicines 
+            if medicine_name.lower() in med.get('name', '').lower()
+        ]
+        return results
     
     def get_all_medicines_with_user_added(self):
         """Get all medicines including user-added ones"""
         base_medicines = self.medicines_df.to_dict('records')
         return base_medicines + self.user_added_medicines
-    
-    def search_medicine(self, medicine_name):
-        """Search medicine by name"""
-        all_medicines = self.get_all_medicines_with_user_added()
-        results = [med for med in all_medicines if medicine_name.lower() in med['name'].lower()]
-        return results
-    
-    def get_medicines_by_category(self, category):
-        """Get medicines by category"""
-        results = self.medicines_df[
-            self.medicines_df['category'].str.contains(category, case=False, na=False)
-        ]
-        return results.to_dict('records')
-    
-    def get_medicines_by_price(self, price_category):
-        """Get medicines by price category"""
-        results = self.medicines_df[
-            self.medicines_df['price_category'].str.contains(price_category, case=False, na=False)
-        ]
-        return results.to_dict('records')
-    
-    def get_top_safe_medicines(self, limit=5):
-        """Get top safest medicines"""
-        sorted_meds = self.medicines_df.sort_values('safety_rating', ascending=False)
-        return sorted_meds.head(limit).to_dict('records')
     
     def get_statistics(self):
         """Get comprehensive statistics for dashboard"""
@@ -336,15 +335,38 @@ class MedicineRecommender:
         """Get count of user-added medicines"""
         return len(self.user_added_medicines)
     
+    def get_all_medicines(self):
+        """Return all medicines with additional info"""
+        return self.medicines_df.to_dict('records')
+    
+    def get_medicines_by_category(self, category):
+        """Get medicines by category"""
+        results = self.medicines_df[
+            self.medicines_df['category'].str.contains(category, case=False, na=False)
+        ]
+        return results.to_dict('records')
+    
+    def get_medicines_by_price(self, price_category):
+        """Get medicines by price category"""
+        results = self.medicines_df[
+            self.medicines_df['price_category'].str.contains(price_category, case=False, na=False)
+        ]
+        return results.to_dict('records')
+    
+    def get_top_safe_medicines(self, limit=5):
+        """Get top safest medicines"""
+        sorted_meds = self.medicines_df.sort_values('safety_rating', ascending=False)
+        return sorted_meds.head(limit).to_dict('records')
+    
     def add_medicine(self, medicine_data):
         """Add a new medicine to the database"""
         try:
             # Create new medicine record
             new_medicine = {
-                'name': medicine_data['name'],
-                'for_symptoms': medicine_data['for_symptoms'],
-                'category': medicine_data['category'],
-                'safety_rating': medicine_data['safety_rating'],
+                'name': medicine_data.get('name', ''),
+                'for_symptoms': medicine_data.get('for_symptoms', ''),
+                'category': medicine_data.get('category', ''),
+                'safety_rating': float(medicine_data.get('safety_rating', 3.5)),
                 'price_category': medicine_data.get('price_category', '💵 Standard'),
                 'key_info': medicine_data.get('key_info', ''),
                 'primary_use': medicine_data.get('primary_use', ''),
@@ -352,6 +374,10 @@ class MedicineRecommender:
                 'dosage_form': medicine_data.get('dosage_form', ''),
                 'duration': medicine_data.get('duration', '')
             }
+            
+            # Validate required fields
+            if not new_medicine['name'] or not new_medicine['category'] or not new_medicine['for_symptoms']:
+                return False, "❌ Please fill in all required fields (name, category, symptoms)"
             
             # Add to user-added medicines list
             self.user_added_medicines.append(new_medicine)
@@ -364,3 +390,17 @@ class MedicineRecommender:
             
         except Exception as e:
             return False, f"❌ Error adding medicine: {str(e)}"
+    
+    def search_medicine(self, query):
+        """Enhanced search medicine by name or category"""
+        all_meds = self.get_all_medicines_with_user_added()
+        query = query.lower()
+        
+        results = []
+        for med in all_meds:
+            # Search in name, category, and symptoms
+            if (query in med.get('name', '').lower() or 
+                query in med.get('category', '').lower() or 
+                query in med.get('for_symptoms', '').lower()):
+                results.append(med)
+        return results
