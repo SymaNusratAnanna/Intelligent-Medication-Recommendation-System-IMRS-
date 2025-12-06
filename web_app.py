@@ -255,7 +255,7 @@ with st.sidebar:
     nav_options = [
         {"icon": "🏠", "label": "Dashboard", "desc": "Home & quick access", "key": "dashboard"},
         {"icon": "🔍", "label": "Symptom Analyzer", "desc": "AI-powered analysis", "key": "symptoms"},
-         {"icon": "➕", "label": "Add Medicine", "desc": "Add new medicine to database", "key": "add_medicine"},  # MOVED HERE
+        # {"icon": "➕", "label": "Add Medicine", "key": "add_medicine"},
         {"icon": "📊", "label": "Medicine Database", "desc": "Complete library", "key": "database"},
         {"icon": "📈", "label": "Analytics", "desc": "Statistics & insights", "key": "analytics"},
         {"icon": "ℹ️", "label": "About", "desc": "Project information", "key": "about"}
@@ -285,36 +285,38 @@ with st.sidebar:
             st.session_state.selected = full_label
         
         # Add description
-        if option['desc']:
-            st.caption(f"📌📌 {option['desc']}")
+        st.caption(f"📌 {option['desc']}")
     
     st.markdown("---")
     
-     # Quick stats in sidebar - UPDATED TO SHOW TOTAL MEDICINES
-try:
-    total_medicines = recommender.get_total_medicines_count()
-    all_meds = recommender.get_all_medicines_with_user_added()
+    # Quick stats in sidebar
+    try:
+        all_meds = recommender.get_all_medicines()
+        if all_meds:
+            st.markdown("### 📊 Quick Stats")
+            total_meds = len(all_meds)
+            avg_safety = np.mean([med.get('safety_rating', 0) for med in all_meds])
+            
+            col1, col2 = st.columns(2)
+            with col1:
+                st.metric("💊 Total", total_meds)
+            with col2:
+                st.metric("⭐ Safety", f"{avg_safety:.1f}/5.0")
+    except:
+        pass
     
-    if all_meds:
-        st.markdown("### 📊📊 Quick Stats")
-        avg_safety = np.mean([med.get('safety_rating', 0) for med in all_meds])
-        user_added_count = recommender.get_user_added_medicines_count()
-        
-        col1, col2 = st.columns(2)
-        with col1:
-            st.metric("💊💊 Total", total_medicines)
-        with col2:
-            st.metric("⭐ Safety", f"{avg_safety:.1f}/5.0")
-        
-        if user_added_count > 0:
-            st.info(f"📝📝 User Added: {user_added_count} medicines")
+    # System status
+    st.markdown("### ⚡ System Status")
+    col1, col2, col3 = st.columns(3)
+    with col1:
+        st.success("🟢 Online")
+    with col2:
+        st.info("⚡ Fast")
+    with col3:
+        st.success("🔒 Secure")
 
-except Exception as e:
-    st.error(f"Error loading stats: {e}")  # ✅ FIXED - proper f-string
-
+# Get the selected value
 selected = st.session_state.selected
-
-
 
 # =============================================
 # DASHBOARD PAGE - WITH ENHANCED MEDICINE CARDS
@@ -420,7 +422,6 @@ if selected == "🏠 Dashboard":
             else:
                 st.warning("❌ No medications found for these symptoms. Try different symptoms or be more specific.")
 
-
 # =============================================
 # SYMPTOM ANALYZER PAGE
 # =============================================
@@ -513,7 +514,7 @@ elif selected == "📊 Medicine Database":
     st.markdown("""
     <div class="glass-card">
         <h1 style='color: #667eea; text-align: center;'>📊 Complete Medicine Database</h1>
-        <p style='text-align: center; color:  F5F527;'>Advanced search and   for  doing filtering for our comprehensive medicine library</p>
+        <p style='text-align: center; color:  F5F527;'>Advanced search and filtering for our comprehensive medicine library</p>
     </div>
     """, unsafe_allow_html=True)
     
@@ -620,41 +621,4 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 
-
-# # Add this right before you call get_total_medicines_count()
-# print("=== DEBUGGING ===")
-# print(f"Recommender object: {repr(recommender)}")
-# print(f"Methods available: {dir(recommender)}")
-# print(f"medicines_df type: {type(recommender.medicines_df)}")
-# print(f"user_added_medicines type: {type(getattr(recommender, 'user_added_medicines', None))}")
-
-# # Then call the method
-# total = recommender.get_total_medicines_count()
-# print(f"Total medicines returned: {total}")
-
-# # Test the counting methods
-# print("=== COUNT VERIFICATION ===")
-# print(f"Total medicines (method): {recommender.get_total_medicines_count()}")
-# print(f"User added (method): {recommender.get_user_added_medicines_count()}")
-# print(f"Manual count: {len(recommender.medicines_df) + len(recommender.user_added_medicines)}")
-
-# # Debug medicine counts
-# print("=== DEBUG ===")
-# print(f"Type of medicines_df: {type(recommender.medicines_df)}")
-# print(f"Type of user_added_medicines: {type(recommender.user_added_medicines)}")
-# print(f"Base medicines count: {len(recommender.medicines_df)}")
-# print(f"User added count: {len(recommender.user_added_medicines)}")
-# print(f"Total medicines (method): {recommender.get_total_medicines_count()}")
-# print(f"User added (method): {recommender.get_user_added_medicines_count()}")
-
-
-
-# # Debug medicine counts
-# print("=== DEBUG ===")
-# print(f"Type of medicines_df: {type(recommender.medicines_df)}")
-# print(f"Type of user_added_medicines: {type(recommender.user_added_medicines)}")
-# print(f"Base medicines count: {len(recommender.medicines_df)}")
-# print(f"User added count: {len(recommender.user_added_medicines)}")
-# print(f"Total medicines (method): {recommender.get_total_medicines_count()}")
-# print(f"User added (method): {recommender.get_user_added_medicines_count()}")
 
