@@ -317,9 +317,9 @@ with st.sidebar:
 # Get the selected value
 selected = st.session_state.selected  
 
-#  # =============================================
-# # DASHBOARD PAGE - COMPLETE WORKING VERSION
-# # =============================================
+# #  # =============================================
+# # # DASHBOARD PAGE - COMPLETE WORKING VERSION
+# # # =============================================
 # if selected == "🏠 Dashboard":
 #     # Hero Section with Glass Morphism
 #     st.markdown("""
@@ -339,16 +339,18 @@ selected = st.session_state.selected
 #     all_medicines = recommender.get_all_medicines()
 #     stats = recommender.get_statistics()
     
+     
 #     col1, col2, col3, col4 = st.columns(4)
 #     with col1:
-#         st.metric("📊 Total Medicines", stats.get('total_medicines', 0))
+#         st.metric("💊 Total Medicines", len(all_medicines))
 #     with col2:
-#         st.metric("⭐ Avg Safety", f"{stats.get('avg_safety', 0)}/5.0")
+#         avg_safety = sum(med.get('safety_rating', 0) for med in all_medicines) / len(all_medicines) if all_medicines else 0
+#         st.metric("⭐ Avg Safety", f"{avg_safety:.1f}/5.0")
 #     with col3:
-#         st.metric("🔬 Categories", stats.get('categories', 0))
+#         categories = len(set(med.get('category', '') for med in all_medicines))
+#         st.metric("🔬 Categories", categories)
 #     with col4:
 #         st.metric("⚡ Response Time", "<1s")
-    
 #     # Quick Symptom Analyzer
 #     st.markdown("---")
 #     st.markdown("## 🔍 Quick Symptom Analysis")
@@ -365,18 +367,32 @@ selected = st.session_state.selected
 #         with col2:
 #             st.write("")  # Spacer            search_btn = st.button("🔍 Search", type="primary")
         
+#         # Quick symptoms buttons
+#     st.markdown("### ⚡ Quick Symptoms")
+#     quick_symptoms = ["fever", "headache", "pain", "allergy", "cough", "nausea", "inflammation", "infection"]
+#     quick_cols = st.columns(4)
+#     for i, symptom in enumerate(quick_symptoms):
+#         with quick_cols[i % 4]:
+#             if st.button(f"🤒 {symptom.title()}", key=f"quick_{symptom}"):
+#                 symptoms = symptom
+#                 search_btn = True
+    
 #         # Search when button is clicked
 #         if search_btn and symptoms:
-#             with st.spinner("🔍 AI is analyzing your symptoms..."):
-#                 results = recommender.recommend_by_symptoms(symptoms)
+#         st.markdown("---")
+#         st.subheader("💊 AI Recommendations")
+        
+#         with st.spinner("🔍 AI is analyzing your symptoms..."):
+#             results = recommender.recommend_by_symptoms(symptoms)
+        
+#         if results:
+#             st.success(f"✅ Found {len(results)} medications for: **'{symptoms}'**")
             
-#             if results:
-#                 st.success(f"✅ Found {len(results)} relevant medications!")
                 
 #                 # =============================================
 #                 # ENHANCED MEDICINE CARDS - WORKING VERSION
 #                 # =============================================
-#                 for medicine in results:
+#             for i, medicine in enumerate(results):
 #                     st.markdown(f"""
 #                     <div class="medicine-card-premium">
 #                         <div style='display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;'>
@@ -472,91 +488,100 @@ selected = st.session_state.selected
 #         else:
 #             st.error(f"❌ No medicines found for: '{symptoms}'")
 
-# # =============================================
-# # DASHBOARD PAGE - WITH ENHANCED MEDICINE CARDS
-# # =============================================
-# if selected == "🏠 Dashboard":
-#     # Hero Section with Glass Morphism
-#     st.markdown("""
-#     <div class="glass-card">
-#         <div style='text-align: center; padding: 2rem;'>
-#             <h1 style='color: #667eea; margin-bottom: 1rem;'>Welcome to MediMatch Pro! 🩺</h1>
-#             <p style='font-size: 1.3rem; color: F5F527; line-height: 1.6;'>
-#             Your intelligent AI-powered medicine recommendation system. Get personalized medication 
-#             suggestions based on your symptoms with advanced safety ratings and detailed medical information.
-#             </p>
-#         </div>
-#     </div>
-#     """, unsafe_allow_html=True)
+# =============================================
+# DASHBOARD PAGE - WITH ENHANCED MEDICINE CARDS
+# =============================================
+if selected == "🏠 Dashboard":
+    # Hero Section with Glass Morphism
+    st.markdown("""
+    <div class="glass-card">
+        <div style='text-align: center; padding: 2rem;'>
+            <h1 style='color: #667eea; margin-bottom: 1rem;'>Welcome to MediMatch Pro! 🩺</h1>
+            <p style='font-size: 1.3rem; color: F5F527; line-height: 1.6;'>
+            Your intelligent AI-powered medicine recommendation system. Get personalized medication 
+            suggestions based on your symptoms with advanced safety ratings and detailed medical information.
+            </p>
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
     
-#     # Quick stats row
-#     col1, col2, col3, col4 = st.columns(4)
-#     with col1:
-#         st.metric("📊 Total Medicines", 24)
-#     with col2:
-#         st.metric("⭐ Avg Safety", "4.2/5.0")
-#     with col3:
-#         st.metric("🔬 Categories", 8)
-#     with col4:
-#         st.metric("⚡ Response Time", "<1s")
+      # Quick stats row
+    col1, col2, col3, col4 = st.columns(4)
+    with col1:
+        st.metric("📊 Total Medicines", 24)
+    with col2:
+        st.metric("⭐ Avg Safety", "4.2/5.0")
+    with col3:
+        st.metric("🔬 Categories", 8)
+    with col4:
+        st.metric("⚡ Response Time", "<1s")
+
     
-#     # Quick Symptom Analyzer
-#     st.markdown("---")
-#     st.markdown("## 🔍 Quick Symptom Analysis")
+    # Quick Symptom Analyzer
+    st.markdown("---")
+    st.markdown("## 🔍 Quick Symptom Analysis")
     
-#     with st.container():
-#         col1, col2 = st.columns([3, 1])
-#         with col1:
-#             symptoms = st.text_input(
-#                 "**Describe your symptoms:**",
-#                 placeholder="fever, headache, pain, inflammation...",
-#                 help="Be specific for better recommendations"
-#             )
+    with st.container():
+        col1, col2 = st.columns([3, 1])
+        with col1:
+            symptoms = st.text_input(
+                "**Describe your symptoms:**",
+                placeholder="fever, headache, pain, inflammation...",
+                help="Be specific for better recommendations"
+            )
         
-#         if symptoms:
-#             with st.spinner("🔍 AI is analyzing your symptoms..."):
-#                 results = recommender.recommend_by_symptoms(symptoms)
+        if symptoms:
+            with st.spinner("🔍 AI is analyzing your symptoms..."):
+                results = recommender.recommend_by_symptoms(symptoms)
                 
-#             if results:
-#                 st.success(f"✅ Found {len(results)} relevant medications!")
+            if results:
+                st.success(f"✅ Found {len(results)} relevant medications!")
+          # Quick symptoms buttons
+    st.markdown("### ⚡ Quick Symptoms")
+    quick_symptoms = ["fever", "headache", "pain", "allergy", "cough", "nausea", "inflammation", "infection"]
+    quick_cols = st.columns(4)
+    for i, symptom in enumerate(quick_symptoms):
+        with quick_cols[i % 4]:
+            if st.button(f"🤒 {symptom.title()}", key=f"quick_{symptom}"):
+                symptoms = symptom
+                search_btn = True      
+
                 
-#                 # =============================================
-#                 # ENHANCED MEDICINE CARDS - UPDATED TEXT
-#                 # =============================================
-#                 for medicine in results:
-#                     # Get enhanced medicine information
-#                     medicine_info = get_medicine_details(medicine)
-                    
-#                     st.markdown(f"""
+                # =============================================
+                # ENHANCED MEDICINE CARDS - UPDATED TEXT
+                # =============================================
+                for i, medicine in enumerate(results):
+                # Create enhanced medicine card
+                 st.markdown(f"""
                    
-#                     <div class="medicine-card-premium">
-#                         <div style='display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;'>
-#                             <h2 style='margin: 0; color: white;'>💊 {medicine['name']}</h2>
-#                             <div style='background: rgba(255,255,255,0.2); padding: 0.5rem 1rem; border-radius: 20px;'>
-#                                 <span style='font-size: 1.2rem; font-weight: bold;'>⭐ {medicine['safety_rating']}/5.0</span>
-#                             </div>
-#                     </div>
-#         <div style='display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;'>
-#         <div>
-#             <strong>🎯 Primary Use:</strong><br>
-#             <span style='opacity: 0.9;'>{medicine_info['primary_use']}</span>
-#         </div>
-#         <div>
-#             <strong>📊 Classification:</strong><br>
-#             <span style='opacity: 0.9;'>{medicine_info['drug_class']}</span>
-#         </div>
-#         <div>
-#          <strong>💊 Formulation:</strong><br>
-#         <span style='opacity: 0.9;'>{medicine_info['dosage_form']}</span>
-#         </div>
-#                             <div>
-#                                 <strong>⏰ Duration:</strong><br>
-#                                 <span style='opacity: 0.9;'>{medicine_info['duration']}</span>
-#                             </div>
-#                             <div style='margin-top: 1rem;'>
-#                             <strong>💡 Important Information:</strong><br>
-#                             <span style='opacity: 0.9; font-size: 0.9rem;'>{medicine_info['key_info']}</span>
-#                         </div>
+                    <div class="medicine-card-premium">
+                        <div style='display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;'>
+                            <h2 style='margin: 0; color: white;'>💊 {medicine['name']}</h2>
+                            <div style='background: rgba(255,255,255,0.2); padding: 0.5rem 1rem; border-radius: 20px;'>
+                                <span style='font-size: 1.2rem; font-weight: bold;'>⭐ {medicine['safety_rating']}/5.0</span>
+                            </div>
+                    </div>
+        <div style='display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;'>
+        <div>
+            <strong>🎯 Primary Use:</strong><br>
+            <span style='opacity: 0.9;'>{medicine['primary_use']}</span>
+        </div>
+        <div>
+            <strong>📊 Classification:</strong><br>
+            <span style='opacity: 0.9;'>{medicine['drug_class']}</span>
+        </div>
+        <div>
+         <strong>💊 Formulation:</strong><br>
+        <span style='opacity: 0.9;'>{medicine['dosage_form']}</span>
+        </div>
+                            <div>
+                                <strong>⏰ Duration:</strong><br>
+                                <span style='opacity: 0.9;'>{medicine['duration']}</span>
+                            </div>
+                            <div style='margin-top: 1rem;'>
+                            <strong>💡 Important Information:</strong><br>
+                            <span style='opacity: 0.9; font-size: 0.9rem;'>{medicine['key_info']}</span>
+                        </div>
                         
                         
                         
@@ -567,76 +592,14 @@ selected = st.session_state.selected
              
 
                  
-#                     """, unsafe_allow_html=True)
+                    """, unsafe_allow_html=True)
                     
-#                     # Progress bar
-#                     safety_percent = (medicine['safety_rating'] / 5.0) * 100
-#                     st.progress(safety_percent / 100)
-                    
-#             else:
-#                 st.warning("❌ No medications found for these symptoms. Try different symptoms or be more specific.")
-
-# =============================================
-# DASHBOARD PAGE - CLEAN WORKING VERSION
-# =============================================
-if selected == "🏠 Dashboard":
-    st.title("💊 Symptom Medicine Finder")
-    st.write("Enter symptoms to find medicines from our database")
-    
-    # Input section
-    col1, col2 = st.columns([3, 1])
-    with col1:
-        symptoms = st.text_input(
-            "**What symptoms do you have?**",
-            placeholder="fever, headache, pain, allergy...",
-            key="dashboard_input"
-        )
-    with col2:
-        st.write("")  # Spacer
-        search_btn = st.button("🔍 Search", type="primary", key="dashboard_search_btn")
-    
-    # Quick symptoms buttons
-    st.write("**⚡ Quick Symptoms:**")
-    quick_cols = st.columns(4)
-    quick_symptoms = ["fever", "headache", "pain", "allergy", "cough", "nausea", "inflammation", "infection"]
-    
-    for i, symptom in enumerate(quick_symptoms):
-        with quick_cols[i % 4]:
-            if st.button(f"🤒 {symptom.title()}", key=f"quick_{symptom}"):
-                symptoms = symptom
-                search_btn = True
-    
-    # Search and display results
-    if search_btn and symptoms:
-        st.markdown("---")
-        
-        # Get results from backend
-        with st.spinner("🔍 Searching medicines..."):
-            results = recommender.recommend_by_symptoms(symptoms)
-        
-        if results:
-            st.success(f"✅ Found {len(results)} medicines for: **'{symptoms}'**")
-            
-            # Display results
-            for medicine in results:
-                st.subheader(f"💊 {medicine['name']} ⭐{medicine['safety_rating']}/5.0")
-                st.write(f"**Category:** {medicine['category']}")
-                st.write(f"**Price:** {medicine['price_category']}")
-                st.write(f"**Treats:** {medicine['for_symptoms']}")
-                
-                # Progress bar
+                    # Progress bar
                 safety_percent = (medicine['safety_rating'] / 5.0) * 100
                 st.progress(safety_percent / 100)
-                
-                st.markdown("---")
-        else:
-            st.error(f"❌ No medicines found for: '{symptoms}'")
-            st.info("💡 Try: fever, headache, pain, allergy, infection")
-    
-    # Show instructions when no search performed
-    elif not symptoms:
-        st.info("💡 Enter symptoms above to search for medications")
-
+                    
+            else:
+                st.warning("❌ No medications found for these symptoms. Try different symptoms or be more specific.")
 
 # # =============================================
 # # DASHBOARD PAGE - COMPREHENSIVE VERSION
