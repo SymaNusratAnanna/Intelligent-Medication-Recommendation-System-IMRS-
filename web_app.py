@@ -740,7 +740,7 @@ if selected == "🏠 Dashboard":
                 #     </div>
                 # </div>  
 
-                      <div class="medicine-card-premium">
+                 <div class="medicine-card-premium">
                         <div style='display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;'>
                             <h2 style='margin: 0; color: white;'>💊 {medicine['name']}</h2>
                             <div style='background: rgba(255,255,255,0.2); padding: 0.5rem 1rem; border-radius: 20px;'>
@@ -748,10 +748,10 @@ if selected == "🏠 Dashboard":
                             </div>
                     </div>
         <div style='display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;'>
-        <div>
-            <strong>🎯 Primary Use:</strong><br>
-            <span style='opacity: 0.9;'>{medicine['primary_use']}</span>
-        </div>
+        # <div>
+        #     <strong>🎯 Primary Use:</strong><br>
+        #     <span style='opacity: 0.9;'>{medicine['primary_use']}</span>
+        # </div>
         <div>
             <strong>📊 Classification:</strong><br>
             <span style='opacity: 0.9;'>{medicine['drug_class']}</span>
