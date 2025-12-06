@@ -269,9 +269,9 @@ class MedicineRecommender:
             # 添加到用户添加的药物列表
             self.user_added_medicines.append(new_medicine)
             
-            # 也添加到主数据框（可选）
-            new_row = pd.DataFrame([new_medicine])
-            # self.medicines_df = pd.concat([self.medicines_df, new_row], ignore_index=True)
+            # # 也添加到主数据框（可选）
+            # new_row = pd.DataFrame([new_medicine])
+            self.medicines_df = pd.concat([self.medicines_df, new_row], ignore_index=True)
             
             return True, "✅ Medicine added successfully!"
             

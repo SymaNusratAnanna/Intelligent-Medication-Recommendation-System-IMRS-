@@ -392,9 +392,9 @@ if selected == "🏠 Dashboard":
             <span style='opacity: 0.9;'>{medicine_info['drug_class']}</span>
         </div>
         <div>
-                                <strong>💊 Formulation:</strong><br>
-                                <span style='opacity: 0.9;'>{medicine_info['dosage_form']}</span>
-                            </div>
+         <strong>💊 Formulation:</strong><br>
+        <span style='opacity: 0.9;'>{medicine_info['dosage_form']}</span>
+        </div>
                             <div>
                                 <strong>⏰ Duration:</strong><br>
                                 <span style='opacity: 0.9;'>{medicine_info['duration']}</span>
@@ -725,4 +725,61 @@ st.markdown("""
 # print(f"Add result: {success}, {message}")
 # print(f"Total medicines now: {recommender.get_total_medicines_count()}")
 
+# simple_web_test.py - EASY ONE-CLICK TEST
+def quick_web_test():
+    """Quick test to verify web-app is working"""
+    
+    print("🌐 QUICK WEB-APP TEST")
+    print("=" * 50)
+    
+    from medicine_recommender import MedicineRecommender
+    
+    try:
+        # Initialize
+        recommender = MedicineRecommender()
+        
+        print("1. Testing database connection...")
+        all_meds = recommender.get_all_medicines()
+        print(f"   ✅ Database loaded: {len(all_meds)} medicines")
+        
+        print("2. Testing symptom search...")
+        results = recommender.recommend_by_symptoms("fever headache")
+        print(f"   ✅ Search working: {len(results)} results found")
+        
+        print("3. Testing web data format...")
+        if results:
+            sample = results[0]
+            required = ['name', 'safety_rating', 'category', 'for_symptoms']
+            missing = [field for field in required if field not in sample]
+            
+            if not missing:
+                print("   ✅ Data format is web-ready")
+                print(f"   💊 Sample: {sample['name']} (⭐{sample['safety_rating']})")
+            else:
+                print(f"   ❌ Missing fields: {missing}")
+                return False
+        else:
+            print("   ❌ No results found")
+            return False
+        
+        print("4. Testing performance...")
+        import time
+        start = time.time()
+        recommender.recommend_by_symptoms("pain")
+        end = time.time()
+        response_time = (end - start) * 1000
+        
+        if response_time < 500:
+            print(f"   ✅ Performance good: {response_time:.1f}ms")
+        else:
+            print(f"   ⚠️ Performance slow: {response_time:.1f}ms")
+        
+        print("\n🎉 WEB-APP IS WORKING CORRECTLY! 🚀")
+        return True
+        
+    except Exception as e:
+        print(f"❌ ERROR: {str(e)}")
+        return False
 
+if __name__ == "__main__":
+    quick_web_test()
