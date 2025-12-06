@@ -281,7 +281,8 @@ class MedicineRecommender:
     def get_all_medicines_with_user_added(self):
         """Get all medicines including user-added ones"""
         base_medicines = self.medicines_df.to_dict('records')
-        return base_medicines + self.user_added_medicines
+        # return base_medicines + self.user_added_medicines
+        return base_medicines + self.medicines_df
     
     def search_medicine(self, medicine_name):
         """Search in both base and user-added medicines"""
