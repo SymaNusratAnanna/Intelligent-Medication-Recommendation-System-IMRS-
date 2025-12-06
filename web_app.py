@@ -737,7 +737,7 @@ if selected == "🏠 Dashboard":
                 st.progress(safety_percent / 100)
                 
                 # Expandable details
-                with st.expander("📋 Detailed Information", key=f"details_{i}"):
+                with st.expander("📋 Detailed Information", key=f"details"):
                     col1, col2 = st.columns(2)
                     with col1:
                         st.write("**💊 Medicine Details:**")
@@ -812,8 +812,8 @@ if selected == "🏠 Dashboard":
     
     # If no search performed yet
     # ✅ CORRECT: Change elif to if
-if not symptoms:
-    st.info("💡 Enter symptoms above to search for medications")
+# if not symptoms:
+#     st.info("💡 Enter symptoms above to search for medications")
         
 
 # =============================================
