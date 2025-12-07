@@ -328,7 +328,7 @@ selected = st.session_state.selected
 if selected == "🏠 Home":
     # Hero Section with Gradient Background
     st.markdown("""
-    <div style='background: linear-gradient(135deg, #667eea 0%, #772285 100%); 
+    <div style='background: linear-gradient(135deg, #667eea 0%, #37369E 100%); 
                 color: white; padding: 4rem 2rem; border-radius: 20px; 
                 margin: -1rem -1rem 2rem -1rem; text-align: center;'>
         <h1 style='color: white; font-size: 3rem; margin-bottom: 1rem;'>MediMatch Pro: Your AI Health Assistant</h1>
