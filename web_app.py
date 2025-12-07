@@ -12,6 +12,9 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
+
+
+
 # =============================================
 # ENHANCED MEDICINE DETAILS FUNCTION - MOVED TO TOP
 # =============================================
@@ -252,6 +255,7 @@ with st.sidebar:
     
     # Navigation options with beautiful buttons
     nav_options = [
+         {"icon": "🏠", "label": "Dashboard", "desc": "Welcome & system overview", "key": "home"},
         {"icon": "🏠", "label": "Dashboard", "desc": "Home & quick access", "key": "dashboard"},
         {"icon": "🔍", "label": "Symptom Analyzer", "desc": "AI-powered analysis", "key": "symptoms"},
        {"icon": "➕", "label": "Add Medicine", "desc": "Add new medicine to database", "key": "add_medicine"}, 
@@ -629,6 +633,90 @@ selected = st.session_state.selected
 #             else:
 #                 st.warning("❌ No medications found for these symptoms. Try different symptoms or be more specific.")
 
+
+# =============================================
+# HOME SECTION - COMPLETE IMPLEMENTATION
+# =============================================
+if selected == "🏠 Home":
+    # Hero Section with Gradient Background
+    st.markdown("""
+    <div style='background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
+                color: white; padding: 4rem 2rem; border-radius: 0 0 20px 20px; 
+                margin: -1rem -1rem 2rem -1rem; text-align: center;'>
+        <h1 style='color: white; font-size: 3.5rem; margin-bottom: 1rem;'>MediMatch Pro</h1>
+        <p style='font-size: 1.5rem; opacity: 0.9;'>AI-Powered Medication Recommendation System</p>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    # Key Features Section
+    st.markdown("## 🔍 Key Features")
+    col1, col2, col3 = st.columns(3)
+    
+    with col1:
+        st.markdown("""
+        <div style='background: rgba(255,255,255,0.1); padding: 1.5rem; border-radius: 15px;'>
+            <h3 style='color: #667eea;'>💊 Symptom Analysis</h3>
+            <p style='color: #666;'>Get personalized medicine recommendations based on your symptoms</p>
+        </div>
+        """, unsafe_allow_html=True)
+    
+    with col2:
+        st.markdown("""
+        <div style='background: rgba(255,255,255,0.1); padding: 1.5rem; border-radius: 15px;'>
+            <h3 style='color: #667eea;'>⭐ Safety Ratings</h3>
+            <p style='color: #666;'>Detailed safety profiles for all medications</p>
+        </div>
+        """, unsafe_allow_html=True)
+    
+    with col3:
+        st.markdown("""
+        <div style='background: rgba(255,255,255,0.1); padding: 1.5rem; border-radius: 15px;'>
+            <h3 style='color: #667eea;'>📊 Medicine Database</h3>
+            <p style='color: #666;'>Comprehensive database of medications</p>
+        </div>
+        """, unsafe_allow_html=True)
+    
+    # How It Works Section
+    st.markdown("---")
+    st.markdown("## 🛠️ How It Works")
+    
+    steps = [
+        ("1️⃣", "Describe Your Symptoms", "Enter symptoms like fever, headache, or pain"),
+        ("2️⃣", "AI Analysis", "Our system analyzes your symptoms"),
+        ("3️⃣", "Get Recommendations", "Receive personalized medicine suggestions"),
+        ("4️⃣", "Check Details", "View safety ratings and usage information")
+    ]
+    
+    for emoji, title, desc in steps:
+        st.markdown(f"""
+        <div style='display: flex; align-items: center; margin: 1rem 0;'>
+            <div style='font-size: 2rem; margin-right: 1rem; color: #667eea;'>{emoji}</div>
+            <div>
+                <h3 style='margin: 0; color: #333;'>{title}</h3>
+                <p style='margin: 0; color: #666;'>{desc}</p>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+    
+    # Call to Action Section
+    st.markdown("---")
+    st.markdown("## 🚀 Get Started")
+    st.markdown("""
+    <div style='text-align: center;'>
+        <p style='font-size: 1.2rem; color: #333;'>
+            Click the <strong style='color: #667eea;'>Dashboard</strong> in the sidebar to begin
+        </p>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    # Footer Section
+    st.markdown("---")
+    st.markdown("""
+    <div style='text-align: center; color: #666; padding: 2rem;'>
+        <p>© 2023 MediMatch Pro | Always consult healthcare professionals</p>
+    </div>
+    """, unsafe_allow_html=True)
+
 # =============================================
 # DASHBOARD PAGE - COMPREHENSIVE VERSION
 # =============================================
@@ -737,12 +825,12 @@ if selected == "🏠 Dashboard":
                             <strong>🤒 Precautions:</strong><br>
                             <span style='opacity: 0.9;'>{medicine['key_info']}</span>
                         </div>
-                      <div>
+                      
                         <div>
                             <strong>📊 Safety Rating:</strong><br>
                             <span style='opacity: 0.9;'>Excellent ({medicine['safety_rating']}/5.0)</span>
                         </div>
-                    </div>
+                    
                 </div>
                 """, unsafe_allow_html=True)
                 
