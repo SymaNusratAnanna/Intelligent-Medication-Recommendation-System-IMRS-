@@ -967,7 +967,7 @@ if selected == "🏠 Dashboard":
 
 
 elif selected == "🔍 Symptom Analyzer":
-    # Page header with improved styling
+    # Page header with gradient background
     st.markdown("""
     <div style='background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
                 color: white; padding: 2rem; border-radius: 15px; margin: -1rem -1rem 2rem -1rem;'>
@@ -1097,6 +1097,7 @@ elif selected == "🔍 Symptom Analyzer":
     
     elif not user_symptoms and search_btn:
         st.warning("⚠️ Please enter some symptoms to search")
+
 
 # =============================================
 # MEDICINE DATABASE PAGE
