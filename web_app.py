@@ -6,7 +6,7 @@ from medicine_recommender import MedicineRecommender
 
 # Page configuration
 st.set_page_config(
-    page_title="MediMatch Pro - AI Medicine Advisor",
+    page_title="MediGuide Pro - Automated Medication Recommendation System",
     page_icon="💊",
     layout="wide",
     initial_sidebar_state="expanded"
@@ -225,7 +225,7 @@ recommender = load_recommender()
 st.markdown("""
 <div style='text-align: center; padding: 3rem 0; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
             border-radius: 0 0 50px 50px; margin: -2rem -2rem 2rem -2rem; color: white;'>
-    <h1 class="main-header floating">💊 MediMatch Pro</h1>
+    <h1 class="main-header floating">💊 MediGuide Pro</h1>
     <h3 style='color: white; opacity: 0.9; margin-top: 0;'>AI-Powered Medicine Recommendation System</h3>
 </div>
 """, unsafe_allow_html=True)
@@ -241,7 +241,7 @@ with st.sidebar:
                 color: white; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.2);
                 border: 1px solid rgba(255,255,255,0.2);'>
         <div style='font-size: 3rem; margin-bottom: 1rem;' class="floating">💊</div>
-        <h2 style='color: white; margin: 0; font-weight: 700;'>MediMatch Pro</h2>
+        <h2 style='color: white; margin: 0; font-weight: 700;'>MediGuide Pro</h2>
         <p style='margin: 0.5rem 0 0 0; opacity: 0.9; font-size: 1.1rem;'>Medical Navigator</p>
     </div>
     """, unsafe_allow_html=True)
@@ -331,7 +331,7 @@ if selected == "🏠 Home":
     <div style='background: linear-gradient(135deg, #667eea 0%, #37369E 100%); 
                 color: white; padding: 4rem 2rem; border-radius: 20px; 
                 margin: -1rem -1rem 2rem -1rem; text-align: center;'>
-        <h1 style='color: white; font-size: 3rem; margin-bottom: 1rem;'>MediMatch Pro: Your AI Health Assistant</h1>
+        <h1 style='color: white; font-size: 3rem; margin-bottom: 1rem;'>MediGuide Pro: Automated Medication Recommendation System</h1>
         <p style='font-size: 1.5rem; opacity: 0.9;'>Tell us what you feel, get personalized medicine recommendations
 AI-powered analysis with safety ratings in seconds</p>
     </div>
@@ -345,7 +345,7 @@ AI-powered analysis with safety ratings in seconds</p>
         st.markdown("""
         <div style='background:linear-gradient(135deg, #667eea 0%, #2EB6E8 100%); padding: 1.5rem; border-radius: 15px;'>
             <h3 style='color: #1B4582;'>💊 Symptom Analysis</h3>
-            <p style='color: white;'>Describe your symptoms in simple terms and get AI-powered medication recommendations. Our system analyzes your symptoms against a comprehensive database of medicines, providing personalized suggestions with detailed safety ratings and usage information.</p>
+            <p style='color: white;'>Describe your symptoms in simple terms and get  medication recommendations. Our system analyzes your symptoms against a comprehensive database of medicines, providing personalized suggestions with detailed safety ratings and usage information.</p>
         </div>
         """, unsafe_allow_html=True)
     
@@ -402,7 +402,7 @@ AI-powered analysis with safety ratings in seconds</p>
     st.markdown("---")
     st.markdown("""
     <div style='text-align: center; color: #666; padding: 2rem;'>
-        <p>© MediMatch Pro develoved by Ananna Syma Nusrat | Always consult healthcare professionals</p>
+        <p>© MediGuide Pro develoved by Ananna Syma Nusrat | Always consult healthcare professionals</p>
     </div>
     """, unsafe_allow_html=True)
 
@@ -410,7 +410,7 @@ AI-powered analysis with safety ratings in seconds</p>
 # DASHBOARD PAGE - COMPREHENSIVE VERSION
 # =============================================
 if selected == "🏠 Dashboard":
-    st.title("🧪 MediMatch Pro - Dashboard")
+    st.title("🧪 MediGuide Pro - Dashboard")
     st.markdown("---")
     
     # Initialize recommender
@@ -856,7 +856,7 @@ elif selected == "📈 Analytics":
     st.markdown("""
     <div class="glass-card">
         <h1 style='color: #667eea; text-align: center;'>📈 Advanced Analytics</h1>
-        <p style='text-align: center; color: F5F527;'>Comprehensive analytics and insights from our medicine database</p>
+        <p style='text-align: center; color: white;'>Comprehensive analytics and insights from our medicine database</p>
     </div>
     """, unsafe_allow_html=True)
     
@@ -893,7 +893,7 @@ elif selected == "ℹ️ About":
           
 <div>
             <p style='font-size: 1.2rem; line-height: 1.6; color: #cccccc;'>
-            <strong style='color: #fff;'>MediMatch Pro</strong> is a pioneering application born from advanced research at the intersection of artificial intelligence and healthcare. Developed as part of a comprehensive Master’s project, it showcases how AI can enhance clinical decision support by analyzing complex medical data and offering intelligent insights to assist healthcare professionals. The app embodies innovation, academic rigor, and a vision for the future of medicine—where technology empowers clinicians to make faster, more accurate, and patient centered decisions.
+            <strong style='color: #fff;'>MediGuide Pro</strong> is a pioneering application born from advanced research at the intersection of artificial intelligence and healthcare. Developed as part of a comprehensive Master’s project, it showcases how AI can enhance clinical decision support by analyzing complex medical data and offering intelligent insights to assist healthcare professionals. The app embodies innovation, academic rigor, and a vision for the future of medicine—where technology empowers clinicians to make faster, more accurate, and patient centered decisions.
 
            
         
@@ -902,7 +902,7 @@ elif selected == "ℹ️ About":
 st.markdown("""
 <div style='text-align: center; padding: 3rem; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
             color: white; border-radius: 20px; margin: 2rem 0;'>
-    <h3 style='color: white; margin-bottom: 1rem;'>💊 MediMatch Pro</h3>
+    <h3 style='color: white; margin-bottom: 1rem;'>💊 MediGuide Pro</h3>
     <p style='opacity: 0.9; margin-bottom: 0.5rem;'>Advanced AI Medicine Recommendation System</p>
     <p style='opacity: 0.7; margin: 0;'>🎓 Master's Research Project | 🔬 Medical Informatics | ⚕️ Always Consult Professionals</p>
 </div>
