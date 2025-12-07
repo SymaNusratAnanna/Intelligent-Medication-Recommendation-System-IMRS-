@@ -819,7 +819,6 @@ if selected == "🏠 Dashboard":
                             <strong>🤒 Precautions:</strong><br>
                             <span style='opacity: 0.9;'>{medicine['key_info']}</span>
                         </div>
-                      
                         <div>
                             <strong>📊 Safety Rating:</strong><br>
                             <span style='opacity: 0.9;'>Excellent ({medicine['safety_rating']}/5.0)</span>
@@ -1891,17 +1890,3 @@ if __name__ == "__main__":
 #     test_dashboard_feature()
 
 
-if search_btn and symptoms:
-    results = recommender.recommend_by_symptoms(symptoms)
-    
-    # DEBUG: See what's actually happening
-    st.write(f"🔍 DEBUG: results = {results}")
-    st.write(f"🔍 DEBUG: len(results) = {len(results) if results else 0}")
-    st.write(f"🔍 DEBUG: results is None = {results is None}")
-    st.write(f"🔍 DEBUG: results == [] = {results == []}")
-    
-    if results and len(results) > 0:
-        st.success(f"✅ Found {len(results)} results!")
-        # ... show results ...
-    else:
-        st.error("❌ No results found")
