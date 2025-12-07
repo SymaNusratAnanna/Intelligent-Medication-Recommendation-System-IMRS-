@@ -785,15 +785,9 @@ if selected == "🏠 Dashboard":
         
         if results:
             # st.success(f"✅ Found {len(results)} medications for: **'{symptoms}'**") 
-              st.success(f"✅ Found {len(results)} relevant medications!")
-            
-
-            # Display medicine cards
-        for medicine in results:
-                    # Get enhanced medicine information
-                     # for i, medicine in enumerate(results):
-            #     # Create enhanced medicine card
-            #     st.markdown(f"""
+            st.success(f"✅ Found {(results)} relevant medications!")
+            for medicine in results:
+                 
                     medicine_info = get_medicine_details(medicine)
                     
                     st.markdown(f"""
@@ -832,42 +826,9 @@ if selected == "🏠 Dashboard":
                         </div>
                     
                 </div>
+                </div>
                 """, unsafe_allow_html=True)
                 
-        #         # Progress bar for safety rating
-        # safety_percent = (medicine['safety_rating'] / 5.0) * 100
-        # st.progress(safety_percent / 100)
-                
-                # Expandable details
-        # with st.expander("📋 Detailed Information", key=f"details"):
-        #             col1, col2 = st.columns(2)
-        #             with col1:
-        #                 st.write("**💊 Medicine Details:**")
-        #                 st.write(f"- **Name:** {medicine['name']}")
-        #                 st.write(f"- **Category:** {medicine['category']}")
-        #                 st.write(f"- **Safety Rating:** ⭐{medicine['safety_rating']}/5.0")
-        #                 st.write(f"- **Price Category:** {medicine['price_category']}")
-                    
-        #             with col2:
-        #                 st.write("**🎯 Usage Information:**")
-        #                 st.write(f"- **Symptoms Treated:** {medicine['for_symptoms']}")
-        #                 st.write(f"- **Match Strength:** Excellent")
-        #                 st.write(f"- **Recommendation:** High safety profile")
-                
-        # st.markdown("---")
-            
-        #     # Summary statistics
-        # st.subheader("📈 Recommendation Summary")
-        # col1, col2, col3 = st.columns(3)
-        #  with col1:
-        #         st.metric("Total Results", len(results))
-        # with col2:
-        #         avg_safety = sum(med['safety_rating'] for med in results) / len(results)
-        #         st.metric("Average Safety", f"{avg_safety:.1f}/5.0")
-        # with col3:
-        #         high_safety = len([med for med in results if med['safety_rating'] >= 4.0])
-        #         st.metric("High Safety", high_safety)
-        
         else:
             st.error(f"❌ No medications found for: '{symptoms}'")
             st.info("💡 Try these symptoms: fever, headache, pain, allergy, infection")
@@ -1623,9 +1584,9 @@ if selected == "➕ Add Medicine":
                     st.success(message)
                     st.balloons()
                     
-                   # Show updated count
-                    total_medicines = recommender.get_total_medicines_count()
-                    st.info(f"📊📊 Total medicines in database: {total_medicines}")
+                #    # Show updated count
+                #     total_medicines = recommender.get_total_medicines_count()
+                #     st.info(f"📊📊 Total medicines in database: {total_medicines}")
                     
                     # Show user-added count
                     user_added_count = recommender.get_user_added_medicines_count()
@@ -1928,3 +1889,19 @@ if __name__ == "__main__":
 
 # if __name__ == "__main__":
 #     test_dashboard_feature()
+
+
+if search_btn and symptoms:
+    results = recommender.recommend_by_symptoms(symptoms)
+    
+    # DEBUG: See what's actually happening
+    st.write(f"🔍 DEBUG: results = {results}")
+    st.write(f"🔍 DEBUG: len(results) = {len(results) if results else 0}")
+    st.write(f"🔍 DEBUG: results is None = {results is None}")
+    st.write(f"🔍 DEBUG: results == [] = {results == []}")
+    
+    if results and len(results) > 0:
+        st.success(f"✅ Found {len(results)} results!")
+        # ... show results ...
+    else:
+        st.error("❌ No results found")
