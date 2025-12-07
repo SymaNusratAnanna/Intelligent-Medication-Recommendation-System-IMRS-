@@ -783,9 +783,14 @@ if selected == "🏠 Dashboard":
         with st.spinner("🔍 AI is analyzing your symptoms..."):
             results = recommender.recommend_by_symptoms(symptoms)
         
-        if results:
-            # st.success(f"✅ Found {len(results)} medications for: **'{symptoms}'**") 
-            st.success(f"✅ Found {(results)} relevant medications!")
+        # if results:
+        #     # st.success(f"✅ Found {len(results)} medications for: **'{symptoms}'**") 
+
+        #     st.success(f"✅ Found {(results)} relevant medications!")
+
+        if results and len(results) > 0:
+            st.success(f"✅ Found {len(results)} relevant medications!")
+            
             for medicine in results:
                  
                     medicine_info = get_medicine_details(medicine)
