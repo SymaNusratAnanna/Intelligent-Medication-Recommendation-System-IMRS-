@@ -380,7 +380,7 @@ if selected == "🏠 Home":
         <div style='display: flex; align-items: center; margin: 1rem 0;'>
             <div style='font-size: 2rem; margin-right: 1rem; color: #667eea;'>{emoji}</div>
             <div>
-                <h3 style='margin: 0; color: #333;'>{title}</h3>
+                <h3 style='margin: 0; color: #667eea;'>{title}</h3>
                 <p style='margin: 0; color: white;'>{desc}</p>
             </div>
         </div>
