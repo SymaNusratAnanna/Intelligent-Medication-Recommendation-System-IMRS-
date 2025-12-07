@@ -735,10 +735,14 @@ if selected == "🏠 Dashboard":
     # Real-time Statistics
     st.subheader("📊 Live Database Statistics")
     all_medicines = recommender.get_all_medicines()
+    if all_medicines:
+        df = pd.DataFrame(all_medicines)
+        
     
     col1, col2, col3, col4 = st.columns(4)
     with col1:
-        st.metric("💊 Total Medicines", len(all_medicines))
+        # st.metric("💊 Total Medicines", len(all_medicines))
+          st.metric("Total Medicines", len(df))
     with col2:
         avg_safety = sum(med.get('safety_rating', 0) for med in all_medicines) / len(all_medicines) if all_medicines else 0
         st.metric("⭐ Avg Safety", f"{avg_safety:.1f}/5.0")
