@@ -391,7 +391,7 @@ if selected == "🏠 Home":
     st.markdown("## 🚀 Get Started")
     st.markdown("""
     <div style='text-align: center;'>
-        <p style='font-size: 1.2rem; color: #333;'>
+        <p style='font-size: 1.5rem; color: #333;'>
             Click the <strong style='color: #667eea;'>Dashboard</strong> in the sidebar to begin
         </p>
     </div>
@@ -401,7 +401,7 @@ if selected == "🏠 Home":
     st.markdown("---")
     st.markdown("""
     <div style='text-align: center; color: #666; padding: 2rem;'>
-        <p>© 2023 MediMatch Pro | Always consult healthcare professionals</p>
+        <p>© MediMatch Pro develoved by Ananna Syma Nusrat | Always consult healthcare professionals</p>
     </div>
     """, unsafe_allow_html=True)
 
