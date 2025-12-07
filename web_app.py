@@ -255,7 +255,7 @@ with st.sidebar:
     
     # Navigation options with beautiful buttons
     nav_options = [
-         {"icon": "🏠", "label": "Dashboard", "desc": "Welcome & system overview", "key": "home"},
+         {"icon": "🏠", "label": "Home", "desc": "Welcome & system overview", "key": "home"},
         {"icon": "🏠", "label": "Dashboard", "desc": "Home & quick access", "key": "dashboard"},
         {"icon": "🔍", "label": "Symptom Analyzer", "desc": "AI-powered analysis", "key": "symptoms"},
        {"icon": "➕", "label": "Add Medicine", "desc": "Add new medicine to database", "key": "add_medicine"}, 
