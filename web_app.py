@@ -471,9 +471,9 @@ if selected == "🏠 Dashboard":
     # Search and display results
     if search_btn and symptoms:
         st.markdown("---")
-        st.subheader("💊 AI Recommendations")
+        st.subheader("💊 Recommendations")
         
-        with st.spinner("🔍 AI is analyzing your symptoms..."):
+        with st.spinner("🔍 Analyzing your symptoms..."):
             results = recommender.recommend_by_symptoms(symptoms)
         
         # if results:
@@ -580,7 +580,7 @@ elif selected == "🔍 Symptom Analyzer":
     st.markdown("""
     <div style='background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
                 color: white; padding: 2rem; border-radius: 15px; margin: -1rem -1rem 2rem -1rem;'>
-        <h1 style='color: white; text-align: center; margin-bottom: 0;'>🔍 AI Symptom Analyzer</h1>
+        <h1 style='color: white; text-align: center; margin-bottom: 0;'>🔍  Symptom Analyzer</h1>
         <p style='text-align: center; opacity: 0.9; font-size: 1.2rem;'>Get personalized medicine recommendations</p>
     </div>
     """, unsafe_allow_html=True)
@@ -631,7 +631,7 @@ elif selected == "🔍 Symptom Analyzer":
         st.markdown("---")
         st.subheader(f"🔍 Searching for: **'{user_symptoms}'**")
         
-        with st.spinner("🤖 AI is analyzing your symptoms..."):
+        with st.spinner("🤖 Analyzing your symptoms..."):
             # Get results from database
             results = recommender.recommend_by_symptoms(user_symptoms)
         
@@ -903,7 +903,7 @@ st.markdown("""
 <div style='text-align: center; padding: 3rem; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
             color: white; border-radius: 20px; margin: 2rem 0;'>
     <h3 style='color: white; margin-bottom: 1rem;'>💊 MediGuide Pro</h3>
-    <p style='opacity: 0.9; margin-bottom: 0.5rem;'>Advanced AI Medicine Recommendation System</p>
+    <p style='opacity: 0.9; margin-bottom: 0.5rem;'>Automated  Medication Recommendation System</p>
     <p style='opacity: 0.7; margin: 0;'>🎓 Master's Research Project | 🔬 Medical Informatics | ⚕️ Always Consult Professionals</p>
 </div>
 """, unsafe_allow_html=True)
