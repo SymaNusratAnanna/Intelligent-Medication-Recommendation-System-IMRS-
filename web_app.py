@@ -329,9 +329,9 @@ if selected == "🏠 Home":
     # Hero Section with Gradient Background
     st.markdown("""
     <div style='background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
-                color: white; padding: 4rem 2rem; border-radius: 0 0 20px 20px; 
+                color: white; padding: 4rem 2rem; border-radius: 20px; 
                 margin: -1rem -1rem 2rem -1rem; text-align: center;'>
-        <h1 style='color: white; font-size: 3.5rem; margin-bottom: 1rem;'>MediMatch Pro: Your AI Health Assistant</h1>
+        <h1 style='color: white; font-size: 3rem; margin-bottom: 1rem;'>MediMatch Pro: Your AI Health Assistant</h1>
         <p style='font-size: 1.5rem; opacity: 0.9;'>Tell us what you feel, get personalized medicine recommendations
 AI-powered analysis with safety ratings in seconds</p>
     </div>
