@@ -226,7 +226,7 @@ st.markdown("""
 <div style='text-align: center; padding: 3rem 0; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
             border-radius: 0 0 50px 50px; margin: -2rem -2rem 2rem -2rem; color: white;'>
     <h1 class="main-header floating">💊 MediGuide Pro</h1>
-    <h3 style='color: white; opacity: 0.9; margin-top: 0;'>AI-Powered Medicine Recommendation System</h3>
+    <h3 style='color: white; opacity: 0.9; margin-top: 0;'>Automated Medication Recommendation System</h3>
 </div>
 """, unsafe_allow_html=True)
 
