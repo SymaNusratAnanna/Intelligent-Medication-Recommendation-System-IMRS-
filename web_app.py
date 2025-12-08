@@ -462,47 +462,7 @@ if selected == "🔍 Symptom Analyzer":
         st.metric("🔬 Categories", categories)
     with col4:
         st.metric("⚡ Response Time", "<1s")
-        
-        # # Enhanced metrics
-        # st.markdown ("📊 Live Database Statistics")
-        # col1, col2, col3, col4 = st.columns(4)
-        # with col1:
-        #     st.metric("💊 Total Medicines", len(df))
-        # with col2:
-        #  avg_safety = sum(med.get('safety_rating', 0) for med in all_medicines) / len(all_medicines) if all_medicines else 0
-        # st.metric("⭐ Avg Safety", f"{avg_safety:.1f}/5.0")
-        # with col3:
-        #  categories = len(set(med.get('category', '') for med in all_medicines))
-        # st.metric("🔬 Categories", categories)
-        # with col4:
-        #  st.metric("⚡ Response Time", "<1s")
-    # # Initialize recommender
-    # try:
-    #     recommender = MedicineRecommender()
-    #     st.success("✅ Medicine database loaded successfully")
-    # except Exception as e:
-    #     st.error(f"❌ Failed to initialize: {str(e)}")
-    #     st.stop()
     
-    # # Real-time Statistics
-    # st.subheader("📊 Live Database Statistics")
-    # all_medicines = recommender.get_all_medicines()
-    # if all_medicines:
-    #     df = pd.DataFrame(all_medicines)
-        
-    
-    # col1, col2, col3, col4 = st.columns(4)
-    # with col1:
-    #     # st.metric("💊 Total Medicines", len(all_medicines))
-    #       st.metric("Total Medicines", len(df))
-    # with col2:
-    #     avg_safety = sum(med.get('safety_rating', 0) for med in all_medicines) / len(all_medicines) if all_medicines else 0
-    #     st.metric("⭐ Avg Safety", f"{avg_safety:.1f}/5.0")
-    # with col3:
-    #     categories = len(set(med.get('category', '') for med in all_medicines))
-    #     st.metric("🔬 Categories", categories)
-    # with col4:
-    #     st.metric("⚡ Response Time", "<1s")
     
     # Symptom Analysis Section
     st.markdown("---")
@@ -593,45 +553,26 @@ if selected == "🔍 Symptom Analyzer":
             st.error(f"❌ No medications found for: '{symptoms}'")
             st.info("💡 Try these symptoms: fever, headache, pain, allergy, infection")
     
-    # Performance Testing Section (Collapsible)
-    with st.expander("🧪 Advanced Testing Tools"):
-        st.subheader("🔧 Performance & Validation Tests")
-        
-        # Quick performance test
-        if st.button("⏱️ Run Quick Performance Test"):
-            import time
-            
-            test_cases = ["fever", "headache", "pain", "allergy"]
-            st.write("**Performance Results:**")
-            
-            for symptoms in test_cases:
-                start_time = time.time()
-                results = recommender.recommend_by_symptoms(symptoms)
-                end_time = time.time()
-                response_time = (end_time - start_time) * 1000
-                
-                status = "✅" if response_time < 100 else "⚠️"
-                st.write(f"{status} '{symptoms}': {len(results)} results in {response_time:.1f}ms")
-        
+
         # Data validation test
-        if st.button("🔍 Validate Data Structure"):
-            results = recommender.recommend_by_symptoms("fever")
+        # if st.button("🔍 Validate Data Structure"):
+        #     results = recommender.recommend_by_symptoms("fever")
             
-            if results:
-                sample_med = results[0]
-                required_fields = ['name', 'for_symptoms', 'category', 'safety_rating', 'price_category']
-                missing_fields = []
+        #     if results:
+        #         sample_med = results[0]
+        #         required_fields = ['name', 'for_symptoms', 'category', 'safety_rating', 'price_category']
+        #         missing_fields = []
                 
-                for field in required_fields:
-                    if field not in sample_med:
-                        missing_fields.append(field)
+        #         for field in required_fields:
+        #             if field not in sample_med:
+        #                 missing_fields.append(field)
                 
-                if missing_fields:
-                    st.error(f"❌ Missing fields: {missing_fields}")
-                else:
-                    st.success("✅ All required fields present")
-            else:
-                st.error("❌ No results to validate")
+        #         if missing_fields:
+        #             st.error(f"❌ Missing fields: {missing_fields}")
+        #         else:
+        #             st.success("✅ All required fields present")
+        #     else:
+        #         st.error("❌ No results to validate")
     
            
 # # =============================================
