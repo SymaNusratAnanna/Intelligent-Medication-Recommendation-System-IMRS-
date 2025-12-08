@@ -440,6 +440,26 @@ analysis with safety ratings in seconds</h1>
 if selected == "🔍 Symptom Analyzer":
     st.title("🧪 MediGuide Pro - 🔍 Symptom Analyzer")
     st.markdown("---")
+
+     # Search and analytics
+    col1, col2, col3 = st.columns([2, 1, 1])
+    
+    all_medicines = recommender.get_all_medicines()
+    
+    if all_medicines:
+        df = pd.DataFrame(all_medicines)
+        
+        # Enhanced metrics
+        st.markdown("### 📈 Database Analytics")
+        col1, col2, col3, col4 = st.columns(4)
+        with col1:
+            st.metric("Total Medicines", len(df))
+        with col2:
+            st.metric("Avg Safety", f"{df['safety_rating'].mean():.1f}/5.0")
+        with col3:
+            st.metric("Categories", df['category'].nunique())
+        with col4:
+            st.metric("High Safety", len(df[df['safety_rating'] >= 4.0]))
     
     # # Initialize recommender
     # try:
