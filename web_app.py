@@ -442,7 +442,7 @@ if selected == "🔍 Symptom Analyzer":
     st.markdown("---")
 
      # Search and analytics
-    
+    st.subheader("📊 Live Database Statistics")
     all_medicines = recommender.get_all_medicines()
     
     if all_medicines:
