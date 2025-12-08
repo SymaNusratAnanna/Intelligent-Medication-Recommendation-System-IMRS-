@@ -365,7 +365,7 @@ analysis with safety ratings in seconds</h1>
         </div>
         """, unsafe_allow_html=True)
 
-
+    st.markdown("  ")
     
     col1, col2, col3 = st.columns(3)
     
