@@ -369,17 +369,14 @@ analysis with safety ratings in seconds</h1>
     
     col1, col2, col3 = st.columns(3)
 
-
-    
     with col1:
         st.markdown("""
-        # <div style='width: 300px; height: 250px; background: linear-gradient(135deg, #667eea 0%, #2EB6E8 100%); padding: 2rem; border-radius: 15px;'>
-        #     <h3 style='color: #1B4582;'>💊 Personalized Analyzer</h3>
-        #     <p style='color: white;'>Get personalized medicine matches with advanced filters for safety, price, and specific symptoms.</p>
-        # </div> 
+        <div style='width: 300px; height: 250px; background: linear-gradient(135deg, #667eea 0%, #2EB6E8 100%); padding: 2rem; border-radius: 15px;'>
+            <h3 style='color: #1B4582;'>💊 Personalized Analyzer</h3>
+            <p style='color: white;'>Get personalized medicine matches with advanced filters for safety, price, and specific symptoms.</p>
+        </div> 
                     
                       """, unsafe_allow_html=True)
-    
     with col2:
         st.markdown("""
         <div style='width: 300px; height: 250px; background:linear-gradient(135deg, #667eea 0%, #2EB6E8 100%); padding: 2rem; border-radius: 15px;'>
