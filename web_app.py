@@ -900,7 +900,7 @@ elif selected == "ℹ️ About":
                 padding: 3rem 2rem; border-radius: 20px; margin: 2rem 0; 
                 border: 1px solid #333; color: white;'>
         <div style='text-align: center; margin-bottom: 3rem;'>
-            <h1 style='color: #667eea; font-size: 2.5rem; margin-bottom: 0.5rem;'>🎓 Master's Research Project</h1>
+            <h1 style='color: #667eea; font-size: 2.5rem; margin-bottom: 0.5rem;'>🎓 Master's Python Project</h1>
             <h2 style='color: #667eea; font-size: 2rem; margin-top: 0;'>Automated Medication Recommendation System</h2>
         </div>
         
