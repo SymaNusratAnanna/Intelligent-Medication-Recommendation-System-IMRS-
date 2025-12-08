@@ -365,7 +365,7 @@ analysis with safety ratings in seconds</h1>
         </div>
         """, unsafe_allow_html=True)
 
-    st.markdown("  ")
+    st.markdown("    ")
     
     col1, col2, col3 = st.columns(3)
     
@@ -380,16 +380,16 @@ analysis with safety ratings in seconds</h1>
     with col2:
         st.markdown("""
         <div style='background:linear-gradient(135deg, #667eea 0%, #2EB6E8 100%); padding: 2rem; border-radius: 15px;'>
-            <h3 style='color: #1B4582;'>⭐ Safety Ratings</h3>
-            <p style='color: white;'>Every medication in our database comes with a 1-5 star safety rating based on clinical data and user feedback. Higher ratings indicate better safety profiles and fewer side effects, helping you make informed decisions about your healthcare.</p>
+            <h3 style='color: #1B4582;'>📈 Analytics</h3>
+            <p style='color: white;'>The Analytics feature offers deep insights into our medication database through interactive visualizations that display category distributions, safety ratings, and performance metrics. This tool enables data-driven decision making by providing real-time analytics and trend analysis for healthcare professionals and researchers.</p>
         </div>
         """, unsafe_allow_html=True)
     
     with col3:
         st.markdown("""
         <div style='background: linear-gradient(135deg, #667eea 0%, #2EB6E8 100%); padding: 2rem; border-radius: 15px;'>
-            <h3 style='color: #1B4582;'>📊 Medicine Database</h3>
-            <p style='color: white;'>Comprehensive database of medications</p>
+            <h3 style='color: #1B4582;'>"ℹ️ About</h3>
+            <p style='color: white;'>**About Section:** Discover the vision and research objectives behind MediGuide Pro, including our mission to improve medication safety through technology and education.</p>
         </div>
         """, unsafe_allow_html=True)
     
