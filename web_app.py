@@ -437,7 +437,7 @@ analysis with safety ratings in seconds</h1>
 # =============================================
 # DASHBOARD PAGE - COMPREHENSIVE VERSION
 # =============================================
-if selected == "🏠 Dashboard":
+if selected == "🔍 Symptom Analyzer":
     st.title("🧪 MediGuide Pro - Dashboard")
     st.markdown("---")
     
@@ -603,7 +603,7 @@ if selected == "🏠 Dashboard":
 # # SYMPTOM ANALYZER PAGE
 # # =============================================
 
-elif selected == "🔍 Symptom Analyzer":
+elif selected == "💊 Personalized Analyzer":
     # Page header with gradient background
     st.markdown("""
     <div style='background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
