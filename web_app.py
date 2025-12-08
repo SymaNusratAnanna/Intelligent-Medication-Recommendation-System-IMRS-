@@ -256,8 +256,8 @@ with st.sidebar:
     # Navigation options with beautiful buttons
     nav_options = [
          {"icon": "🏠", "label": "Home", "desc": "Welcome & system overview", "key": "home"},
-        {"icon": "🏠", "label": "Dashboard", "desc": "Home & quick access", "key": "dashboard"},
-        {"icon": "💊", "label": "Persinalized Analyzer", "desc": "AI-powered analysis", "key": "symptoms"},
+        {"icon": "🔍", "label": "Symptom Analyzer", "desc": "Home & quick access", "key": "dashboard"},
+        {"icon": "💊", "label": "Personalized Analyzer", "desc": "AI-powered analysis", "key": "symptoms"},
        {"icon": "➕", "label": "Add Medicine", "desc": "Add new medicine to database", "key": "add_medicine"}, 
         {"icon": "📊", "label": "Medicine Database", "desc": "Complete library", "key": "database"},
         {"icon": "📈", "label": "Analytics", "desc": "Statistics & insights", "key": "analytics"},
@@ -437,8 +437,8 @@ analysis with safety ratings in seconds</h1>
 # =============================================
 # DASHBOARD PAGE - COMPREHENSIVE VERSION
 # =============================================
-if selected == "🏠 Dashboard":
-    st.title("🧪 MediGuide Pro - Dashboard")
+if selected == "🔍 Symptom Analyzer":
+    st.title("🧪 MediGuide Pro - 🔍 Symptom Analyzer")
     st.markdown("---")
     
     # Initialize recommender
@@ -603,12 +603,12 @@ if selected == "🏠 Dashboard":
 # # SYMPTOM ANALYZER PAGE
 # # =============================================
 
-elif selected == "💊 Persinalized Analyzer":
+elif selected == "💊 Personalized Analyzer":
     # Page header with gradient background
     st.markdown("""
     <div style='background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
                 color: white; padding: 2rem; border-radius: 15px; margin: -1rem -1rem 2rem -1rem;'>
-        <h1 style='color: white; text-align: center; margin-bottom: 0;'>💊 Persinalized Analyzer</h1>
+        <h1 style='color: white; text-align: center; margin-bottom: 0;'>💊 Personalized Analyzer</h1>
         <p style='text-align: center; opacity: 0.9; font-size: 1.2rem;'>Get personalized medicine recommendations</p>
     </div>
     """, unsafe_allow_html=True)
