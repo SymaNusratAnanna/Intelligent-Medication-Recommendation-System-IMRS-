@@ -343,7 +343,7 @@ analysis with safety ratings in seconds</h1>
     
     with col1:
         st.markdown("""
-        <div style='background:linear-gradient(135deg, #667eea 0%, #2EB6E8 100%); padding: 2rem; border-radius: 15px;'>
+        <div style='width: 300px; height: 200px; background:linear-gradient(135deg, #667eea 0%, #2EB6E8 100%); padding: 2rem; border-radius: 15px;'>
             <h3 style='color: #1B4582;'>💊 Symptom Analysis</h3>
             <p style='color: white;'>Describe your symptoms in simple terms and get  medication recommendations. Our system analyzes your symptoms against a comprehensive database of medicines, providing personalized suggestions with detailed safety ratings and usage information.</p>
         </div>
@@ -388,8 +388,8 @@ analysis with safety ratings in seconds</h1>
     with col3:
         st.markdown("""
         <div style='background: linear-gradient(135deg, #667eea 0%, #2EB6E8 100%); padding: 2rem; border-radius: 15px;'>
-            <h3 style='color: #1B4582;'>"ℹ️ About</h3>
-            <p style='color: white;'>**About Section:** Discover the vision and research objectives behind MediGuide Pro, including our mission to improve medication safety through technology and education.</p>
+            <h3 style='color: #1B4582;'>ℹ️ About</h3>
+            <p style='color: white;'>Discover the vision and research objectives behind MediGuide Pro, including our mission to improve medication safety through technology and education.</p>
         </div>
         """, unsafe_allow_html=True)
     
