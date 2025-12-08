@@ -736,8 +736,8 @@ elif selected == "📊 Medicine Database":
     
     # Search and analytics
     col1, col2, col3 = st.columns([2, 1, 1])
-    with col1:
-        search_term = st.text_input("🔍 Search medicines:", placeholder="Search by name, category, or symptoms...")
+    # with col1:
+    #     search_term = st.text_input("🔍 Search medicines:", placeholder="Search by name, category, or symptoms...")
     
     all_medicines = recommender.get_all_medicines()
     
