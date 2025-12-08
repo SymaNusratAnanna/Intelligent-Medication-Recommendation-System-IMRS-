@@ -331,14 +331,40 @@ if selected == "🏠 Home":
     <div style='background: linear-gradient(135deg, #667eea 0%, #37369E 100%); 
                 color: white; padding: 4rem 2rem; border-radius: 20px; 
                 margin: -1rem -1rem 2rem -1rem; text-align: center;'>
-        <h1 style='color: white; font-size: 2.5rem; margin-bottom: 1rem;'>MediGuide Pro: Automated Medication Recommendation System</h1>
-        <p style='font-size: 1.5rem; opacity: 0.9;'>Tell us what you feel, get personalized medicine recommendations
-analysis with safety ratings in seconds</p>
+        <h1 style='color: white; font-size: 2rem; margin-bottom: 1rem;'>Tell us what you feel, get personalized medicine recommendations
+analysis with safety ratings in seconds</h1>
+        <p style='font-size: 1.5rem; opacity: 0.9;'></p>
     </div>
     """, unsafe_allow_html=True)
     
     # Key Features Section
     st.markdown("## 🔍 Key Features")
+    col1, col2, col3 = st.columns(3)
+    
+    with col1:
+        st.markdown("""
+        <div style='background:linear-gradient(135deg, #667eea 0%, #2EB6E8 100%); padding: 1.5rem; border-radius: 15px;'>
+            <h3 style='color: #1B4582;'>💊 Symptom Analysis</h3>
+            <p style='color: white;'>Describe your symptoms in simple terms and get  medication recommendations. Our system analyzes your symptoms against a comprehensive database of medicines, providing personalized suggestions with detailed safety ratings and usage information.</p>
+        </div>
+        """, unsafe_allow_html=True)
+    
+    with col2:
+        st.markdown("""
+        <div style='background:linear-gradient(135deg, #667eea 0%, #2EB6E8 100%); padding: 1.5rem; border-radius: 15px;'>
+            <h3 style='color: #1B4582;'>⭐ Safety Ratings</h3>
+            <p style='color: white;'>Every medication in our database comes with a 1-5 star safety rating based on clinical data and user feedback. Higher ratings indicate better safety profiles and fewer side effects, helping you make informed decisions about your healthcare.</p>
+        </div>
+        """, unsafe_allow_html=True)
+    
+    with col3:
+        st.markdown("""
+        <div style='background: linear-gradient(135deg, #667eea 0%, #2EB6E8 100%); padding: 1.5rem; border-radius: 15px;'>
+            <h3 style='color: #1B4582;'>📊 Medicine Database</h3>
+            <p style='color: white;'>Comprehensive database of medications</p>
+        </div>
+        """, unsafe_allow_html=True)
+    
     col1, col2, col3 = st.columns(3)
     
     with col1:
