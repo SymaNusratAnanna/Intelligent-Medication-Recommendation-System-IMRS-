@@ -345,7 +345,7 @@ analysis with safety ratings in seconds</h1>
         st.markdown("""
         <div style='width: 320px; height: 320px; background:linear-gradient(135deg, #667eea 0%, #2EB6E8 100%); padding: 2rem; border-radius: 15px;'>
             <h3 style='color: #1B4582;'>💊 Symptom Analysis</h3>
-            <p style='color: white;'>Describe your symptoms in simple terms and get  medication recommendations. Our system analyzes your symptoms against a comprehensive database of medicines, providing personalized suggestions with detailed safety ratings and usage information.</p>
+            <p style='color: white;'>Describe symptoms → Get personalized medication recommendations with safety ratings from our verified database.</p>
         </div>
         """, unsafe_allow_html=True)
     
@@ -353,7 +353,7 @@ analysis with safety ratings in seconds</h1>
         st.markdown("""
         <div style='background:linear-gradient(135deg, #667eea 0%, #2EB6E8 100%); padding: 2rem; border-radius: 15px;'>
             <h3 style='color: #1B4582;'>⭐ Safety Ratings</h3>
-            <p style='color: white;'>Every medication in our database comes with a 1-5 star safety rating based on clinical data and user feedback. Higher ratings indicate better safety profiles and fewer side effects, helping you make informed decisions about your healthcare.</p>
+            <p style='color: white;'>1-5 star safety ratings based on clinical data for informed medication decisions.</p>
         </div>
         """, unsafe_allow_html=True)
     
@@ -361,7 +361,7 @@ analysis with safety ratings in seconds</h1>
         st.markdown("""
         <div style='background: linear-gradient(135deg, #667eea 0%, #2EB6E8 100%); padding: 2rem; border-radius: 15px;'>
             <h3 style='color: #1B4582;'>📊 Medicine Database</h3>
-            <p style='color: white;'>Comprehensive database of medications</p>
+            <p style='color: white;'>Verified medications with therapeutic information and categorization.</p>
         </div>
         """, unsafe_allow_html=True)
 
@@ -372,8 +372,8 @@ analysis with safety ratings in seconds</h1>
     with col1:
         st.markdown("""
         <div style='background:linear-gradient(135deg, #667eea 0%, #2EB6E8 100%); padding: 2rem; border-radius: 15px;'>
-            <h3 style='color: #1B4582;'>💊 Symptom Analysis</h3>
-            <p style='color: white;'>Describe your symptoms in simple terms and get  medication recommendations. Our system analyzes your symptoms against a comprehensive database of medicines, providing personalized suggestions with detailed safety ratings and usage information.</p>
+            <h3 style='color: #1B4582;'>➕ Add Medicine</h3>
+            <p style='color: white;'>Database portal for adding new medications with safety and usage details.</p>
         </div>
         """, unsafe_allow_html=True)
     
@@ -381,7 +381,7 @@ analysis with safety ratings in seconds</h1>
         st.markdown("""
         <div style='background:linear-gradient(135deg, #667eea 0%, #2EB6E8 100%); padding: 2rem; border-radius: 15px;'>
             <h3 style='color: #1B4582;'>📈 Analytics</h3>
-            <p style='color: white;'>The Analytics feature offers deep insights into our medication database through interactive visualizations that display category distributions, safety ratings, and performance metrics. This tool enables data-driven decision making by providing real-time analytics and trend analysis for healthcare professionals and researchers.</p>
+            <p style='color: white;'>Interactive visualizations of medication trends and safety metrics.</p>
         </div>
         """, unsafe_allow_html=True)
     
@@ -389,7 +389,7 @@ analysis with safety ratings in seconds</h1>
         st.markdown("""
         <div style='background: linear-gradient(135deg, #667eea 0%, #2EB6E8 100%); padding: 2rem; border-radius: 15px;'>
             <h3 style='color: #1B4582;'>ℹ️ About</h3>
-            <p style='color: white;'>Discover the vision and research objectives behind MediGuide Pro, including our mission to improve medication safety through technology and education.</p>
+            <p style='color: white;'>Discover the vision and research objectives behind MediGuide Pro.</p>
         </div>
         """, unsafe_allow_html=True)
     
