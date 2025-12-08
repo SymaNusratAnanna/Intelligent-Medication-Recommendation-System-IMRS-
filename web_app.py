@@ -907,11 +907,10 @@ elif selected == "ℹ️ About":
           
 <div>
             <p style='font-size: 1.2rem; line-height: 1.6; color: #cccccc;'>
-            <strong style='color: #fff;'>MediGuide Pro</strong> is a pioneering application born from advanced research at the intersection of artificial intelligence and healthcare. Developed as part of a comprehensive Master’s project, it showcases how AI can enhance clinical decision support by analyzing complex medical data and offering intelligent insights to assist healthcare professionals. The app embodies innovation, academic rigor, and a vision for the future of medicine—where technology empowers clinicians to make faster, more accurate, and patient centered decisions.
-
+            <strong style='color: #fff;'>MediGuide Pro</strong> is a data-driven medication recommendation platform built with Python and Streamlit. The system employs sophisticated string-matching algorithms and safety-prioritized filtering to connect user symptoms with appropriate treatments from our comprehensive medicine database. Developed as a Master's-level project, it showcases practical application of software engineering principles in healthcare technology, focusing on reliability, safety, and user experience.
            
         
-    """, unsafe_allow_html=True)  # ⬅️ 关键修复：添加这个参数
+    """, unsafe_allow_html=True)  
 # Professional Footer
 st.markdown("""
 <div style='text-align: center; padding: 3rem; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
