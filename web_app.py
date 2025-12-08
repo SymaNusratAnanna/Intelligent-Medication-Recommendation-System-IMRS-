@@ -343,7 +343,7 @@ analysis with safety ratings in seconds</h1>
     
     with col1:
         st.markdown("""
-        <div style='background:linear-gradient(135deg, #667eea 0%, #2EB6E8 100%); padding: 1.5rem; border-radius: 15px;'>
+        <div style='background:linear-gradient(135deg, #667eea 0%, #2EB6E8 100%); padding: 2rem; border-radius: 15px;'>
             <h3 style='color: #1B4582;'>💊 Symptom Analysis</h3>
             <p style='color: white;'>Describe your symptoms in simple terms and get  medication recommendations. Our system analyzes your symptoms against a comprehensive database of medicines, providing personalized suggestions with detailed safety ratings and usage information.</p>
         </div>
@@ -351,7 +351,7 @@ analysis with safety ratings in seconds</h1>
     
     with col2:
         st.markdown("""
-        <div style='background:linear-gradient(135deg, #667eea 0%, #2EB6E8 100%); padding: 1.5rem; border-radius: 15px;'>
+        <div style='background:linear-gradient(135deg, #667eea 0%, #2EB6E8 100%); padding: 2rem; border-radius: 15px;'>
             <h3 style='color: #1B4582;'>⭐ Safety Ratings</h3>
             <p style='color: white;'>Every medication in our database comes with a 1-5 star safety rating based on clinical data and user feedback. Higher ratings indicate better safety profiles and fewer side effects, helping you make informed decisions about your healthcare.</p>
         </div>
@@ -359,17 +359,19 @@ analysis with safety ratings in seconds</h1>
     
     with col3:
         st.markdown("""
-        <div style='background: linear-gradient(135deg, #667eea 0%, #2EB6E8 100%); padding: 1.5rem; border-radius: 15px;'>
+        <div style='background: linear-gradient(135deg, #667eea 0%, #2EB6E8 100%); padding: 2rem; border-radius: 15px;'>
             <h3 style='color: #1B4582;'>📊 Medicine Database</h3>
             <p style='color: white;'>Comprehensive database of medications</p>
         </div>
         """, unsafe_allow_html=True)
+
+
     
     col1, col2, col3 = st.columns(3)
     
     with col1:
         st.markdown("""
-        <div style='background:linear-gradient(135deg, #667eea 0%, #2EB6E8 100%); padding: 1.5rem; border-radius: 15px;'>
+        <div style='background:linear-gradient(135deg, #667eea 0%, #2EB6E8 100%); padding: 2rem; border-radius: 15px;'>
             <h3 style='color: #1B4582;'>💊 Symptom Analysis</h3>
             <p style='color: white;'>Describe your symptoms in simple terms and get  medication recommendations. Our system analyzes your symptoms against a comprehensive database of medicines, providing personalized suggestions with detailed safety ratings and usage information.</p>
         </div>
@@ -377,7 +379,7 @@ analysis with safety ratings in seconds</h1>
     
     with col2:
         st.markdown("""
-        <div style='background:linear-gradient(135deg, #667eea 0%, #2EB6E8 100%); padding: 1.5rem; border-radius: 15px;'>
+        <div style='background:linear-gradient(135deg, #667eea 0%, #2EB6E8 100%); padding: 2rem; border-radius: 15px;'>
             <h3 style='color: #1B4582;'>⭐ Safety Ratings</h3>
             <p style='color: white;'>Every medication in our database comes with a 1-5 star safety rating based on clinical data and user feedback. Higher ratings indicate better safety profiles and fewer side effects, helping you make informed decisions about your healthcare.</p>
         </div>
@@ -385,7 +387,7 @@ analysis with safety ratings in seconds</h1>
     
     with col3:
         st.markdown("""
-        <div style='background: linear-gradient(135deg, #667eea 0%, #2EB6E8 100%); padding: 1.5rem; border-radius: 15px;'>
+        <div style='background: linear-gradient(135deg, #667eea 0%, #2EB6E8 100%); padding: 2rem; border-radius: 15px;'>
             <h3 style='color: #1B4582;'>📊 Medicine Database</h3>
             <p style='color: white;'>Comprehensive database of medications</p>
         </div>
