@@ -256,8 +256,8 @@ with st.sidebar:
     # Navigation options with beautiful buttons
     nav_options = [
          {"icon": "🏠", "label": "Home", "desc": "Welcome & system overview", "key": "home"},
-        {"icon": "🔍", "label": "Symptom Analyzer", "desc": "Home & quick access", "key": "dashboard"},
-        {"icon": "💊", "label": "Personalised Analyzer", "desc": "AI-powered analysis", "key": "symptoms"},
+        {"icon": "🏠", "label": "Dashboard", "desc": "Home & quick access", "key": "dashboard"},
+        {"icon": "🔍", "label": "Symptom Analyzer", "desc": "AI-powered analysis", "key": "symptoms"},
        {"icon": "➕", "label": "Add Medicine", "desc": "Add new medicine to database", "key": "add_medicine"}, 
         {"icon": "📊", "label": "Medicine Database", "desc": "Complete library", "key": "database"},
         {"icon": "📈", "label": "Analytics", "desc": "Statistics & insights", "key": "analytics"},
@@ -437,7 +437,7 @@ analysis with safety ratings in seconds</h1>
 # =============================================
 # DASHBOARD PAGE - COMPREHENSIVE VERSION
 # =============================================
-if selected == "🔍 Symptom Analyzer":
+if selected == "🏠 Dashboard":
     st.title("🧪 MediGuide Pro - Dashboard")
     st.markdown("---")
     
@@ -603,7 +603,7 @@ if selected == "🔍 Symptom Analyzer":
 # # SYMPTOM ANALYZER PAGE
 # # =============================================
 
-elif selected == "💊Personalized Analyzer":
+elif selected == "🔍 Symptom Analyzer":
     # Page header with gradient background
     st.markdown("""
     <div style='background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
