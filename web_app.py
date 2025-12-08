@@ -450,17 +450,18 @@ if selected == "🔍 Symptom Analyzer":
         df = pd.DataFrame(all_medicines)
         
         # Enhanced metrics
-        st.markdown("### 📈 Database Analytics")
+        st.markdown ("📊 Live Database Statistics")
         col1, col2, col3, col4 = st.columns(4)
         with col1:
-            st.metric("Total Medicines", len(df))
+            st.metric("💊 Total Medicines", len(df))
         with col2:
-            st.metric("Avg Safety", f"{df['safety_rating'].mean():.1f}/5.0")
+         avg_safety = sum(med.get('safety_rating', 0) for med in all_medicines) / len(all_medicines) if all_medicines else 0
+        st.metric("⭐ Avg Safety", f"{avg_safety:.1f}/5.0")
         with col3:
-            st.metric("Categories", df['category'].nunique())
+         categories = len(set(med.get('category', '') for med in all_medicines))
+        st.metric("🔬 Categories", categories)
         with col4:
-            st.metric("High Safety", len(df[df['safety_rating'] >= 4.0]))
-    
+         st.metric("⚡ Response Time", "<1s")
     # # Initialize recommender
     # try:
     #     recommender = MedicineRecommender()
