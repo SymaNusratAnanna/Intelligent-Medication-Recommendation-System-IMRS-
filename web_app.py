@@ -603,7 +603,7 @@ if selected == "🔍 Symptom Analyzer":
 # # SYMPTOM ANALYZER PAGE
 # # =============================================
 
-elif selected == "💊 Personalized Analyzer":
+elif selected == "💊Personalized Analyzer":
     # Page header with gradient background
     st.markdown("""
     <div style='background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
