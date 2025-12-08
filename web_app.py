@@ -894,14 +894,14 @@ elif selected == "📈 Analytics":
 # ABOUT PAGE - SAME SIZE CARDS
 # =============================================
 elif selected == "ℹ️ About":
-    # 修复的About页面代码
+    
     st.markdown("""
     <div style='background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%); 
                 padding: 3rem 2rem; border-radius: 20px; margin: 2rem 0; 
                 border: 1px solid #333; color: white;'>
         <div style='text-align: center; margin-bottom: 3rem;'>
             <h1 style='color: #667eea; font-size: 2.5rem; margin-bottom: 0.5rem;'>🎓 Master's Research Project</h1>
-            <h2 style='color: #667eea; font-size: 2rem; margin-top: 0;'>Advanced Medical AI</h2>
+            <h2 style='color: #667eea; font-size: 2rem; margin-top: 0;'>Automated Medication Recommendation System</h2>
         </div>
         
           
