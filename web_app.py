@@ -343,7 +343,7 @@ analysis with safety ratings in seconds</h1>
     
     with col1:
         st.markdown("""
-        <div style='width: 320px; height: 320px; background:linear-gradient(135deg, #667eea 0%, #2EB6E8 100%); padding: 2rem; border-radius: 15px;'>
+        <div style='width: 250px; height: 250px; background:linear-gradient(135deg, #667eea 0%, #2EB6E8 100%); padding: 2rem; border-radius: 15px;'>
             <h3 style='color: #1B4582;'>💊 Symptom Analysis</h3>
             <p style='color: white;'>Describe symptoms → Get personalized medication recommendations with safety ratings from our verified database.</p>
         </div>
@@ -351,7 +351,7 @@ analysis with safety ratings in seconds</h1>
     
     with col2:
         st.markdown("""
-        <div style='background:linear-gradient(135deg, #667eea 0%, #2EB6E8 100%); padding: 2rem; border-radius: 15px;'>
+        <div style='width: 250px; height: 250px; background:linear-gradient(135deg, #667eea 0%, #2EB6E8 100%); padding: 2rem; border-radius: 15px;'>
             <h3 style='color: #1B4582;'>⭐ Safety Ratings</h3>
             <p style='color: white;'>1-5 star safety ratings based on clinical data for informed medication decisions.</p>
         </div>
@@ -359,7 +359,7 @@ analysis with safety ratings in seconds</h1>
     
     with col3:
         st.markdown("""
-        <div style='background: linear-gradient(135deg, #667eea 0%, #2EB6E8 100%); padding: 2rem; border-radius: 15px;'>
+        <div style='width: 250px; height: 250px; background: linear-gradient(135deg, #667eea 0%, #2EB6E8 100%); padding: 2rem; border-radius: 15px;'>
             <h3 style='color: #1B4582;'>📊 Medicine Database</h3>
             <p style='color: white;'>Verified medications with therapeutic information and categorization.</p>
         </div>
@@ -371,7 +371,7 @@ analysis with safety ratings in seconds</h1>
     
     with col1:
         st.markdown("""
-        <div style='background:linear-gradient(135deg, #667eea 0%, #2EB6E8 100%); padding: 2rem; border-radius: 15px;'>
+        <div style='width: 250px; height: 250px; background:linear-gradient(135deg, #667eea 0%, #2EB6E8 100%); padding: 2rem; border-radius: 15px;'>
             <h3 style='color: #1B4582;'>➕ Add Medicine</h3>
             <p style='color: white;'>Database portal for adding new medications with safety and usage details.</p>
         </div>
@@ -379,7 +379,7 @@ analysis with safety ratings in seconds</h1>
     
     with col2:
         st.markdown("""
-        <div style='background:linear-gradient(135deg, #667eea 0%, #2EB6E8 100%); padding: 2rem; border-radius: 15px;'>
+        <div style='width: 250px; height: 250px; background:linear-gradient(135deg, #667eea 0%, #2EB6E8 100%); padding: 2rem; border-radius: 15px;'>
             <h3 style='color: #1B4582;'>📈 Analytics</h3>
             <p style='color: white;'>Interactive visualizations of medication trends and safety metrics.</p>
         </div>
@@ -387,7 +387,7 @@ analysis with safety ratings in seconds</h1>
     
     with col3:
         st.markdown("""
-        <div style='background: linear-gradient(135deg, #667eea 0%, #2EB6E8 100%); padding: 2rem; border-radius: 15px;'>
+        <div style='width: 250px; height: 250px; background: linear-gradient(135deg, #667eea 0%, #2EB6E8 100%); padding: 2rem; border-radius: 15px;'>
             <h3 style='color: #1B4582;'>ℹ️ About</h3>
             <p style='color: white;'>Discover the vision and research objectives behind MediGuide Pro.</p>
         </div>
@@ -932,7 +932,7 @@ st.markdown("""
             color: white; border-radius: 20px; margin: 2rem 0;'>
     <h3 style='color: white; margin-bottom: 1rem;'>💊 MediGuide Pro</h3>
     <p style='opacity: 0.9; margin-bottom: 0.5rem;'>Automated  Medication Recommendation System</p>
-    <p style='opacity: 0.7; margin: 0;'>🎓 Master's Research Project | 🔬 Medical Informatics | ⚕️ Always Consult Professionals</p>
+   <p>Developed by <strong>Ananna Syma Nusrat </strong> | Master's Python Project |  2025</p>
 </div>
 """, unsafe_allow_html=True)
 
