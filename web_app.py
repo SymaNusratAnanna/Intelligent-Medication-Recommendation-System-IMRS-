@@ -442,7 +442,6 @@ if selected == "🔍 Symptom Analyzer":
     st.markdown("---")
 
      # Search and analytics
-    col1, col2, col3 = st.columns([2, 1, 1])
     
     all_medicines = recommender.get_all_medicines()
     
