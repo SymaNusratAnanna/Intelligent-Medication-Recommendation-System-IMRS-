@@ -287,8 +287,8 @@ with st.sidebar:
         if st.button(f"**{full_label}**", key=option['key'], use_container_width=True):
             st.session_state.selected = full_label
         
-        # Add description
-        st.caption(f"📌 {option['desc']}")
+        # # Add description
+        # st.caption(f"📌 {option['desc']}")
     
     st.markdown("---")
     
